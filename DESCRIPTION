@@ -1,11 +1,24 @@
 Package: mozR
-Title: What the Package Does (One Line, Title Case)
+Title: USAID Mozambique R Utilities Package
 Version: 0.0.0.9000
-Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+Authors@R: c(
+    person("Joe", "Lara", , "jlara@usaid.gov", role = c("aut", "cre")),
+    person("Karishma", "Srikanth", role = c("aut"),
+    email = "ksrikanth@usaid.gov"))
+Description: This package is a set of helper functions for the USAID PEPFAR Mozambique team to optimize PEPFAR workflows in R.
 License: MIT + file LICENSE
 Encoding: UTF-8
+LazyData: true
 Roxygen: list(markdown = TRUE)
+<<<<<<< HEAD
 RoxygenNote: 7.2.2
+=======
+RoxygenNote: 7.1.2
+BugReports: https://github.com/usaid-mozambique/mozR/issues
+Imports:
+  magrittr,
+  googlesheets4
+VignetteBuilder: knitr
+Depends: 
+    R (>= 2.10)
+>>>>>>> 616240a8ab432bdfbc1a10e8640cf77ce797e7d7
