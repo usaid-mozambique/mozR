@@ -2,19 +2,20 @@
 % Please edit documentation in R/pull_ajuda_sitemap.R
 \name{pull_ajuda_sitemap}
 \alias{pull_ajuda_sitemap}
-\title{Import AJUDA site map}
+\title{Retrieve PEPFAR Mozambique AJUDA Site Map from Google Sheets}
 \usage{
 pull_ajuda_sitemap()
 }
 \value{
-A dataframe of 640 rows for all AJUDA site metadata
+A dataframe containing metadata for all PEPFAR Mozambique AJUDA sites
 }
 \description{
-Import AJUDA site map
+Retrieve PEPFAR Mozambique AJUDA Site Map from Google Sheets
 }
 \examples{
  \dontrun{
- site_map <- pull_ajuda_sitemap()
+
+ df <- pull_ajuda_sitemap()
 }
 
 }

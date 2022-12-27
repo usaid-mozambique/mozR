@@ -1,11 +1,12 @@
-#' Import AJUDA site map
+#' Retrieve PEPFAR Mozambique AJUDA Site Map from Google Sheets
 #'
-#' @return A dataframe of 640 rows for all AJUDA site metadata
+#' @return A dataframe containing metadata for all PEPFAR Mozambique AJUDA sites
 #' @export
 #'
 #' @examples
 #'  \dontrun{
-#'  site_map <- pull_ajuda_sitemap()
+#'
+#'  df <- pull_ajuda_sitemap()
 #' }
 #'
 
