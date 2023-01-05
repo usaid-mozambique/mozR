@@ -9,7 +9,7 @@
 #'
 #' df <- reshape_em_prep()}
 
-prep_reshape <- function(filename, ip){
+reshape_em_prep <- function(filename, ip){
 
   df <- readxl::read_excel(filename, # Function argument
                            sheet = "Resumo Mensal de PrEP",
