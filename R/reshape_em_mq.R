@@ -1,0 +1,116 @@
+#' Process monthly enhanced monitoring MQ submission from PEPFAR Mozambique Clinical Partners
+#' @param filename Local path to the monthly IP submission
+#' @param ip IP whose submission the file pertains to
+#' @return A tidy dataframe with monthly enhanced monitoring MQ results
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#'
+#' df <- reshape_em_mq()}
+
+reshape_em_mq <- function(filename, ip){
+
+  df <- readxl::read_excel(filename,
+                           sheet = "Monitoria Intensiva",
+                           skip = 9,
+                           col_types = c("text",
+                                         "text", "text", "text", "text", "text",
+                                         "text", "text", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric")) %>%
+    dplyr::rename(dpi.colheu.pcr_d__all = dpi.colheu.pcr_d_total,
+                  dpi.colheu.pcr_n__all = dpi.colheu.pcr_n_total,
+                  dpi.pcr.enviado_d__all = dpi.pcr.enviado_d_total,
+                  dpi.pcr.enviado_n__all = dpi.pcr.enviado_n_total,
+                  dpi.pcr.entregue_d__all = dpi.pcr.entregue_d_total,
+                  dpi.pcr.entregue_n__all = dpi.pcr.entregue_n_total,
+                  dpi.pcr.tarv_d__all = dpi.pcr.tarv_d_total,
+                  dpi.pcr.tarv_n__all = dpi.pcr.tarv_n_total) %>%
+    tidyr::pivot_longer('dpi.colheu.pcr_d__all':'mds.cv.estaveis_n_mds',
+                        names_to = c("indicator", "numdenom", "pop_type", "age"),
+                        names_sep = "_",
+                        values_to = "value") %>%
+    dplyr::filter(!numdenom == "prop",
+                  !pop_type == "total") %>%
+    dplyr::mutate(age = dplyr::recode(age,
+                                      "menor2" = "<2 Months",
+                                      "0.1" = "<1",
+                                      "0.2" = "0-2",
+                                      "0.4" = "0-4",
+                                      "1.4" = "1-4",
+                                      "5.9" = "5-9",
+                                      "10.14" = "10-14",
+                                      "15.19" = "15-19",
+                                      "0.14" = "0-14",
+                                      "1.14" = "1-14",
+                                      "2.14" = "2-14"),
+                  numdenom = dplyr::recode(numdenom,
+                                           "n" = "N",
+                                           "d" = "D"),
+                  pop_type = dplyr::recode(pop_type,
+                                           "all" = "All",
+                                           "mg" = "MG",
+                                           "ml" = "ML",
+                                           "mds" = "MDS"),
+                  indicator = paste0(indicator,
+                                     if_else(numdenom %in% c("D"), "_D", "")),
+                  month = {month}) %>%
+    dplyr::filter(Partner == ip) %>%
+    dplyr::select(-c(Data))
+
+}

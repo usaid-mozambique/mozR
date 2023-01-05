@@ -1,0 +1,122 @@
+#' Process monthly enhanced monitoring PREP submission from PEPFAR Mozambique Clinical Partners
+#' @param filename Local path to the monthly IP submission
+#' @param ip IP whose submission the file pertains to
+#' @return A tidy dataframe with monthly enhanced monitoring PREP results
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#'
+#' df <- reshape_em_prep()}
+
+prep_reshape <- function(filename, ip){
+
+  df <- readxl::read_excel(filename, # Function argument
+                           sheet = "Resumo Mensal de PrEP",
+                           col_types = c("text",
+                                         "text", "text", "text", "text", "text",
+                                         "numeric", "text", "text", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric",
+                                         "numeric", "numeric", "numeric"),
+                           skip = 7) %>%
+    dplyr::filter(Partner == ip) %>%  # Function argument
+    dplyr::select(!c(Elegible.to.PrEP_All_Total_Total,
+                     Elegible.to.PrEP_Casos.Especiais_Male_Total,
+                     Elegible.to.PrEP_Casos.Especiais_Female_Total,
+                     Elegible.to.PrEP_All_PW_Total,
+                     Elegible.to.PrEP_All_LW_Total,
+                     PrEP.NEW_All_Total_Total,
+                     PrEP.NEW_Casos.Especiais_Male_Total,
+                     PrEP.NEW_Casos.Especiais_Female_Total,
+                     PrEP.NEW_All_PW_Total,
+                     PrEP.NEW_All_LW_Total,
+                     PrEP.New.Who.RTT_All_Total_Total,
+                     PrEP.New.Who.RTT_Casos.Especiais_Male_Total,
+                     PrEP.New.Who.RTT_Casos.Especiais_Female_Total,
+                     PrEP.New.Who.RTT_All_PW_Total,
+                     PrEP.New.Who.RTT_All_LW_Total,
+                     PrEP.CT_All_Total_Total,
+                     PrEP.CT_Casos.Especiais_Male_Total,
+                     PrEP.CT_Casos.Especiais_Female_Total,
+                     PrEP.CT_All_PW_Total,
+                     PrEP.CT_All_LW_Total,
+                     PrEP.CT.3months_All_Total_Total,
+                     PrEP.CT.3months_Casos.Especiais_Male_Total,
+                     PrEP.CT.3months_Casos.Especiais_Female_Total,
+                     PrEP.CT.3months_All_PW_Total,
+                     PrEP.CT.3months_All_LW_Total)) %>%
+    tidyr::pivot_longer('Elegible.to.PrEP_Casos.Especiais_Male_10.14':'PrEP.CT.3months_TP_People.who.Injected.Drugs_Total',
+                        names_to = c("indicator", "pop_type", "disaggregate", "age"),
+                        names_sep = "_",
+                        values_to = "value") %>%
+    dplyr::mutate(period = as.Date(month, "%Y-%m-%d"),
+                  indicator = stringr::str_replace_all(indicator, "\\.", "_"),
+                  indicator = stringr::str_replace_all(indicator, "Elegible_to_PrEP", "PrEP_Eligible"),
+                  indicator = stringr::str_replace_all(indicator, "PrEP_New_Who_RTT", "PrEP_NEW_RTT"),
+                  age = stringr::str_replace_all(age, "\\.", "-"),
+                  age = stringr::str_replace_all(age, "Total", "Unknown"),
+                  sex = dplyr::case_when(
+                    disaggregate == "Female" ~ "Female",
+                    disaggregate == "Male" ~ "Male",
+                    TRUE ~ as.character("Unknown")),
+                  pop_type = dplyr::recode(pop_type,
+                                           "Casos.Especiais" = "Special Cases",
+                                           "TP.AtRisk" = "TP at Risk",
+                                           "All" = "PLW"),
+                  disaggregate = dplyr::recode(disaggregate,
+                                               "Long.Distance.driver" = "Long Distance Drivers",
+                                               "military" = "Military",
+                                               "miner" = "Miners",
+                                               "People.who.Injected.Drugs" = "PWID",
+                                               "Sero.Discordante.Couples" = "Sero-Discordante Couples",
+                                               "Sex.workers" = "Sex Workers",
+                                               "TG" = "Transgender")) %>%
+    tidyr::pivot_wider(names_from =  indicator, values_from = value)
+
+}
