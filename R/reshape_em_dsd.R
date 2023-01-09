@@ -22,7 +22,7 @@ reshape_em_dsd <- function(df, ip) {
                         names_sep = "_",
                         values_to = "value") %>%
     dplyr::filter(Partner == ip, # function argument
-                  !str_detect(indicator, "remove")) %>%
+                  !stringr::str_detect(indicator, "remove")) %>%
     dplyr::mutate(period = as.Date(month, "%Y-%m-%d"),
                   indicator = stringr::str_replace_all(indicator, "\\.", "_"),
                   age = stringr::str_replace_all(age, "\\.", "-"),

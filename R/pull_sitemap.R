@@ -22,3 +22,4 @@ pull_sitemap <- function(sheetname = "list_ajuda") {
   return(site_map)
 
 }
+
