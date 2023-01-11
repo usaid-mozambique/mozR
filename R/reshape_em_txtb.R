@@ -81,12 +81,11 @@ reshape_em_txtb <- function(filename, ip){
                         values_to = "value") %>%
     dplyr::mutate(period = as.Date(month, "%Y-%m-%d"),
                   indicator = stringr::str_replace_all(indicator, "\\.", "_"),
-                  age = dplyr:recode(age, "Unk" = "Unknown"),
+                  age = dplyr::recode(age, "Unk" = "Unknown"),
                   disaggregate = dplyr::recode(disaggregate,
                                                "newART" = "New on ART",
                                                "alreadyART" = "Already on ART")) %>%
-    tidyr::pivot_wider(names_from =  indicator, values_from = value) %>%
-    glimpse()
+    tidyr::pivot_wider(names_from =  indicator, values_from = value)
 
 }
 
