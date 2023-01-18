@@ -100,7 +100,7 @@ reshape_em_prep <- function(filename, ip){
                   indicator = stringr::str_replace_all(indicator, "Elegible_to_PrEP", "PrEP_Eligible"),
                   indicator = stringr::str_replace_all(indicator, "PrEP_New_Who_RTT", "PrEP_NEW_RTT"),
                   age = stringr::str_replace_all(age, "\\.", "-"),
-                  age = stringr::str_replace_all(age, "Total", "Unknown"),
+                  age = stringr::str_replace_all(age, "Total", "Unknown Age"), # new code, changed from Unknown to Unknown Age
                   sex = dplyr::case_when(
                     disaggregate == "Female" ~ "Female",
                     disaggregate == "Male" ~ "Male",
