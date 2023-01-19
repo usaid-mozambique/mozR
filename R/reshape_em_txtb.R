@@ -82,8 +82,7 @@ reshape_em_txtb <- function(filename, ip){
     dplyr::mutate(period = as.Date(month, "%Y-%m-%d"),
                   indicator = stringr::str_replace_all(indicator, "\\.", "_"),
                   age = dplyr::recode(age,
-                                      "Unk" = "Unknown",
-                                      "Unknown" = "Unknown Age"), # new code to correct age
+                                      "Unk" = "Unknown Age"), # new code to correct age
                   disaggregate = dplyr::recode(disaggregate,
                                                "newART" = "New on ART",
                                                "alreadyART" = "Already on ART")) %>%

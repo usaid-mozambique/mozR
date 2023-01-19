@@ -22,7 +22,9 @@ clean_em_mq <- function(df){
                   period = month) %>%
     dplyr::relocate(sisma_uid:site_nid, .after = datim_uid) %>%
     dplyr::relocate(period:partner, .after = site_nid) %>%
-    tidyr::pivot_wider(names_from = indicator, values_from = value)
+    dplyr::mutate(row_n = row_number()) %>%
+    tidyr::pivot_wider(names_from = indicator, values_from = value) %>%
+    dplyr::select(!row_n)
 
   return(df_cleaned)
 
