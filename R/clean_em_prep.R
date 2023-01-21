@@ -7,23 +7,24 @@
 #' \dontrun{
 #'
 #' df <- clean_em_prep()}
-#'
+
 clean_em_prep <- function(df){
 
-  prep_tidy_historic <- df %>%
-    dplyr::select(-c(No,
-                     Partner,
-                     Province,
-                     District,
-                     `Health Facility`,
-                     `SISMA Code`,
-                     Relatorio_period,
-                     Relatorio_Date)) %>%
+  df_cleaned <- df %>%
+
+    dplyr::select(!c(partner, snu, psnu, sitename)) %>% # strip meta data that will be replaced by sitemap
+
+    dplyr::mutate(row_n = row_number()) %>%
+
+    tidyr::pivot_wider(names_from =  indicator, values_from = value) %>%
+
     dplyr::mutate(across(starts_with('PrEP_'), ~ tidyr::replace_na(., 0))) %>%
-    dplyr::left_join(ajuda_site_map, by = c("Datim Code" = "datim_uid")) %>%
-    dplyr::rename(datim_uid = `Datim Code`) %>%
+
+    dplyr::left_join(ajuda_site_map, by = "datim_uid") %>%
+
     dplyr::select(datim_uid,
                   sisma_uid,
+                  sisma_uid_datim_map,
                   site_nid,
                   period,
                   partner = partner_pepfar_clinical,
@@ -38,5 +39,7 @@ clean_em_prep <- function(df){
                   sex,
                   age,
                   starts_with("PrEP_"))
+
+  return(df_cleaned)
 
 }

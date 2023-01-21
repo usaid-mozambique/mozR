@@ -7,11 +7,11 @@
 #' @examples
 #' \dontrun{
 #'
-#' df <- reshape_em_mq()}
+#' df <- reshape_em_mi()}
 
-reshape_em_mq <- function(filename, ip){
+reshape_em_mi <- function(filename, ip){
 
-  df <- readxl::read_excel(filename,
+  df_cleaned <- readxl::read_excel(filename,
                            sheet = "Monitoria Intensiva",
                            skip = 9,
                            col_types = c("text",
@@ -73,7 +73,15 @@ reshape_em_mq <- function(filename, ip){
                                          "numeric", "numeric", "numeric",
                                          "numeric", "numeric", "numeric",
                                          "numeric", "numeric")) %>%
-    dplyr::rename(dpi.colheu.pcr_d__all = dpi.colheu.pcr_d_total,
+
+    dplyr::select(-c(No, Data, SISMA_code)) %>%
+
+    dplyr::rename(partner = Partner,
+                  snu = Province,
+                  psnu = District,
+                  sitename = `Health Facility`,
+                  datim_uid = DATIM_code,
+                  dpi.colheu.pcr_d__all = dpi.colheu.pcr_d_total,
                   dpi.colheu.pcr_n__all = dpi.colheu.pcr_n_total,
                   dpi.pcr.enviado_d__all = dpi.pcr.enviado_d_total,
                   dpi.pcr.enviado_n__all = dpi.pcr.enviado_n_total,
@@ -81,12 +89,17 @@ reshape_em_mq <- function(filename, ip){
                   dpi.pcr.entregue_n__all = dpi.pcr.entregue_n_total,
                   dpi.pcr.tarv_d__all = dpi.pcr.tarv_d_total,
                   dpi.pcr.tarv_n__all = dpi.pcr.tarv_n_total) %>%
+
+    dplyr::filter(partner == ip) %>%
+
     tidyr::pivot_longer('dpi.colheu.pcr_d__all':'mds.cv.estaveis_n_mds',
                         names_to = c("indicator", "numdenom", "pop_type", "age"),
                         names_sep = "_",
                         values_to = "value") %>%
+
     dplyr::filter(!numdenom == "prop",
                   !pop_type == "total") %>%
+
     dplyr::mutate(age = dplyr::recode(age,
                                       "menor2" = "<02 Months",
                                       "0.1" = "<01",
@@ -109,8 +122,8 @@ reshape_em_mq <- function(filename, ip){
                                            "mds" = "MDS"),
                   indicator = paste0(indicator,
                                      if_else(numdenom %in% c("D"), "_D", "")),
-                  month = {month}) %>%
-    dplyr::filter(Partner == ip) %>%
-    dplyr::select(-c(Data))
+                  period = {month})
+
+  return(df_cleaned)
 
 }

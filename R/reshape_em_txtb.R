@@ -72,21 +72,28 @@ reshape_em_txtb <- function(filename, ip){
                                          "numeric", "numeric", "numeric",
                                          "numeric", "numeric", "numeric",
                                          "numeric", "numeric", "numeric",
-                                         "numeric"), skip = 7) %>%
+                                         "numeric"),
+                           skip = 7) %>%
+
     dplyr::filter(partner == ip) %>%
-    dplyr::select(!c(contains(c("remove", "tot")))) %>%
+
+    dplyr::select(!c(contains(c("remove", "tot")),
+                     sisma_nid)) %>%
+
+    dplyr::rename(snu = snu1) %>%
+
     tidyr::pivot_longer('TX.CURR_newART_Male_<15':'TX.TB.CURR.N_alreadyART_Female_Unk',
                         names_to = c("indicator", "disaggregate", "sex", "age"),
                         names_sep = "_",
                         values_to = "value") %>%
+
     dplyr::mutate(period = as.Date(month, "%Y-%m-%d"),
                   indicator = stringr::str_replace_all(indicator, "\\.", "_"),
                   age = dplyr::recode(age,
                                       "Unk" = "Unknown Age"), # new code to correct age
                   disaggregate = dplyr::recode(disaggregate,
                                                "newART" = "New on ART",
-                                               "alreadyART" = "Already on ART")) %>%
-    tidyr::pivot_wider(names_from =  indicator, values_from = value)
+                                               "alreadyART" = "Already on ART"))
 
 }
 

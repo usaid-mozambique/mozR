@@ -65,8 +65,14 @@ reshape_em_prep <- function(filename, ip){
                                          "numeric", "numeric", "numeric",
                                          "numeric", "numeric", "numeric"),
                            skip = 7) %>%
+
     dplyr::filter(Partner == ip) %>%  # Function argument
-    dplyr::select(!c(Elegible.to.PrEP_All_Total_Total,
+
+    dplyr::select(!c(No,
+                     `SISMA Code`,
+                     Relatorio_period,
+                     Relatorio_Date,
+                     Elegible.to.PrEP_All_Total_Total,
                      Elegible.to.PrEP_Casos.Especiais_Male_Total,
                      Elegible.to.PrEP_Casos.Especiais_Female_Total,
                      Elegible.to.PrEP_All_PW_Total,
@@ -91,10 +97,18 @@ reshape_em_prep <- function(filename, ip){
                      PrEP.CT.3months_Casos.Especiais_Female_Total,
                      PrEP.CT.3months_All_PW_Total,
                      PrEP.CT.3months_All_LW_Total)) %>%
+
+    dplyr::rename(partner = Partner,
+                  snu = Province,
+                  psnu = District,
+                  sitename = `Health Facility`,
+                  datim_uid = `Datim Code`) %>%
+
     tidyr::pivot_longer('Elegible.to.PrEP_Casos.Especiais_Male_10.14':'PrEP.CT.3months_TP_People.who.Injected.Drugs_Total',
                         names_to = c("indicator", "pop_type", "disaggregate", "age"),
                         names_sep = "_",
                         values_to = "value") %>%
+
     dplyr::mutate(period = as.Date(month, "%Y-%m-%d"),
                   indicator = stringr::str_replace_all(indicator, "\\.", "_"),
                   indicator = stringr::str_replace_all(indicator, "Elegible_to_PrEP", "PrEP_Eligible"),
@@ -116,7 +130,6 @@ reshape_em_prep <- function(filename, ip){
                                                "People.who.Injected.Drugs" = "PWID",
                                                "Sero.Discordante.Couples" = "Sero-Discordante Couples",
                                                "Sex.workers" = "Sex Workers",
-                                               "TG" = "Transgender")) %>%
-    tidyr::pivot_wider(names_from =  indicator, values_from = value)
+                                               "TG" = "Transgender"))
 
 }
