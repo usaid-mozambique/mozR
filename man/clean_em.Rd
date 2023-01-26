@@ -4,14 +4,12 @@
 \alias{clean_em}
 \title{Process monthly enhanced monitoring submission datasets from PEPFAR Mozambique Clinical Partners}
 \usage{
-clean_em(type, filename, ip)
+clean_em(df, type)
 }
 \arguments{
+\item{df}{Processed monthly enhanced monitoring dataframe}
+
 \item{type}{Submission tab}
-
-\item{filename}{Local path to the monthly IP submission}
-
-\item{ip}{IP whose submission the file pertains to}
 }
 \value{
 A tidy dataframe with monthly enhanced monitoring results
@@ -22,5 +20,5 @@ Process monthly enhanced monitoring submission datasets from PEPFAR Mozambique C
 \examples{
  \dontrun{
 
- df <- reshape_em()}
+ df <- clean_em()}
 }
