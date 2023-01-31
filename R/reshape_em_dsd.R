@@ -1,6 +1,5 @@
 #' Process monthly enhanced monitoring DSD submission from PEPFAR Mozambique Clinical Partners
-#'
-#' @param df Local path to the monthly IP submission
+#' @param filename Local path to the monthly IP submission
 #' @param ip IP whose submission the file pertains to
 #'
 #' @return A tidy dataframe with monthly enhanced monitoring DSD results
@@ -11,9 +10,9 @@
 #'
 #' df <- reshape_em_dsd()}
 
-reshape_em_dsd <- function(df, ip) {
+reshape_em_dsd <- function(filename, ip) {
 
-  df <- readxl::read_excel(df, # function argument
+  df <- readxl::read_excel(filename, # function argument
                            sheet = "MDS",
                            skip = 8) %>%
     dplyr::select(!c(No, SISMA_code, Period)) %>%

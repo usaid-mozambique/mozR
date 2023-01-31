@@ -4,10 +4,10 @@
 \alias{reshape_em_dsd}
 \title{Process monthly enhanced monitoring DSD submission from PEPFAR Mozambique Clinical Partners}
 \usage{
-reshape_em_dsd(df, ip)
+reshape_em_dsd(filename, ip)
 }
 \arguments{
-\item{df}{Local path to the monthly IP submission}
+\item{filename}{Local path to the monthly IP submission}
 
 \item{ip}{IP whose submission the file pertains to}
 }

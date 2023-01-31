@@ -11,19 +11,14 @@
 
 clean_em <- function(df, type){
 
-  if(type == "TPT"){
-    df <- clean_em_tpt(df)
-  } else if (type == "TXTB"){
-    df <- clean_em_txtb(df)
-  } else if (type == "MI"){
-    df <- clean_em_mi(df)
-  } else if (type == "DSD"){
-    df <- clean_em_dsd(df)
-  } else if (type == "IMER"){
-    df <- clean_em_imer(df)
-  } else if (type == "PrEP"){
-    df <- clean_em_prep(df)
-  }
+  switch(type,
+         "TPT" = clean_em_tpt(df),
+         "TXTB" = clean_em_txtb(df),
+         "MI" = clean_em_mi(df),
+         "DSD" = clean_em_dsd(df),
+         "IMER" = clean_em_imer(df),
+         "PrEP" = clean_em_prep(df)
+  )
 
   return(df)
 
