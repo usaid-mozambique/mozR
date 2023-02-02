@@ -17,6 +17,7 @@ Imports:
   googlesheets4,
   dplyr,
   tidyr,
+  readr,
   stringr,
   readxl
 Depends: 
