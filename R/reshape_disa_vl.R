@@ -144,7 +144,7 @@ reshape_disa_vl <- function(filename) {
     dplyr::ungroup()
 
 
-  # REMOVE OBJECTS ----------------------------------------------------------
+  # BIND OBJECTS ----------------------------------------------------------
 
   df_vl <- dplyr::bind_rows(xAge, xPW, xLW)
 
