@@ -6,9 +6,9 @@
 #' @examples
 #'  \dontrun{
 #'
-#'  df <- reshape_em_disa()}
+#'  df <- reshape_disa_vl()}
 
-reshape_em_disa <- function(filename) {
+reshape_disa_vl <- function(filename) {
 
   # disa by age
   xAge <- readxl::read_excel({filename},
