@@ -38,8 +38,8 @@ clean_sisma_csv <- function(file) {
                   across(c(orgunitlevel2, orgunitlevel3), ~ str_to_title(.))) %>%
 
     dplyr::select(period = periodcode,
-                  province = orgunitlevel2,
-                  distrit = orgunitlevel3,
+                  snu = orgunitlevel2,
+                  psnu = orgunitlevel3,
                   sitename = orgunitlevel4,
                   sisma_uid = organisationunitid,
                   indicator,
