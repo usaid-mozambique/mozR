@@ -19,6 +19,8 @@ Imports:
   tidyr,
   readr,
   stringr,
-  readxl
+  readxl,
+  tidyselect,
+  janitor
 Depends: 
     R (>= 2.10)
