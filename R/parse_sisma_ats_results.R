@@ -42,6 +42,8 @@ parse_sisma_ats_results <- function(file) {
                                   modality == "Triagem" ~ "Triage",
                                   modality == "UATS" ~ "VCT"),
 
+      modality_sub = NA_character_,
+
       source = "HTS Register",
 
       age_coarse = dplyr::case_when(age_semi_fine == "<01" ~ "<15",
@@ -50,6 +52,7 @@ parse_sisma_ats_results <- function(file) {
       age_coarse = tidyr::replace_na(age_coarse, "15+"),
 
       sub_group = NA_character_,
+
       indicator = "HTS_TST")
 
 
@@ -59,7 +62,7 @@ parse_sisma_ats_results <- function(file) {
 
 
   df_parse <- dplyr::bind_rows(df_all, df_pos) %>%
-    dplyr::select(sisma_uid, snu, psnu, sitename, period, indicator, source, modality, sub_group, sex, age_coarse, age_semi_fine, result_status, value)
+    dplyr::select(sisma_uid, snu, psnu, sitename, period, indicator, source, modality, modality_sub, sub_group, sex, age_coarse, age_semi_fine, result_status, value)
 
   return(df_parse)
 

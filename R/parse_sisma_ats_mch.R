@@ -52,6 +52,8 @@ parse_sisma_ats_mch <- function(file) {
                                               stringr::str_detect(indicator, "smi_pf") ~ "MCH-PF",
                                               stringr::str_detect(indicator, "smi_ug") ~ "MCH-UG"),
 
+                  modality_sub = NA_character_,
+
                   result_status = dplyr::case_when(stringr::str_detect(indicator, "negativ") ~ "Negative",
                                                    stringr::str_detect(indicator, "positi") ~ "Positive",
                                                    stringr::str_detect(indicator, "HIV+") ~ "Positive",
@@ -75,14 +77,14 @@ parse_sisma_ats_mch <- function(file) {
 
                   source = "MCH Register",
 
-                  age_semi_fine = NA)
+                  age_semi_fine = NA_character_,)
 
   df_pos <- df_all %>%
     dplyr::filter(result_status == "Positive") %>%
     dplyr::mutate(indicator = dplyr::case_when(indicator == "HTS_TST" ~ "HTS_TST_POS"))
 
   df_parse <- dplyr::bind_rows(df_all, df_pos) %>%
-    dplyr::select(sisma_uid, snu, psnu, sitename, period, indicator, source, modality, sub_group, sex, age_coarse, age_semi_fine, result_status, value)
+    dplyr::select(sisma_uid, snu, psnu, sitename, period, indicator, source, modality, modality_sub, sub_group, sex, age_coarse, age_semi_fine, result_status, value)
 
 
   return(df_parse)

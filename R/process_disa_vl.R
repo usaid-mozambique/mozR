@@ -77,11 +77,8 @@ process_disa_vl <- function(filename) {
                                          indicator == "vl" & sex %in% c("UNKNOWN", "Not Specified", "N\\u00e3o especificado") ~ "Unknown"),
 
                   age = dplyr::case_when(age == "<1" ~ "<01",
-                                         age == "Idade n\\u00e3o especificada" ~ "Unknown Age",
-                                         age == "No Age Specified" ~ "Unknown Age",
-                                         age == "N\\u00e3o especificada" ~ "Unknown Age",
-                                         age == "N\\u00e3o especificado" ~ "Unknown Age",
                                          age == "NS" ~ "Unknown Age",
+                                         stringr::str_detect(age, "pecif") ~ "Unknown Age",
                                          TRUE ~ age),
 
                   group = dplyr::case_when(group == "age" ~ "Age",

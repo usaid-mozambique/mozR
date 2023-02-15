@@ -25,6 +25,8 @@ parse_sisma_ats_index <- function(file) {
                                   str_detect(indicator, "UATS") ~ "VCT",
                                   str_detect(indicator, "ATS-C") ~ "Community"),
 
+      modality_sub = NA_character_,
+
       sub_group = dplyr::case_when(str_detect(indicator, "Filhos <10") ~ "Chilren <10",
                                    str_detect(indicator, "Parceiro") ~ "Partner",
                                    str_detect(indicator, " / Pai ") ~ "Mother/Father"),
@@ -47,7 +49,7 @@ parse_sisma_ats_index <- function(file) {
 
       sex = NA_character_) %>%
 
-    dplyr::select(sisma_uid, snu, psnu, sitename, period, indicator, source, modality, sub_group, sex, age_coarse, age_semi_fine, result_status, value)
+    dplyr::select(sisma_uid, snu, psnu, sitename, period, indicator, source, modality, modality_sub, sub_group, sex, age_coarse, age_semi_fine, result_status, value)
 
 
   return(df_parse)

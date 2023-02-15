@@ -25,6 +25,8 @@ parse_sisma_ats_history <- function(file) {
                                   stringr::str_detect(indicator, "UATS") ~ "VCT",
                                   stringr::str_detect(indicator, "ATS-C") ~ "Community"),
 
+      modality_sub = NA_character_,
+
       sub_group = dplyr::case_when(stringr::str_detect(indicator, "- MTS") ~ "FSW",
                                    stringr::str_detect(indicator, "- PID") ~ "IDU",
                                    stringr::str_detect(indicator, "- HSH") ~ "MSM",
@@ -44,7 +46,7 @@ parse_sisma_ats_history <- function(file) {
       age_semi_fine = NA_character_,
       sex = NA_character_) %>%
 
-    dplyr::select(sisma_uid, snu, psnu, sitename, period, indicator, source, modality, sub_group, sex, age_coarse, age_semi_fine, result_status, value)
+    dplyr::select(sisma_uid, snu, psnu, sitename, period, indicator, source, modality, modality_sub, sub_group, sex, age_coarse, age_semi_fine, result_status, value)
 
 
   return(df_parse)
