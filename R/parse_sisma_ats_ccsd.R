@@ -22,30 +22,30 @@ parse_sisma_ats_ccsd <- function(file) {
                                                    stringr::str_detect(indicator, "egativo") ~ "Negative",
                                                    stringr::str_detect(indicator, "ndeter") ~ "Indet."),
 
-                  sex = dplyr::case_when(stringr::str_detect(indicator, "Crian") ~ "Unknown",
-                                         TRUE ~ "Female"),
+                  sex = dplyr::case_when(stringr::str_detect(indicator, "Crian") ~ "Desconh.",
+                                         TRUE ~ "Feminino"),
 
                   modality = dplyr::case_when(stringr::str_detect(indicator, "SMI CCS") ~ "SMI-CCS",
                                               stringr::str_detect(indicator, "SMI CCD") ~ "SMI-CCD"),
 
-                  modality_sub = dplyr::case_when(stringr::str_detect(indicator, "osto") ~ "Fixed Post",
-                                                  stringr::str_detect(indicator, "rigad") ~ "Mobile Brigade"),
+                  modality_sub = dplyr::case_when(stringr::str_detect(indicator, "osto") ~ "Posto Fixo",
+                                                  stringr::str_detect(indicator, "rigad") ~ "Brigada Movel"),
 
-                  source = "MCH Register",
+                  source = "LdR SMI",
 
                   sub_group = NA_character_,
 
-                  age_semi_fine = NA_character_,
+                  age = NA_character_,
 
-                  indicator = "HTS_TST")
+                  indicator = "ATS_TST")
 
   df_pos <- df_all %>%
     dplyr::filter(result_status == "Positive") %>%
-    dplyr::mutate(indicator = dplyr::case_when(indicator == "HTS_TST" ~ "HTS_TST_POS"))
+    dplyr::mutate(indicator = dplyr::case_when(indicator == "ATS_TST" ~ "ATS_TST_POS"))
 
 
   df_parse <- dplyr::bind_rows(df_all, df_pos) %>%
-    dplyr::select(sisma_uid, snu, psnu, sitename, period, indicator, source, modality, modality_sub, sub_group, sex, age_coarse, age_semi_fine, result_status, value)
+    dplyr::select(sisma_uid, snu, psnu, sitename, period, indicator, source, modality, modality_sub, sub_group, sex, age_coarse, age, value)
 
   return(df_parse)
 

@@ -45,12 +45,12 @@ parse_sisma_ats_mch <- function(file) {
                         names_to = "indicator",
                         values_to = "value") %>%
 
-    dplyr::mutate(modality = dplyr::case_when(stringr::str_detect(indicator, "smi_cpn") ~ "MCH-CPN",
-                                              stringr::str_detect(indicator, "smi_mat") ~ "MCH-MAT",
-                                              stringr::str_detect(indicator, "smi_ccr") ~ "MCH-CCR",
-                                              stringr::str_detect(indicator, "smi_cpp") ~ "MCH-CPP",
-                                              stringr::str_detect(indicator, "smi_pf") ~ "MCH-PF",
-                                              stringr::str_detect(indicator, "smi_ug") ~ "MCH-UG"),
+    dplyr::mutate(modality = dplyr::case_when(stringr::str_detect(indicator, "smi_cpn") ~ "SMI-CPN",
+                                              stringr::str_detect(indicator, "smi_mat") ~ "SMI-MAT",
+                                              stringr::str_detect(indicator, "smi_ccr") ~ "SMI-CCR",
+                                              stringr::str_detect(indicator, "smi_cpp") ~ "SMI-CPP",
+                                              stringr::str_detect(indicator, "smi_pf") ~ "SMI-PF",
+                                              stringr::str_detect(indicator, "smi_ug") ~ "SMI-UG"),
 
                   modality_sub = NA_character_,
 
@@ -61,30 +61,30 @@ parse_sisma_ats_mch <- function(file) {
                                                    stringr::str_detect(indicator, "utentes_hiv_das") ~ "Positive",
                                                    stringr::str_detect(indicator, "identificad") ~ "Positive"),
 
-                  sub_group = dplyr::case_when(stringr::str_detect(indicator, "parceir") ~ "Partner",
-                                               stringr::str_detect(indicator, "expost") ~ "Infant"),
+                  sub_group = dplyr::case_when(stringr::str_detect(indicator, "parceir") ~ "Parceiro",
+                                               stringr::str_detect(indicator, "expost") ~ "Infante"),
 
                   age_coarse = dplyr::case_when(stringr::str_detect(indicator, "smi_ccr") ~ "<15"),
 
                   age_coarse = tidyr::replace_na(age_coarse, "15+"),
 
-                  sex = dplyr::case_when(stringr::str_detect(indicator, "parceir") ~ "Male",
-                                         stringr::str_detect(modality, ", smi_ccr") ~ "Unknown"),
+                  sex = dplyr::case_when(stringr::str_detect(indicator, "parceir") ~ "Masculino",
+                                         stringr::str_detect(modality, ", smi_ccr") ~ "Desconh."),
 
-                  sex = tidyr::replace_na(sex, "Female"),
+                  sex = tidyr::replace_na(sex, "Feminino"),
 
-                  indicator = "HTS_TST",
+                  indicator = "ATS_TST",
 
-                  source = "MCH Register",
+                  source = "LdR SMI",
 
-                  age_semi_fine = NA_character_,)
+                  age = NA_character_,)
 
   df_pos <- df_all %>%
     dplyr::filter(result_status == "Positive") %>%
-    dplyr::mutate(indicator = dplyr::case_when(indicator == "HTS_TST" ~ "HTS_TST_POS"))
+    dplyr::mutate(indicator = dplyr::case_when(indicator == "ATS_TST" ~ "ATS_TST_POS"))
 
   df_parse <- dplyr::bind_rows(df_all, df_pos) %>%
-    dplyr::select(sisma_uid, snu, psnu, sitename, period, indicator, source, modality, modality_sub, sub_group, sex, age_coarse, age_semi_fine, result_status, value)
+    dplyr::select(sisma_uid, snu, psnu, sitename, period, indicator, source, modality, modality_sub, sub_group, sex, age_coarse, age, value)
 
 
   return(df_parse)

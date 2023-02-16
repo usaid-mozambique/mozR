@@ -31,9 +31,9 @@ parse_sisma_ats_saaj_cm <- function(file) {
                   age_coarse = dplyr::case_when(age %in% c("<10", "10-14") ~ "<15",
                                                 TRUE ~ "15+"),
 
-                  sex = dplyr::case_when(stringr::str_detect(indicator, "FEMININO") ~ "Female",
-                                         stringr::str_detect(indicator, "MASCULINO") ~ "Male",
-                                         stringr::str_detect(indicator, "MZ C.MASC") ~ "Male"),
+                  sex = dplyr::case_when(stringr::str_detect(indicator, "FEMININO") ~ "Feminino",
+                                         stringr::str_detect(indicator, "MASCULINO") ~ "Masculino",
+                                         stringr::str_detect(indicator, "MZ C.MASC") ~ "Masculino"),
 
                   modality = dplyr::case_when(stringr::str_detect(indicator, "MZ SAAJ") ~ "SAAJ",
                                               stringr::str_detect(indicator, "MZ C.MASC") ~ "CM"),
@@ -44,22 +44,22 @@ parse_sisma_ats_saaj_cm <- function(file) {
 
                   modality_sub = NA_character_,
 
-                  source = dplyr::case_when(stringr::str_detect(indicator, "MZ SAAJ") ~ "SAAJ Register",
-                                            stringr::str_detect(indicator, "MZ C.MASC") ~ "CM Register"),
+                  source = dplyr::case_when(stringr::str_detect(indicator, "MZ SAAJ") ~ "LdR SAAJ",
+                                            stringr::str_detect(indicator, "MZ C.MASC") ~ "LdR CM"),
 
-                  sub_group = dplyr::case_when(stringr::str_detect(indicator, "arceiro") ~ "Partner",
+                  sub_group = dplyr::case_when(stringr::str_detect(indicator, "arceiro") ~ "Parceiro",
                                                TRUE ~ NA_character_),
 
-                  indicator = "HTS_TST")
+                  indicator = "ATS_TST")
 
 
   df_pos <- df_all %>%
     dplyr::filter(result_status == "Positive") %>%
-    dplyr::mutate(indicator = dplyr::case_when(indicator == "HTS_TST" ~ "HTS_TST_POS"))
+    dplyr::mutate(indicator = dplyr::case_when(indicator == "ATS_TST" ~ "ATS_TST_POS"))
 
 
   df_parse <- dplyr::bind_rows(df_all, df_pos) %>%
-    dplyr::select(sisma_uid, snu, psnu, sitename, period, indicator, source, modality, modality_sub, sub_group, sex, age_coarse, age, result_status, value)
+    dplyr::select(sisma_uid, snu, psnu, sitename, period, indicator, source, modality, modality_sub, sub_group, sex, age_coarse, age, value)
 
   return(df_parse)
 
