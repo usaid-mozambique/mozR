@@ -14,6 +14,8 @@ parse_sisma_ats_index <- function(file) {
 
   df_all <- file %>%
 
+    dplyr::filter(!is.na(value)) %>%
+
     dplyr::mutate(
       modality = dplyr::case_when(stringr::str_detect(indicator, "Banco de Socorros") ~ "ATS-BdS",
                                   stringr::str_detect(indicator, "Consultas Externas") ~ "ATS-CE",

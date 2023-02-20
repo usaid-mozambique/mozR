@@ -33,7 +33,7 @@ clean_sisma_csv <- function(file) {
                         values_to = "value",
                         values_transform = list(value = as.numeric)) %>%
 
-    dplyr::filter(!is.na(value)) %>%
+    # dplyr::filter(!is.na(value)) %>%
 
     dplyr::mutate(periodcode = paste0(periodcode, "01"),
                   periodcode = ymd(periodcode),
