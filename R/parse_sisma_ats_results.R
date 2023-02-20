@@ -29,8 +29,8 @@ parse_sisma_ats_results <- function(file) {
                              TRUE ~ age),
 
       result_status = stringr::str_extract(modality, "Negativo|Positivo"),
-      result_status = dplyr::case_when(result_status == "Negativo" ~ "Negative",
-                                       result_status == "Positivo" ~ "Positive"),
+      result_status = dplyr::case_when(result_status == "Negativo" ~ "Negativo",
+                                       result_status == "Positivo" ~ "Positivo"),
 
       modality = stringr::str_remove(modality, " (Negativo|Positivo)"),
       modality = dplyr::case_when(modality == "ATS-C" ~ "ATS-C",
@@ -58,12 +58,12 @@ parse_sisma_ats_results <- function(file) {
 
 
   df_pos <- df_all %>%
-    dplyr::filter(result_status == "Positive") %>%
+    dplyr::filter(result_status == "Positivo") %>%
     dplyr::mutate(indicator = dplyr::case_when(indicator == "ATS_TST" ~ "ATS_TST_POS"))
 
 
   df_parse <- dplyr::bind_rows(df_all, df_pos) %>%
-    dplyr::select(sisma_uid, snu, psnu, sitename, period, indicator, source, modality, modality_sub, sub_group, sex, age_coarse, age, value)
+    dplyr::select(sisma_uid, snu, psnu, sitename, period, indicator, source, modality, modality_sub, sub_group, sex, age_coarse, age, result_status, value)
 
   return(df_parse)
 

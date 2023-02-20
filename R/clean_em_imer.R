@@ -45,6 +45,11 @@ clean_em_imer <- function(df){
     tidyr::pivot_wider(
       names_from = temp_indicator,
       values_from = temp_value
-    )
+    ) %>%
+    dplyr::mutate(
+      TX_MMD_D = TX_MMD,
+      TX_MMD = dplyr::case_when(dispensation %in% c("3-5", "6+") ~ TX_MMD_D),
+      indicator = dplyr::case_when(indicator == "TX_MMD" ~ "TX_MMD_D",
+                                   TRUE ~ indicator))
 
 }

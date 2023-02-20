@@ -37,8 +37,8 @@ parse_sisma_ats_history <- function(file) {
                                    stringr::str_detect(indicator, "pos. ") ~ "ATS_HIST_POS",
                                    stringr::str_detect(indicator, "Subgrupo") ~ "ATS_KP"),
 
-      result_status = dplyr::case_when(stringr::str_detect(indicator, "Positi") ~ "Positive",
-                                       stringr::str_detect(indicator, "Negativ") ~ "Negative"),
+      result_status = dplyr::case_when(stringr::str_detect(indicator, "Positi") ~ "Positivo",
+                                       stringr::str_detect(indicator, "Negativ") ~ "Negativo"),
 
       source = "LdR ATS",
 
@@ -48,7 +48,7 @@ parse_sisma_ats_history <- function(file) {
 
       sex = NA_character_) %>%
 
-    dplyr::select(sisma_uid, snu, psnu, sitename, period, indicator, source, modality, modality_sub, sub_group, sex, age_coarse, age, value)
+    dplyr::select(sisma_uid, snu, psnu, sitename, period, indicator, source, modality, modality_sub, sub_group, sex, age_coarse, age, result_status, value)
 
 
   return(df_parse)

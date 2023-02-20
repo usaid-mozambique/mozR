@@ -12,7 +12,7 @@
 
 parse_sisma_ats_index <- function(file) {
 
-  df_parse <- file %>%
+  df_all <- file %>%
 
     dplyr::mutate(
       modality = dplyr::case_when(stringr::str_detect(indicator, "Banco de Socorros") ~ "ATS-BdS",
@@ -31,13 +31,14 @@ parse_sisma_ats_index <- function(file) {
                                    str_detect(indicator, "Parceiro") ~ "Parceiro",
                                    str_detect(indicator, " / Pai ") ~ "Mae/Pai"),
 
+      result_status = dplyr::case_when(str_detect(indicator, "ositi") ~ "Positivo",
+                                       str_detect(indicator, "egativ") ~ "Negativo"),
+
       indicator = dplyr::case_when(str_detect(indicator, "Teste de Subgrupo") ~ "ATS_CI_TST",
                                    str_detect(indicator, "Contactos de casos de indice") ~ "ATS_CI",
                                    str_detect(indicator, "Numero Diagnosticado") ~ "ATS_LIG_DEN",
                                    str_detect(indicator, "ligado aos") ~ "ATS_LIG_NUM"),
 
-      result_status = dplyr::case_when(str_detect(indicator, "Positi") ~ "Positive",
-                                       str_detect(indicator, "Negativ") ~ "Negative"),
 
       age_coarse = dplyr::case_when(str_detect(indicator, "Filhos <10") ~ "<15",
                                     str_detect(indicator, "Parceiro") ~ "15+",
@@ -47,9 +48,16 @@ parse_sisma_ats_index <- function(file) {
 
       age = NA_character_,
 
-      sex = NA_character_) %>%
+      sex = NA_character_)
 
-    dplyr::select(sisma_uid, snu, psnu, sitename, period, indicator, source, modality, modality_sub, sub_group, sex, age_coarse, age, value)
+
+  df_pos <- df_all %>%
+    dplyr::filter(result_status == "Positivo") %>%
+    dplyr::mutate(indicator = dplyr::case_when(indicator == "ATS_CI_TST" ~ "ATS_CI_TST_POS"))
+
+
+  df_parse <- dplyr::bind_rows(df_all, df_pos) %>%
+    dplyr::select(sisma_uid, snu, psnu, sitename, period, indicator, source, modality, modality_sub, sub_group, sex, age_coarse, age, result_status, value)
 
 
   return(df_parse)

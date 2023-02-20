@@ -54,12 +54,12 @@ parse_sisma_ats_mch <- function(file) {
 
                   modality_sub = NA_character_,
 
-                  result_status = dplyr::case_when(stringr::str_detect(indicator, "negativ") ~ "Negative",
-                                                   stringr::str_detect(indicator, "positi") ~ "Positive",
-                                                   stringr::str_detect(indicator, "HIV+") ~ "Positive",
-                                                   stringr::str_detect(indicator, "rperas_hiv_das") ~ "Positive",
-                                                   stringr::str_detect(indicator, "utentes_hiv_das") ~ "Positive",
-                                                   stringr::str_detect(indicator, "identificad") ~ "Positive"),
+                  result_status = dplyr::case_when(stringr::str_detect(indicator, "negativ") ~ "Negativo",
+                                                   stringr::str_detect(indicator, "positi") ~ "Positivo",
+                                                   stringr::str_detect(indicator, "HIV+") ~ "Positivo",
+                                                   stringr::str_detect(indicator, "rperas_hiv_das") ~ "Positivo",
+                                                   stringr::str_detect(indicator, "utentes_hiv_das") ~ "Positivo",
+                                                   stringr::str_detect(indicator, "identificad") ~ "Positivo"),
 
                   sub_group = dplyr::case_when(stringr::str_detect(indicator, "parceir") ~ "Parceiro",
                                                stringr::str_detect(indicator, "expost") ~ "Infante"),
@@ -80,11 +80,11 @@ parse_sisma_ats_mch <- function(file) {
                   age = NA_character_,)
 
   df_pos <- df_all %>%
-    dplyr::filter(result_status == "Positive") %>%
+    dplyr::filter(result_status == "Positivo") %>%
     dplyr::mutate(indicator = dplyr::case_when(indicator == "ATS_TST" ~ "ATS_TST_POS"))
 
   df_parse <- dplyr::bind_rows(df_all, df_pos) %>%
-    dplyr::select(sisma_uid, snu, psnu, sitename, period, indicator, source, modality, modality_sub, sub_group, sex, age_coarse, age, value)
+    dplyr::select(sisma_uid, snu, psnu, sitename, period, indicator, source, modality, modality_sub, sub_group, sex, age_coarse, age, result_status, value)
 
 
   return(df_parse)

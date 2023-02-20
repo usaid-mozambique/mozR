@@ -18,8 +18,8 @@ parse_sisma_ats_ccsd <- function(file) {
     dplyr::mutate(age_coarse = dplyr::case_when(stringr::str_detect(indicator, "Crian") ~ "<15",
                                                 TRUE ~ "15+"),
 
-                  result_status = dplyr::case_when(stringr::str_detect(indicator, "ositivo") ~ "Positive",
-                                                   stringr::str_detect(indicator, "egativo") ~ "Negative",
+                  result_status = dplyr::case_when(stringr::str_detect(indicator, "ositivo") ~ "Positivo",
+                                                   stringr::str_detect(indicator, "egativo") ~ "Negativo",
                                                    stringr::str_detect(indicator, "ndeter") ~ "Indet."),
 
                   sex = dplyr::case_when(stringr::str_detect(indicator, "Crian") ~ "Desconh.",
@@ -40,12 +40,12 @@ parse_sisma_ats_ccsd <- function(file) {
                   indicator = "ATS_TST")
 
   df_pos <- df_all %>%
-    dplyr::filter(result_status == "Positive") %>%
+    dplyr::filter(result_status == "Positivo") %>%
     dplyr::mutate(indicator = dplyr::case_when(indicator == "ATS_TST" ~ "ATS_TST_POS"))
 
 
   df_parse <- dplyr::bind_rows(df_all, df_pos) %>%
-    dplyr::select(sisma_uid, snu, psnu, sitename, period, indicator, source, modality, modality_sub, sub_group, sex, age_coarse, age, value)
+    dplyr::select(sisma_uid, snu, psnu, sitename, period, indicator, source, modality, modality_sub, sub_group, sex, age_coarse, age, result_status, value)
 
   return(df_parse)
 
