@@ -16,8 +16,6 @@ parse_sisma_ats_mch <- function(file) {
 
     tidyr::pivot_wider(names_from = indicator, values_from = value) %>%
 
-    janitor::clean_names() %>%
-
     # make sure the columns that need values for subsequent calculations are not in na
     tidyr::replace_na(list(smi_cpp_puerperas_testadas_na_consulta_pos_parto = 0,
                            smi_cpp_puerperas_hiv_das_puerperas_testadas_na_consulta_pos_parto = 0,

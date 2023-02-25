@@ -17,34 +17,36 @@ parse_sisma_ats_index <- function(file) {
     dplyr::filter(!is.na(value)) %>%
 
     dplyr::mutate(
-      modality = dplyr::case_when(stringr::str_detect(indicator, "Banco de Socorros") ~ "ATS-BdS",
-                                  stringr::str_detect(indicator, "Consultas Externas") ~ "ATS-CE",
-                                  stringr::str_detect(indicator, "Enfermaria") ~ "ATS-Enf",
-                                  stringr::str_detect(indicator, "Outro ATIP") ~ "ATS-ATIP Outro",
-                                  stringr::str_detect(indicator, "SMI") ~ "ATS-SMI",
-                                  stringr::str_detect(indicator, "TB") ~ "ATS-TB",
-                                  stringr::str_detect(indicator, "Triagem") ~ "ATS-Triagem",
-                                  stringr::str_detect(indicator, "UATS") ~ "ATS-UATS",
-                                  stringr::str_detect(indicator, "ATS-C") ~ "ATS-C"),
+      indicator = stringr::str_remove_all(indicator, "mz_ats_"),
+
+      modality = dplyr::case_when(stringr::str_detect(indicator, "uats")                ~ "ATS-UATS",
+                                  stringr::str_detect(indicator, "consultas_externas")  ~ "ATS-CE",
+                                  stringr::str_detect(indicator, "triagem")             ~ "ATS-Triagem",
+                                  stringr::str_detect(indicator, "enfermaria")          ~ "ATS-Enf",
+                                  stringr::str_detect(indicator, "outro_atip")          ~ "ATS-ATIP Outro",
+                                  stringr::str_detect(indicator, "banco_de_socorros")   ~ "ATS-BdS",
+                                  stringr::str_detect(indicator, "_smi")                ~ "ATS-SMI",
+                                  stringr::str_detect(indicator, "_tb")                 ~ "ATS-TB",
+                                  stringr::str_detect(indicator, "_ats_c")              ~ "ATS-C"),
 
       modality_sub = NA_character_,
 
-      sub_group = dplyr::case_when(str_detect(indicator, "Filhos <10") ~ "Filhos <10",
-                                   str_detect(indicator, "Parceiro") ~ "Parceiro",
-                                   str_detect(indicator, " / Pai ") ~ "Mae/Pai"),
+      sub_group = dplyr::case_when(str_detect(indicator, "filhos_10") ~ "Filhos <10",
+                                   str_detect(indicator, "parceiro") ~ "Parceiro",
+                                   str_detect(indicator, "mae_pai") ~ "Mae/Pai"),
 
-      result_status = dplyr::case_when(str_detect(indicator, "ositi") ~ "Positivo",
-                                       str_detect(indicator, "egativ") ~ "Negativo"),
+      result_status = dplyr::case_when(stringr::str_detect(indicator, "negativo")  ~ "Negativo",
+                                       stringr::str_detect(indicator, "positivo")  ~ "Positivo"),
 
-      indicator = dplyr::case_when(str_detect(indicator, "Teste de Subgrupo") ~ "ATS_CI_TST",
-                                   str_detect(indicator, "Contactos de casos de indice") ~ "ATS_CI",
-                                   str_detect(indicator, "Numero Diagnosticado") ~ "ATS_LIG_DEN",
-                                   str_detect(indicator, "ligado aos") ~ "ATS_LIG_NUM"),
+      age_coarse = dplyr::case_when(str_detect(indicator, "filhos_10") ~ "<15",
+                                    str_detect(indicator, "parceiro") ~ "15+",
+                                    str_detect(indicator, "mae_pai") ~ "15+"),
 
+      indicator = dplyr::case_when(str_detect(indicator, "teste_de_subgrupo") ~ "ATS_CI_TST",
+                                   str_detect(indicator, "contactos_de_casos_de_indice") ~ "ATS_CI",
+                                   str_detect(indicator, "numero_diagnosticado") ~ "ATS_LIG_DEN",
+                                   str_detect(indicator, "ligado_aos") ~ "ATS_LIG_NUM"),
 
-      age_coarse = dplyr::case_when(str_detect(indicator, "Filhos <10") ~ "<15",
-                                    str_detect(indicator, "Parceiro") ~ "15+",
-                                    str_detect(indicator, " / Pai ") ~ "15+"),
 
       source = "LdR ATS",
 

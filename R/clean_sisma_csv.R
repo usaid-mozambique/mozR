@@ -10,11 +10,14 @@
 #'
 #'  df <- clean_sisma_csv()}
 
+
 clean_sisma_csv <- function(file) {
 
   df <- readr::read_csv(file) %>%
 
     dplyr::filter(!organisationunitid == "abg5UReivZX") %>% # for whatever reason this site creates issues
+
+    janitor::clean_names() %>%
 
     dplyr::select(!c(periodname,
                      periodid,
