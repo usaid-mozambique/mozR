@@ -13,10 +13,7 @@
 parse_sisma_ats_saaj_cm <- function(file) {
 
   df_all <- file %>%
-
     tidyr::pivot_wider(names_from = indicator, values_from = value) %>%
-
-    janitor::clean_names() %>%
 
     mutate(across(starts_with("mz_saaj_"), ~ replace_na(.x, 0))) %>%
 

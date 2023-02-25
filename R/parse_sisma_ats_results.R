@@ -16,35 +16,32 @@ parse_sisma_ats_results <- function(file) {
 
     dplyr::filter(!is.na(value)) %>%
 
-    dplyr::mutate(indicator = str_remove(indicator, "MZ ATS - Resultado por grupo etario - ")) %>%
-
-    tidyr::separate(indicator, c("modality", "age", "sex"), sep = ", ") %>%
-
     dplyr::mutate(
-      age = stringr::str_remove_all(age, " |anos|ano"),
+      indicator = stringr::str_remove_all(indicator, "mz_ats_resultado_por_grupo_etario_"),
 
-      sex = dplyr::case_when(sex == "FEMININO"   ~ "Feminino",
-                             sex == "MASCULINO" ~ "Masculino"),
-      age = dplyr::case_when(age == "<1"                    ~ "<01",
-                             age == "1-9"                   ~ "01-09",
-                             stringr::str_detect(age, "50") ~ "50+",
-                             TRUE ~ age),
+      sex = dplyr::case_when(stringr::str_detect(indicator, "feminino")  ~ "Feminino",
+                             stringr::str_detect(indicator, "masculino") ~ "Masculino"),
 
-      result_status = stringr::str_extract(modality, "Negativo|Positivo"),
+      age = dplyr::case_when(stringr::str_detect(indicator, "_1_ano")  ~ "<01",
+                             stringr::str_detect(indicator, "1_9_ano") ~ "01-09",
+                             stringr::str_detect(indicator, "10_14")   ~ "10-14",
+                             stringr::str_detect(indicator, "15_19")   ~ "15-19",
+                             stringr::str_detect(indicator, "20_24")   ~ "20-24",
+                             stringr::str_detect(indicator, "25_49")   ~ "25-49",
+                             stringr::str_detect(indicator, "_50_")    ~ "50+"),
 
-      result_status = dplyr::case_when(result_status == "Negativo" ~ "Negativo",
-                                       result_status == "Positivo" ~ "Positivo"),
+      result_status = dplyr::case_when(stringr::str_detect(indicator, "negativo")  ~ "Negativo",
+                                       stringr::str_detect(indicator, "positivo")  ~ "Positivo"),
 
-      modality = stringr::str_remove(modality, " (Negativo|Positivo)"),
-      modality = dplyr::case_when(modality == "ATS-C"               ~ "ATS-C",
-                                  modality == "Banco de Socorros"   ~ "ATS-BdS",
-                                  modality == "Consultas Externas"  ~ "ATS-CE",
-                                  modality == "Enfermaria"          ~ "ATS-Enf",
-                                  modality == "Outro ATIP"          ~ "ATS-ATIP Outro",
-                                  modality == "SMI"                 ~ "ATS-SMI",
-                                  modality == "TB"                  ~ "ATS-TB",
-                                  modality == "Triagem"             ~ "ATS-Triagem",
-                                  modality == "UATS"                ~ "ATS-UATS"),
+      modality = dplyr::case_when(stringr::str_detect(indicator, "uats")                ~ "ATS-UATS",
+                                  stringr::str_detect(indicator, "consultas_externas")  ~ "ATS-CE",
+                                  stringr::str_detect(indicator, "triagem")             ~ "ATS-Triagem",
+                                  stringr::str_detect(indicator, "enfermaria")          ~ "ATS-Enf",
+                                  stringr::str_detect(indicator, "outro_atip")          ~ "ATS-ATIP Outro",
+                                  stringr::str_detect(indicator, "banco_de_socorros")   ~ "ATS-BdS",
+                                  stringr::str_detect(indicator, "smi_")                ~ "ATS-SMI",
+                                  stringr::str_detect(indicator, "tb_")                 ~ "ATS-TB",
+                                  stringr::str_detect(indicator, "ats_c")               ~ "ATS-C"),
 
       modality_sub = NA_character_,
 
