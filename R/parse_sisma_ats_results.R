@@ -43,18 +43,20 @@ parse_sisma_ats_results <- function(file) {
                                   stringr::str_detect(indicator, "tb_")                 ~ "ATS-TB",
                                   stringr::str_detect(indicator, "ats_c")               ~ "ATS-C"),
 
-      modality_sub = NA_character_,
-
-      source = "LdR ATS",
+      indicator = "ATS_TST",
 
       age_coarse = dplyr::case_when(age == "<01"   ~ "<15",
                                     age == "01-09" ~ "<15",
                                     age == "10-14" ~ "<15"),
+
       age_coarse = tidyr::replace_na(age_coarse, "15+"),
 
-      sub_group = NA_character_,
+      modality_sub = NA_character_,
 
-      indicator = "ATS_TST")
+      source = "LdR ATS",
+
+      sub_group = NA_character_
+      )
 
 
   df_pos <- df_all %>%

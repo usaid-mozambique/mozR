@@ -2,7 +2,7 @@
 % Please edit documentation in R/pull_sitemap.R
 \name{pull_sitemap}
 \alias{pull_sitemap}
-\title{Retrieve PEPFAR Mozambique AJUDA Site Map from Google Sheets}
+\title{Retrieve PEPFAR Mozambique AJUDA Site Map from USAID Google Sheets}
 \usage{
 pull_sitemap(sheetname = "list_ajuda")
 }
@@ -13,7 +13,7 @@ pull_sitemap(sheetname = "list_ajuda")
 A dataframe containing metadata for all PEPFAR Mozambique AJUDA sites
 }
 \description{
-Retrieve PEPFAR Mozambique AJUDA Site Map from Google Sheets
+Retrieve PEPFAR Mozambique AJUDA Site Map from USAID Google Sheets
 }
 \examples{
  \dontrun{
