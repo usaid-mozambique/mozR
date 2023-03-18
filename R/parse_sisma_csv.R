@@ -12,10 +12,8 @@
 parse_sisma_csv <- function(data, type){
 
   switch(type,
-         "CPN" = parse_sisma_smi_cpn(df),
-         "ATS Result" = parse_sisma_ats_results(df)
+         "CPN" = parse_sisma_smi_cpn(data),
+         "ATS Result" = parse_sisma_ats_results(data)
   )
-
-  return(df)
 
 }
