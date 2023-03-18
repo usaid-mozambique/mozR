@@ -20,4 +20,6 @@ parse_sisma_smi_cpn <- function(file) {
     dplyr::filter(!is.na(value)) %>%
     dplyr::select(starts_with("period"), snu, psnu, sitename, sisma_uid, indicator = indicator_new, age, disaggregate, value)
 
+  return(df)
+
 }
