@@ -3,9 +3,9 @@
 \docType{data}
 \name{data_sisma_smi_cpn_map}
 \alias{data_sisma_smi_cpn_map}
-\title{Name of cascade plots available to the user}
+\title{SISMA CPN indicator Map for Feature Engineering}
 \format{
-A list of the plots available to the user
+A list of the variables included to engineer dataset features
 \describe{
 \item{data_sisma_smi_cpn_map}{indicator}
 \item{data_sisma_smi_cpn_map}{indicator_new}
