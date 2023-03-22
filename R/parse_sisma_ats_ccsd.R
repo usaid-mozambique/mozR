@@ -14,32 +14,13 @@ parse_sisma_ats_ccsd <- function(file) {
 
   df_all <- file %>%
     dplyr::filter(!is.na(value)) %>%
-
-    dplyr::filter(!str_detect(indicator, "estada")) %>%
-
-    dplyr::mutate(age_coarse = dplyr::case_when(stringr::str_detect(indicator, "crian") ~ "<15",
-                                                TRUE ~ "15+"),
-
-                  result_status = dplyr::case_when(stringr::str_detect(indicator, "ositivo")  ~ "Positivo",
-                                                   stringr::str_detect(indicator, "egativo")  ~ "Negativo",
-                                                   stringr::str_detect(indicator, "ndeter")   ~ "Indet."),
-
-                  sex = dplyr::case_when(stringr::str_detect(indicator, "crian") ~ "Desconh.",
-                                         TRUE ~ "Feminino"),
-
-                  modality = dplyr::case_when(stringr::str_detect(indicator, "smi_ccs") ~ "SMI-CCS",
-                                              stringr::str_detect(indicator, "smi_ccd") ~ "SMI-CCD"),
-
-                  modality_sub = dplyr::case_when(stringr::str_detect(indicator, "osto")  ~ "Posto Fixo",
-                                                  stringr::str_detect(indicator, "rigad") ~ "Brigada Movel"),
-
-                  source = "LdR SMI",
-
-                  sub_group = NA_character_,
-
-                  age = NA_character_,
-
-                  indicator = "ATS_TST")
+    dplyr::left_join(data_sisma_ats_ccsd, by = "indicator") %>%
+    dplyr::filter(!is.na(indicator_new)) %>%
+    dplyr::mutate(
+      source = "LdR SMI",
+      sub_group = NA_character_,
+      age = NA_character_,
+      indicator = "ATS_TST")
 
   df_pos <- df_all %>%
     dplyr::filter(result_status == "Positivo") %>%
@@ -47,7 +28,8 @@ parse_sisma_ats_ccsd <- function(file) {
 
 
   df_parse <- dplyr::bind_rows(df_all, df_pos) %>%
-    dplyr::select(sisma_uid, snu, psnu, sitename, period, indicator, source, modality, modality_sub, sub_group, sex, age_coarse, age, result_status, value)
+    dplyr::select(sisma_uid, snu, psnu, sitename, period, indicator = indicator_new, source, modality, modality_sub, sub_group, sex, age_coarse, age, result_status, value)
+
 
   return(df_parse)
 

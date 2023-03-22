@@ -13,7 +13,12 @@ parse_sisma_csv <- function(data, type){
 
   switch(type,
          "CPN" = parse_sisma_smi_cpn(data),
-         "ATS Result" = parse_sisma_ats_results(data)
+         "ATS Result" = parse_sisma_ats_results(data),
+         "ATS History" = parse_sisma_ats_history(data),
+         "ATS CI" = parse_sisma_ats_index(data),
+         "ATS SAAJ" = parse_sisma_ats_saaj_cm(data),
+         "ATS CCSD" = parse_sisma_ats_ccsd(data),
+         "ATS SMI" = parse_sisma_ats_mch(data),
   )
 
 }

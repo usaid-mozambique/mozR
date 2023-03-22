@@ -12,7 +12,7 @@
 
 parse_sisma_ats_history <- function(file) {
 
-  df_all <- df %>%
+  df_all <- file %>%
     dplyr::left_join(data_sisma_ats_hist, by = "indicator") %>%
     dplyr::filter(!is.na(value)) %>%
     dplyr::mutate(
@@ -26,9 +26,8 @@ parse_sisma_ats_history <- function(file) {
     dplyr::filter(result_status == "Positivo") %>%
     dplyr::mutate(indicator = dplyr::case_when(indicator == "ATS_KP" ~ "ATS_KP_POS"))
 
-
   df_parse <- dplyr::bind_rows(df_all, df_pos) %>%
-    dplyr::select(sisma_uid, snu, psnu, sitename, period, indicator, source, modality, modality_sub, sub_group, sex, age_coarse, age, result_status, value)
+    dplyr::select(sisma_uid, snu, psnu, sitename, period, indicator = indicator_new, source, modality, modality_sub, sub_group, sex, age_coarse, age, result_status, value)
 
   return(df_parse)
 
