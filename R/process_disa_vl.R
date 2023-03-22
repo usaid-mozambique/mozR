@@ -1,5 +1,6 @@
 #' Process monthly DISA results for Viral Load
 #' @param filename Local path to the monthly DISA dataset
+#' @param month Month of DISA results
 #' @return A tidy dataframe with monthly DISA results
 #' @export
 #'
@@ -9,7 +10,7 @@
 #' df <- process_disa_vl()}
 
 
-process_disa_vl <- function(filename) {
+process_disa_vl <- function(filename, month) {
 
   # ingestion
   df_age <- readxl::read_excel(filename,
@@ -56,29 +57,27 @@ process_disa_vl <- function(filename) {
 
 
   # tidy
-  df_all <- dplyr::bind_rows(df_age, df_pw, df_lw, df_tat) %>%
-
-    dplyr::select(!c(datim_uid, sitetype, tidyselect::contains("total"))) %>%
-
+  df <- dplyr::bind_rows(df_age, df_pw, df_lw, df_tat) %>%
+    dplyr::select(!c(datim_uid, sitetype, contains("total"))) %>%
     tidyr::pivot_longer(cols = tidyselect::starts_with("vl"),
                         names_to = c("indicator", "group", "motive", "result", "tat_step"),
                         names_sep = "_",
                         values_to = "value") %>%
-
     dplyr::filter(value > 0)
 
 
   # feature engineering
-  df_final <- df_all %>%
+  df_1 <- df %>%
     dplyr::mutate(period = as.Date(month, "%Y-%m-%d"),
 
                   sex = dplyr::case_when(indicator == "vl" & sex == "F" ~ "Female",
                                          indicator == "vl" & sex == "M" ~ "Male",
-                                         indicator == "vl" & sex %in% c("UNKNOWN", "Not Specified", "N\\u00e3o especificado") ~ "Unknown"),
+                                         indicator == "vl" & sex == "UNKNOWN" ~ "Unknown",
+                                         stringr::str_detect(sex, "specif") ~ "Unknown"),
 
                   age = dplyr::case_when(age == "<1" ~ "<01",
                                          age == "NS" ~ "Unknown Age",
-                                         stringr::str_detect(age, "pecif") ~ "Unknown Age",
+                                         stringr::str_detect(age, "specif") ~ "Unknown Age",
                                          TRUE ~ age),
 
                   group = dplyr::case_when(group == "age" ~ "Age",
@@ -98,14 +97,19 @@ process_disa_vl <- function(filename) {
 
                   VL = dplyr::case_when(result == "suppress" | result == "unsuppress" & indicator == "vl" ~ value),
 
-                  VLS = dplyr::case_when(result == "suppress" & indicator == "vl" ~ value),
+                  VLS = dplyr::case_when(result == "suppress" & indicator == "vl" ~ value,
+                                         is.na(result) ~ 0),
 
-                  VLS = dplyr::case_when(indicator == "vl" ~replace_na(VLS, 0)),
-
-                  TAT = dplyr::case_when(indicator == "vltat" ~ value)) %>%
-
+                  TAT = dplyr::case_when(indicator == "vltat" ~ value,
+                                         TRUE ~ NA_integer_)) %>%
     dplyr::select(!c(result, indicator, value))
 
-  return(df_final)
+
+  # compress table
+  df_2 <- df_1 %>%
+    dplyr::group_by(dplyr::across(site_nid:period), .drop = TRUE) %>%
+    dplyr::summarise(dplyr::across(tidyselect::where(is.double), ~ sum(.x, na.rm = TRUE)))
+
+  return(df_2)
 
 }

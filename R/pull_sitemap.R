@@ -1,4 +1,4 @@
-#' Retrieve PEPFAR Mozambique AJUDA Site Map from USAID Google Sheets
+#' Retrieve site meta data for Mozambique Health Facilities from the USAID Google Sheet
 #'
 #' @param sheetname Sheet name from the Mozambique AJUDA Site Map
 #' @return A dataframe containing metadata for all PEPFAR Mozambique AJUDA sites
