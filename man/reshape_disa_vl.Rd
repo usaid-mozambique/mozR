@@ -2,18 +2,20 @@
 % Please edit documentation in R/reshape_disa_vl.R
 \name{reshape_disa_vl}
 \alias{reshape_disa_vl}
-\title{Process monthly enhanced monitoring DISA submission from PEPFAR Mozambique lab partner APHL}
+\title{Process monthly enhanced monitoring DISA Viral Load submission from PEPFAR Mozambique lab partner APHL}
 \usage{
-reshape_disa_vl(filename)
+reshape_disa_vl(filepath, month)
 }
 \arguments{
-\item{filename}{Local path to the monthly DISA submission}
+\item{filepath}{Local path to the monthly DISA submission}
+
+\item{month}{Month for which DISA Viral Load is included in submission}
 }
 \value{
-A tidy dataframe with monthly enhanced monitoring DISA results
+A tidy dataframe with monthly enhanced monitoring DISA Viral Load results
 }
 \description{
-Process monthly enhanced monitoring DISA submission from PEPFAR Mozambique lab partner APHL
+Process monthly enhanced monitoring DISA Viral Load submission from PEPFAR Mozambique lab partner APHL
 }
 \examples{
  \dontrun{

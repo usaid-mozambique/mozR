@@ -4,10 +4,12 @@
 \alias{reshape_disa_dpi}
 \title{Reshape APHL DISA DPI submission}
 \usage{
-reshape_disa_dpi(filename)
+reshape_disa_dpi(filename, month)
 }
 \arguments{
 \item{filename}{file path and name of APHL DPI submission}
+
+\item{month}{Month for which DISA DPI is included in submission}
 }
 \value{
 Tidy dataframe with APHL DPI results.  Does not include site metadata.

@@ -8,9 +8,9 @@
 #' @examples
 #'  \dontrun{
 #'
-#'  df <- parse_sisma_ats_mch()}
+#'  df <- parse_sisma_ats_smi()}
 
-parse_sisma_ats_mch <- function(file) {
+parse_sisma_ats_smi <- function(file) {
 
   df_all <- file %>%
 

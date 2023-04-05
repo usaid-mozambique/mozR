@@ -15,7 +15,7 @@ parse_sisma_ats_results <- function(file) {
   df_all <- file %>%
 
     dplyr::filter(!is.na(value)) %>%
-    dplyr::left_join(data_sisma_ats_results, by = "indicator") %>%
+    dplyr::left_join(data_sisma_ats_results_map, by = "indicator") %>%
     dplyr::mutate(
       indicator = "ATS_TST",
       age_coarse = dplyr::case_when(age == "<01"   ~ "<15",

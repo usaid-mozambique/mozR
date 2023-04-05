@@ -50,7 +50,7 @@ data_sisma_smi_cpn_map <-
 usethis::use_data(data_sisma_smi_cpn_map, overwrite = TRUE)
 
 
-data_sisma_ats_results <-
+data_sisma_ats_results_map <-
   tibble::tribble(
                                                                               ~indicator, ~indicator_new,        ~sex,    ~age, ~age_coarse,        ~modality, ~result_status,
              "mz_ats_resultado_por_grupo_etario_outro_atip_negativo_20_24_anos_feminino",      "ATS_TST",  "Feminino", "20-24",          NA, "ATS-ATIP Outro",     "Negativo",
@@ -306,10 +306,10 @@ data_sisma_ats_results <-
                     "mz_ats_resultado_por_grupo_etario_tb_positivo_15_19_anos_masculino",      "ATS_TST", "Masculino", "15-19",          NA,         "ATS-TB",     "Positivo",
                           "mz_ats_resultado_por_grupo_etario_tb_positivo_1_ano_feminino",      "ATS_TST",  "Feminino",   "<01",       "<15",         "ATS-TB",     "Positivo"
     )
-usethis::use_data(data_sisma_ats_results, overwrite = TRUE)
+usethis::use_data(data_sisma_ats_results_map, overwrite = TRUE)
 
 
-data_sisma_ats_ci <-
+data_sisma_ats_ci_map <-
 tibble::tribble(
                                                                                                 ~indicator, ~indicator_new,        ~modality,   ~sub_group, ~result_status, ~age_coarse,
                          "mz_ats_utentes_diagonsticados_hiv_numero_hiv_ligado_aos_servicos_clinicos_ats_c",  "ATS_LIG_NUM",          "ATS-C",           NA,             NA,          NA,
@@ -412,10 +412,10 @@ tibble::tribble(
                 "mz_ats_teste_de_subgrupo_por_contactos_dos_casos_indices_parceiros_sexuais_uats_negativo",   "ATS_CI_TST",       "ATS-UATS",   "Parceiro",     "Negativo",       "15+",
                 "mz_ats_teste_de_subgrupo_por_contactos_dos_casos_indices_parceiros_sexuais_uats_positivo",   "ATS_CI_TST",       "ATS-UATS",   "Parceiro",     "Positivo",       "15+"
   )
-usethis::use_data(data_sisma_ats_ci, overwrite = TRUE)
+usethis::use_data(data_sisma_ats_ci_map, overwrite = TRUE)
 
 
-data_sisma_ats_hist <-
+data_sisma_ats_hist_map <-
 tibble::tribble(
                                                                            ~indicator,  ~indicator_new,        ~modality, ~sub_group, ~result_status,
                                    "mz_ats_historial_de_testagem_1_vez_testado_ats_c", "ATS_HIST_PRIM",          "ATS-C",         NA,             NA,
@@ -527,9 +527,9 @@ tibble::tribble(
                 "mz_ats_teste_de_subgrupo_resultados_por_pop_chave_rec_uats_negativo",        "ATS_KP",       "ATS-UATS",      "REC",     "Negativo",
                 "mz_ats_teste_de_subgrupo_resultados_por_pop_chave_rec_uats_positivo",        "ATS_KP",       "ATS-UATS",      "REC",     "Positivo"
   )
-usethis::use_data(data_sisma_ats_hist, overwrite = TRUE)
+usethis::use_data(data_sisma_ats_hist_map, overwrite = TRUE)
 
-data_sisma_ats_smi <-
+data_sisma_ats_smi_map <-
 tibble::tribble(
                                                                                        ~indicator, ~indicator_new, ~modality, ~sub_group, ~result_status, ~age_coarse,        ~sex,
                                  "smi_cpn_mulheres_gravidas_testadas_hiv_negativas_durante_a_cpn",      "ATS_TST", "SMI-CPN",         NA,     "Negativo",       "15+",  "Feminino",
@@ -551,10 +551,10 @@ tibble::tribble(
                                                                             "smi_pf_hiv_negative",      "ATS_TST",  "SMI-PF",         NA,     "Negativo",       "15+",  "Feminino",
                                                                             "smi_ug_hiv_negative",      "ATS_TST",  "SMI-UG",         NA,     "Negativo",       "15+",  "Feminino"
   )
-usethis::use_data(data_sisma_ats_smi, overwrite = TRUE)
+usethis::use_data(data_sisma_ats_smi_map, overwrite = TRUE)
 
 
-data_sisma_ats_ccsd <-
+data_sisma_ats_ccsd_map <-
 tibble::tribble(
                                                                    ~indicator, ~indicator_new,   ~source, ~modality,   ~modality_sub, ~result_status, ~age_coarse,       ~sex,
   "mz_smi_ccd_total_de_criancas_com_teste_de_hiv_indeterminado_brigada_movel",      "ATS_TST", "LdR SMI", "SMI-CCD", "Brigada Movel",       "Indet.",       "<15", "Desconh.",
@@ -576,10 +576,10 @@ tibble::tribble(
            "mz_smi_ccs_total_de_maes_com_teste_de_hiv_negativo_brigada_movel",      "ATS_TST", "LdR SMI", "SMI-CCS", "Brigada Movel",     "Negativo",       "15+", "Feminino",
               "mz_smi_ccs_total_de_maes_com_teste_de_hiv_negativo_posto_fixo",      "ATS_TST", "LdR SMI", "SMI-CCS",    "Posto Fixo",     "Negativo",       "15+", "Feminino"
   )
-usethis::use_data(data_sisma_ats_ccsd, overwrite = TRUE)
+usethis::use_data(data_sisma_ats_ccsd_map, overwrite = TRUE)
 
 
-data_sisma_ats_autoteste <-
+data_sisma_ats_autoteste_map <-
 tibble::tribble(
                                                              ~indicator,       ~indicator_new,    ~age,        ~sex,         ~disaggregate,
              "mz_hiv_autoteste_grupo_etario_e_sexo_15_19_anos_feminino",       "ATS_TST_AUTO", "15-19",  "Feminino",                    NA,
@@ -617,10 +617,10 @@ tibble::tribble(
     "mz_hiv_autoteste_tipo_de_distribuicao_athiv_distribuicao_primaria", "ATS_TST_AUTO_DISTR",      NA,          NA,            "Primaria",
   "mz_hiv_autoteste_tipo_de_distribuicao_athiv_distribuicao_secundaria", "ATS_TST_AUTO_DISTR",      NA,          NA,          "Secundaria"
   )
-usethis::use_data(data_sisma_ats_autoteste, overwrite = TRUE)
+usethis::use_data(data_sisma_ats_autoteste_map, overwrite = TRUE)
 
 
-data_sisma_ats_saaj <-
+data_sisma_ats_saaj_map <-
 tibble::tribble(
                                                                                           ~indicator, ~indicator_new,    ~source,    ~age, ~modality, ~sub_group, ~result_status, ~age_coarse,        ~sex,
                            "mz_saaj_testagem_para_hiv_numero_parceiros_testados_10_14_anos_feminino",      "ATS_TST", "LdR SAAJ", "10-14",    "SAAJ", "Parceiro",             NA,       "<15",  "Feminino",
@@ -716,5 +716,213 @@ tibble::tribble(
                   "mz_saaj_testagem_para_hiv_numero_de_parceiros_testados_negativo_25_anos_feminino",      "ATS_TST", "LdR SAAJ",   "25+",    "SAAJ", "Parceiro",     "Negativo",       "15+",  "Feminino",
                  "mz_saaj_testagem_para_hiv_numero_de_parceiros_testados_negativo_25_anos_masculino",      "ATS_TST", "LdR SAAJ",   "25+",    "SAAJ", "Parceiro",     "Negativo",       "15+", "Masculino"
   )
-usethis::use_data(data_sisma_ats_saaj, overwrite = TRUE)
+usethis::use_data(data_sisma_ats_saaj_map, overwrite = TRUE)
+
+
+data_sisma_hiv_tarv_map <-
+tibble::tribble(
+                                                                                                                                                                    ~indicator,      ~indicator_new,    ~age,        ~sex,         ~exit_type,
+  "mz_hiv_sida_dos_activos_tarv_no_fim_do_mes_b_13_subgrupo_que_recebeu_resultado_de_cv_com_supressao_virologica_durante_o_mes_1000_copias_m_l_notificacao_anual_fg_0_14_anos",        "TX_CV_SURP",  "0-14",          NA,                 NA,
+    "mz_hiv_sida_dos_activos_tarv_no_fim_do_mes_b_13_subgrupo_que_recebeu_resultado_de_cv_com_supressao_virologica_durante_o_mes_1000_copias_m_l_notificacao_anual_fg_15_anos",        "TX_CV_SURP",   "15+",          NA,                 NA,
+                            "mz_hiv_sida_dos_activos_em_tarv_no_fim_do_mes_b_13_subgrupo_que_realizou_um_teste_de_carga_viral_cv_durante_o_mes_notificacao_anual_fg_0_14_anos",       "TX_CV_NOTIF",  "0-14",          NA,                 NA,
+                              "mz_hiv_sida_dos_activos_em_tarv_no_fim_do_mes_b_13_subgrupo_que_realizou_um_teste_de_carga_viral_cv_durante_o_mes_notificacao_anual_fg_15_anos",       "TX_CV_NOTIF",   "15+",          NA,                 NA,
+                         "mz_hiv_sida_dos_activos_em_tarv_no_fim_do_mes_b_13_subgrupo_que_recebeu_um_resultado_de_carga_viral_cv_durante_o_mes_notificacao_anual_fg_0_14_anos",       "TX_CV_RECEB",  "0-14",          NA,                 NA,
+                           "mz_hiv_sida_dos_activos_em_tarv_no_fim_do_mes_b_13_subgrupo_que_recebeu_um_resultado_de_carga_viral_cv_durante_o_mes_notificacao_anual_fg_15_anos",       "TX_CV_RECEB",   "15+",          NA,                 NA,
+                                                       "mz_hiv_sida_dos_novos_inscritos_em_cuidados_no_mes_subgrupo_de_pacientes_que_iniciou_profilaxia_com_isoniazida_tpi_fg",   "TX_TB_INSCR_TPI",      NA,          NA,                 NA,
+                                                                         "mz_hiv_sida_dos_novos_inscritos_em_cuidados_no_mes_subgrupo_que_foi_diagnosticado_como_tb_activa_fg",   "TX_TB_INSCR_POS",      NA,          NA,                 NA,
+                                                                                    "mz_hiv_sida_dos_novos_inscritos_em_cuidados_no_mes_subgrupo_que_foi_rastreado_para_tb_fg", "TX_TB_INSCR_RASTR",      NA,          NA,                 NA,
+                                                                         "mz_hiv_sida_dos_pacientes_que_vieram_a_consulta_durante_o_mes_subgrupo_que_foi_rastreado_para_tb_fg",   "TX_TB_CON_RASTR",      NA,          NA,                 NA,
+                                                                                                         "mz_hiv_sida_no_activo_em_tarv_ate_ao_fim_do_mes_anterior_f_0_4_anos",         "TX_ACTIVO",   "0-4",  "Desconh.",                 NA,
+                                                                                                         "mz_hiv_sida_no_activo_em_tarv_ate_ao_fim_do_mes_anterior_f_5_9_anos",         "TX_ACTIVO", "05-09",  "Desconh.",                 NA,
+                                                                                             "mz_hiv_sida_no_activo_em_tarv_ate_ao_fim_do_mes_anterior_fg_10_14_anos_feminino",         "TX_ACTIVO", "10-14",  "Feminino",                 NA,
+                                                                                            "mz_hiv_sida_no_activo_em_tarv_ate_ao_fim_do_mes_anterior_fg_10_14_anos_masculino",         "TX_ACTIVO", "10-14", "Masculino",                 NA,
+                                                                                             "mz_hiv_sida_no_activo_em_tarv_ate_ao_fim_do_mes_anterior_fg_15_19_anos_feminino",         "TX_ACTIVO", "15-19",  "Feminino",                 NA,
+                                                                                            "mz_hiv_sida_no_activo_em_tarv_ate_ao_fim_do_mes_anterior_fg_15_19_anos_masculino",         "TX_ACTIVO", "15-19", "Masculino",                 NA,
+                                                                                                     "mz_hiv_sida_no_activo_em_tarv_ate_ao_fim_do_mes_anterior_fg_20_feminino",         "TX_ACTIVO",   "20+",  "Feminino",                 NA,
+                                                                                                    "mz_hiv_sida_no_activo_em_tarv_ate_ao_fim_do_mes_anterior_fg_20_masculino",         "TX_ACTIVO",   "20+", "Masculino",                 NA,
+                                                                                                                   "mz_hiv_sida_no_de_abandonos_tarv_durante_o_mes_f_0_4_anos",          "TX_SAIDA",   "0-4",  "Desconh.",         "Abandono",
+                                                                                                                   "mz_hiv_sida_no_de_abandonos_tarv_durante_o_mes_f_5_9_anos",          "TX_SAIDA", "05-09",  "Desconh.",         "Abandono",
+                                                                                                       "mz_hiv_sida_no_de_abandonos_tarv_durante_o_mes_fg_10_14_anos_feminino",          "TX_SAIDA", "10-14",  "Feminino",         "Abandono",
+                                                                                                      "mz_hiv_sida_no_de_abandonos_tarv_durante_o_mes_fg_10_14_anos_masculino",          "TX_SAIDA", "10-14", "Masculino",         "Abandono",
+                                                                                                       "mz_hiv_sida_no_de_abandonos_tarv_durante_o_mes_fg_15_19_anos_feminino",          "TX_SAIDA", "15-19",  "Feminino",         "Abandono",
+                                                                                                      "mz_hiv_sida_no_de_abandonos_tarv_durante_o_mes_fg_15_19_anos_masculino",          "TX_SAIDA", "15-19", "Masculino",         "Abandono",
+                                                                                                               "mz_hiv_sida_no_de_abandonos_tarv_durante_o_mes_fg_20_feminino",          "TX_SAIDA",   "20+",  "Feminino",         "Abandono",
+                                                                                                              "mz_hiv_sida_no_de_abandonos_tarv_durante_o_mes_fg_20_masculino",          "TX_SAIDA",   "20+", "Masculino",         "Abandono",
+                                                              "mz_hiv_sida_no_de_pacientes_que_iniciou_pre_tarv_cuidados_hiv_nesta_unidade_sanitaria_durante_o_mes_f_0_4_anos",          "TX_INSCR",   "0-4",  "Desconh.",                 NA,
+                                                              "mz_hiv_sida_no_de_pacientes_que_iniciou_pre_tarv_cuidados_hiv_nesta_unidade_sanitaria_durante_o_mes_f_5_9_anos",          "TX_INSCR", "05-09",  "Desconh.",                 NA,
+                                                  "mz_hiv_sida_no_de_pacientes_que_iniciou_pre_tarv_cuidados_hiv_nesta_unidade_sanitaria_durante_o_mes_fg_10_14_anos_feminino",          "TX_INSCR", "10-14",  "Feminino",                 NA,
+                                                 "mz_hiv_sida_no_de_pacientes_que_iniciou_pre_tarv_cuidados_hiv_nesta_unidade_sanitaria_durante_o_mes_fg_10_14_anos_masculino",          "TX_INSCR", "10-14", "Masculino",                 NA,
+                                                  "mz_hiv_sida_no_de_pacientes_que_iniciou_pre_tarv_cuidados_hiv_nesta_unidade_sanitaria_durante_o_mes_fg_15_19_anos_feminino",          "TX_INSCR", "15-19",  "Feminino",                 NA,
+                                                 "mz_hiv_sida_no_de_pacientes_que_iniciou_pre_tarv_cuidados_hiv_nesta_unidade_sanitaria_durante_o_mes_fg_15_19_anos_masculino",          "TX_INSCR", "15-19", "Masculino",                 NA,
+                                                          "mz_hiv_sida_no_de_pacientes_que_iniciou_pre_tarv_cuidados_hiv_nesta_unidade_sanitaria_durante_o_mes_fg_20_feminino",          "TX_INSCR",   "20+",  "Feminino",                 NA,
+                                                         "mz_hiv_sida_no_de_pacientes_que_iniciou_pre_tarv_cuidados_hiv_nesta_unidade_sanitaria_durante_o_mes_fg_20_masculino",          "TX_INSCR",   "20+", "Masculino",                 NA,
+                                                                               "mz_hiv_sida_no_de_pacientes_que_iniciou_tarv_nesta_unidade_sanitaria_durante_o_mes_f_0_4_anos",           "TX_NOVO",   "0-4",  "Desconh.",                 NA,
+                                                                               "mz_hiv_sida_no_de_pacientes_que_iniciou_tarv_nesta_unidade_sanitaria_durante_o_mes_f_5_9_anos",           "TX_NOVO", "05-09",  "Desconh.",                 NA,
+                                                                   "mz_hiv_sida_no_de_pacientes_que_iniciou_tarv_nesta_unidade_sanitaria_durante_o_mes_fg_10_14_anos_feminino",           "TX_NOVO", "10-14",  "Feminino",                 NA,
+                                                                  "mz_hiv_sida_no_de_pacientes_que_iniciou_tarv_nesta_unidade_sanitaria_durante_o_mes_fg_10_14_anos_masculino",           "TX_NOVO", "10-14", "Masculino",                 NA,
+                                                                   "mz_hiv_sida_no_de_pacientes_que_iniciou_tarv_nesta_unidade_sanitaria_durante_o_mes_fg_15_19_anos_feminino",           "TX_NOVO", "15-19",  "Feminino",                 NA,
+                                                                  "mz_hiv_sida_no_de_pacientes_que_iniciou_tarv_nesta_unidade_sanitaria_durante_o_mes_fg_15_19_anos_masculino",           "TX_NOVO", "15-19", "Masculino",                 NA,
+                                                                           "mz_hiv_sida_no_de_pacientes_que_iniciou_tarv_nesta_unidade_sanitaria_durante_o_mes_fg_20_feminino",           "TX_NOVO",   "20+",  "Feminino",                 NA,
+                                                                          "mz_hiv_sida_no_de_pacientes_que_iniciou_tarv_nesta_unidade_sanitaria_durante_o_mes_fg_20_masculino",           "TX_NOVO",   "20+", "Masculino",                 NA,
+                                                                                                          "mz_hiv_sida_no_de_pacientes_que_vieram_a_consulta_durante_o_mes_fg",        "TX_CON_MES",      NA,          NA,                 NA,
+                                                                            "mz_hiv_sida_no_de_pacientes_que_vieram_pelo_menos_a_uma_consulta_durante_o_ano_notificacao_anual",      "TX_CON_ANUAL",      NA,          NA,                 NA,
+                                                                                                                   "mz_hiv_sida_no_de_reinicios_tarv_durante_o_mes_f_0_4_anos",       "TX_REINICIO",   "0-4",  "Desconh.",                 NA,
+                                                                                                                   "mz_hiv_sida_no_de_reinicios_tarv_durante_o_mes_f_5_9_anos",       "TX_REINICIO", "05-09",  "Desconh.",                 NA,
+                                                                                                       "mz_hiv_sida_no_de_reinicios_tarv_durante_o_mes_fg_10_14_anos_feminino",       "TX_REINICIO", "10-14",  "Feminino",                 NA,
+                                                                                                      "mz_hiv_sida_no_de_reinicios_tarv_durante_o_mes_fg_10_14_anos_masculino",       "TX_REINICIO", "10-14", "Masculino",                 NA,
+                                                                                                       "mz_hiv_sida_no_de_reinicios_tarv_durante_o_mes_fg_15_19_anos_feminino",       "TX_REINICIO", "15-19",  "Feminino",                 NA,
+                                                                                                      "mz_hiv_sida_no_de_reinicios_tarv_durante_o_mes_fg_15_19_anos_masculino",       "TX_REINICIO", "15-19", "Masculino",                 NA,
+                                                                                                               "mz_hiv_sida_no_de_reinicios_tarv_durante_o_mes_fg_20_feminino",       "TX_REINICIO",   "20+",  "Feminino",                 NA,
+                                                                                                              "mz_hiv_sida_no_de_reinicios_tarv_durante_o_mes_fg_20_masculino",       "TX_REINICIO",   "20+", "Masculino",                 NA,
+                                                                                                                   "mz_hiv_sida_no_de_suspensos_tarv_durante_o_mes_f_0_4_anos",          "TX_SAIDA",   "0-4",  "Desconh.",         "Suspenso",
+                                                                                                                   "mz_hiv_sida_no_de_suspensos_tarv_durante_o_mes_f_5_9_anos",          "TX_SAIDA", "05-09",  "Desconh.",         "Suspenso",
+                                                                                                       "mz_hiv_sida_no_de_suspensos_tarv_durante_o_mes_fg_10_14_anos_feminino",          "TX_SAIDA", "10-14",  "Feminino",         "Suspenso",
+                                                                                                      "mz_hiv_sida_no_de_suspensos_tarv_durante_o_mes_fg_10_14_anos_masculino",          "TX_SAIDA", "10-14", "Masculino",         "Suspenso",
+                                                                                                       "mz_hiv_sida_no_de_suspensos_tarv_durante_o_mes_fg_15_19_anos_feminino",          "TX_SAIDA", "15-19",  "Feminino",         "Suspenso",
+                                                                                                      "mz_hiv_sida_no_de_suspensos_tarv_durante_o_mes_fg_15_19_anos_masculino",          "TX_SAIDA", "15-19", "Masculino",         "Suspenso",
+                                                                                                               "mz_hiv_sida_no_de_suspensos_tarv_durante_o_mes_fg_20_feminino",          "TX_SAIDA",   "20+",  "Feminino",         "Suspenso",
+                                                                                                              "mz_hiv_sida_no_de_suspensos_tarv_durante_o_mes_fg_20_masculino",          "TX_SAIDA",   "20+", "Masculino",         "Suspenso",
+                                                                                                "mz_hiv_sida_no_de_transferidos_de_outras_us_em_tarv_durante_o_mes_f_0_4_anos",         "TX_TRN_DE",   "0-4",  "Desconh.",                 NA,
+                                                                                                "mz_hiv_sida_no_de_transferidos_de_outras_us_em_tarv_durante_o_mes_f_5_9_anos",         "TX_TRN_DE", "05-09",  "Desconh.",                 NA,
+                                                                                    "mz_hiv_sida_no_de_transferidos_de_outras_us_em_tarv_durante_o_mes_fg_10_14_anos_feminino",         "TX_TRN_DE", "10-14",  "Feminino",                 NA,
+                                                                                   "mz_hiv_sida_no_de_transferidos_de_outras_us_em_tarv_durante_o_mes_fg_10_14_anos_masculino",         "TX_TRN_DE", "10-14", "Masculino",                 NA,
+                                                                                    "mz_hiv_sida_no_de_transferidos_de_outras_us_em_tarv_durante_o_mes_fg_15_19_anos_feminino",         "TX_TRN_DE", "15-19",  "Feminino",                 NA,
+                                                                                   "mz_hiv_sida_no_de_transferidos_de_outras_us_em_tarv_durante_o_mes_fg_15_19_anos_masculino",         "TX_TRN_DE", "15-19", "Masculino",                 NA,
+                                                                                            "mz_hiv_sida_no_de_transferidos_de_outras_us_em_tarv_durante_o_mes_fg_20_feminino",         "TX_TRN_DE",   "20+",  "Feminino",                 NA,
+                                                                                           "mz_hiv_sida_no_de_transferidos_de_outras_us_em_tarv_durante_o_mes_fg_20_masculino",         "TX_TRN_DE",   "20+", "Masculino",                 NA,
+                                                                                              "mz_hiv_sida_no_de_transferidos_para_outras_us_em_tarv_durante_o_mes_f_0_4_anos",          "TX_SAIDA",   "0-4",  "Desconh.", "Transferido para",
+                                                                                              "mz_hiv_sida_no_de_transferidos_para_outras_us_em_tarv_durante_o_mes_f_5_9_anos",          "TX_SAIDA", "05-09",  "Desconh.", "Transferido para",
+                                                                                  "mz_hiv_sida_no_de_transferidos_para_outras_us_em_tarv_durante_o_mes_fg_10_14_anos_feminino",          "TX_SAIDA", "10-14",  "Feminino", "Transferido para",
+                                                                                 "mz_hiv_sida_no_de_transferidos_para_outras_us_em_tarv_durante_o_mes_fg_10_14_anos_masculino",          "TX_SAIDA", "10-14", "Masculino", "Transferido para",
+                                                                                  "mz_hiv_sida_no_de_transferidos_para_outras_us_em_tarv_durante_o_mes_fg_15_19_anos_feminino",          "TX_SAIDA", "15-19",  "Feminino", "Transferido para",
+                                                                                 "mz_hiv_sida_no_de_transferidos_para_outras_us_em_tarv_durante_o_mes_fg_15_19_anos_masculino",          "TX_SAIDA", "15-19", "Masculino", "Transferido para",
+                                                                                          "mz_hiv_sida_no_de_transferidos_para_outras_us_em_tarv_durante_o_mes_fg_20_feminino",          "TX_SAIDA",   "20+",  "Feminino", "Transferido para",
+                                                                                         "mz_hiv_sida_no_de_transferidos_para_outras_us_em_tarv_durante_o_mes_fg_20_masculino",          "TX_SAIDA",   "20+", "Masculino", "Transferido para",
+                                                                                                                      "mz_hiv_sida_no_de_obitos_tarv_durante_o_mes_f_0_4_anos",          "TX_SAIDA",   "0-4",  "Desconh.",            "Obito",
+                                                                                                                      "mz_hiv_sida_no_de_obitos_tarv_durante_o_mes_f_5_9_anos",          "TX_SAIDA", "05-09",  "Desconh.",            "Obito",
+                                                                                                          "mz_hiv_sida_no_de_obitos_tarv_durante_o_mes_fg_10_14_anos_feminino",          "TX_SAIDA", "10-14",  "Feminino",            "Obito",
+                                                                                                         "mz_hiv_sida_no_de_obitos_tarv_durante_o_mes_fg_10_14_anos_masculino",          "TX_SAIDA", "10-14", "Masculino",            "Obito",
+                                                                                                          "mz_hiv_sida_no_de_obitos_tarv_durante_o_mes_fg_15_19_anos_feminino",          "TX_SAIDA", "15-19",  "Feminino",            "Obito",
+                                                                                                         "mz_hiv_sida_no_de_obitos_tarv_durante_o_mes_fg_15_19_anos_masculino",          "TX_SAIDA", "15-19", "Masculino",            "Obito",
+                                                                                                                  "mz_hiv_sida_no_de_obitos_tarv_durante_o_mes_fg_20_feminino",          "TX_SAIDA",   "20+",  "Feminino",            "Obito",
+                                                                                                                 "mz_hiv_sida_no_de_obitos_tarv_durante_o_mes_fg_20_masculino",          "TX_SAIDA",   "20+", "Masculino",            "Obito"
+  )
+usethis::use_data(data_sisma_hiv_tarv_map, overwrite = TRUE)
+
+
+data_sisma_smi_mat_map <-
+tibble::tribble(
+                                                                                     ~indicator,                      ~indicator_new,                             ~disaggregate,  ~cause_type,
+                                                                   "smi_mat_total_de_admissoes",                     "MAT_ADMISSOES",                                        NA,           NA,
+                                                       "smi_mat_total_de_partos_na_maternidade",                     "MAT_PARTOS_US",                                        NA,           NA,
+                                                  "smi_mat_total_de_partos_fora_da_maternidade",                   "MAT_PARTOS_FORA",                                        NA,           NA,
+                                                  "smi_mat_gravidas_hiv_desconhecido_a_entrada",                   "MAT_HIV_ENTRADA",                                    "Desc",           NA,
+                                              "smi_mat_gravidas_hiv_negativo_3_meses_a_entrada",                   "MAT_HIV_ENTRADA",                                "Negativo",           NA,
+                                                      "smi_mat_gravidas_hiv_positivo_a_entrada",                   "MAT_HIV_ENTRADA",                                "Positivo",           NA,
+                                                    "smi_mat_gravidas_que_iniciaram_arv_na_cpn",                   "MAT_HIV_ARV_CPN",                           "Inicio na CPN",           NA,
+                                               "smi_mat_total_testadas_para_hiv_na_maternidade",                      "MAT_HIV_TEST",                                        NA,           NA,
+                                                     "smi_mat_hiv_identificadas_na_maternidade",            "MAT_HIV_TEST_RESULTADO",                                "Positivo",           NA,
+                                    "smi_mat_gravidas_que_fizeram_triprofilaxia_na_maternidade",                   "MAT_HIV_ARV_MAT",                           "Triprofilaxia",           NA,
+                                                           "smi_mat_gravidas_em_tarv_a_entrada",                   "MAT_HIV_ARV_MAT",                          "TARV a entrada",           NA,
+                                           "smi_mat_gravidas_que_iniciaram_tarv_na_maternidade",                   "MAT_HIV_ARV_MAT",                   "Inicio na Maternidade",           NA,
+                                "smi_mat_total_testadas_para_sifilis_na_admissao_a_maternidade",                      "MAT_SIF_TEST",                                        NA,           NA,
+                   "smi_mat_gravidas_diagnosticadas_sifilis_positivo_na_admissao_a_maternidade",            "MAT_SIF_TEST_RESULTADO",                                "Positivo",           NA,
+                "smi_mat_gravidas_que_fizeram_uma_dose_de_tratamento_na_admissao_a_maternidade",                  "MAT_SIF_TX_DOSE1",                                        NA,           NA,
+                                                               "smi_mat_tipo_de_parto_eutocico",                    "MAT_PARTO_TIPO",                                "Eutocico",           NA,
+                                                                "smi_mat_tipo_de_parto_ventosa",                    "MAT_PARTO_TIPO",                                 "Ventosa",           NA,
+                                                              "smi_mat_tipo_de_parto_cesariana",                    "MAT_PARTO_TIPO",                               "Cesariana",           NA,
+                                                       "smi_mat_tipo_de_parto_outras_distocias",                    "MAT_PARTO_TIPO",                        "Outras dictocias",           NA,
+                                              "smi_mat_dequitadura_manejo_activo_do_3o_estadio",             "MAT_PARTO_DEQUITADURA",                           "Manejo activo",           NA,
+                                               "smi_mat_dequitadura_remocao_manual_da_placenta",             "MAT_PARTO_DEQUITADURA",              "Remocao manual da placenta",           NA,
+                                                    "smi_mat_dequitadura_removida_em_cesariana",             "MAT_PARTO_DEQUITADURA",                    "Remocao em cesariana",           NA,
+                                       "smi_mat_acompanhante_durante_o_trabalho_de_parto_parto",            "MAT_PARTO_ACOMPANHANTE",                                        NA,           NA,
+                                          "smi_mat_partos_em_posicao_vertical_ou_semi_vertical",           "MAT_PARTO_VERT_SEMIVERT",                                        NA,           NA,
+                                       "smi_mat_partos_com_partograma_completamente_preenchido",              "MAT_PARTO_PARTOGRAMA",                                        NA,           NA,
+                                   "smi_mat_hemorragia_ante_parto_placenta_previa_complicacoes",                   "MAT_COMPL_CAUSA",                         "Placenta previa",   "Directas",
+                                         "smi_mat_hemorragia_ante_parto_placenta_previa_obitos",                   "MAT_OBITO_CAUSA",                         "Placenta previa",   "Directas",
+                                             "smi_mat_hemorragia_ante_parto_dppni_complicacoes",                   "MAT_COMPL_CAUSA",                                   "DPPNI",   "Directas",
+                                                   "smi_mat_hemorragia_ante_parto_dppni_obitos",                   "MAT_OBITO_CAUSA",                                   "DPPNI",   "Directas",
+                                 "smi_mat_hemorragia_pos_parto_por_atonia_uterina_complicacoes",                   "MAT_COMPL_CAUSA",                         "Antonia uterina",   "Directas",
+                                       "smi_mat_hemorragia_pos_parto_por_atonia_uterina_obitos",                   "MAT_OBITO_CAUSA",                         "Antonia uterina",   "Directas",
+  "smi_mat_hemorragia_pos_parto_por_retencao_da_placenta_ou_de_restos_placentares_complicacoes",                   "MAT_COMPL_CAUSA",                    "Retencao da placenta",   "Directas",
+        "smi_mat_hemorragia_pos_parto_por_retencao_da_placenta_ou_de_restos_placentares_obitos",                   "MAT_OBITO_CAUSA",                    "Retencao da placenta",   "Directas",
+                    "smi_mat_hemorragia_pos_parto_por_laceracoes_do_colo_e_vagina_complicacoes",                   "MAT_COMPL_CAUSA",                "Laceracoes do colo e vag",   "Directas",
+                          "smi_mat_hemorragia_pos_parto_por_laceracoes_do_colo_e_vagina_obitos",                   "MAT_OBITO_CAUSA",                "Laceracoes do colo e vag",   "Directas",
+                                                    "smi_mat_ruptura_uterina_fora_complicacoes",                   "MAT_COMPL_CAUSA",     "Ruptura uterina fora da maternidade",   "Directas",
+                                                          "smi_mat_ruptura_uterina_fora_obitos",                   "MAT_OBITO_CAUSA",     "Ruptura uterina fora da maternidade",   "Directas",
+                                                  "smi_mat_ruptura_uterina_dentro_complicacoes",                   "MAT_COMPL_CAUSA",                   "Ruptura uterina na US",   "Directas",
+                                                        "smi_mat_ruptura_uterina_dentro_obitos",                   "MAT_OBITO_CAUSA",                   "Ruptura uterina na US",   "Directas",
+                           "smi_mat_trabalho_de_parto_arrastado_ou_obstruido_fora_complicacoes",                   "MAT_COMPL_CAUSA",     "Parto arrastado fora da maternidade",   "Directas",
+                                 "smi_mat_trabalho_de_parto_arrastado_ou_obstruido_fora_obitos",                   "MAT_OBITO_CAUSA",     "Parto arrastado fora da maternidade",   "Directas",
+                         "smi_mat_trabalho_de_parto_arrastado_ou_obstruido_dentro_complicacoes",                   "MAT_COMPL_CAUSA",                   "Parto arrastado na US",   "Directas",
+                               "smi_mat_trabalho_de_parto_arrastado_ou_obstruido_dentro_obitos",                   "MAT_OBITO_CAUSA",                   "Parto arrastado na US",   "Directas",
+                                                    "smi_mat_pre_eclampsia_severa_complicacoes",                   "MAT_COMPL_CAUSA",                    "Pre eclampsia severa",   "Directas",
+                                                          "smi_mat_pre_eclampsia_severa_obitos",                   "MAT_OBITO_CAUSA",                    "Pre eclampsia severa",   "Directas",
+                                                               "smi_mat_eclampsia_complicacoes",                   "MAT_COMPL_CAUSA",                               "Eclampsia",   "Directas",
+                                                                     "smi_mat_eclampsia_obitos",                   "MAT_OBITO_CAUSA",                               "Eclampsia",   "Directas",
+                                                                  "smi_mat_sepsis_complicacoes",                   "MAT_COMPL_CAUSA",                                  "Sepsis",   "Directas",
+                                                                        "smi_mat_sepsis_obitos",                   "MAT_OBITO_CAUSA",                                  "Sepsis",   "Directas",
+                                                       "smi_mat_gravidez_ectopica_complicacoes",                   "MAT_COMPL_CAUSA",                       "Gravidez ectopica",   "Directas",
+                                                             "smi_mat_gravidez_ectopica_obitos",                   "MAT_OBITO_CAUSA",                       "Gravidez ectopica",   "Directas",
+                                                  "smi_mat_complicacoes_de_aborto_complicacoes",                   "MAT_COMPL_CAUSA",                                  "Aborto",   "Directas",
+                                                        "smi_mat_complicacoes_de_aborto_obitos",                   "MAT_OBITO_CAUSA",                                  "Aborto",   "Directas",
+                                                "smi_mat_outras_complicacoesectas_complicacoes",                   "MAT_COMPL_CAUSA",                                  "Outras",   "Directas",
+                                                      "smi_mat_outras_complicacoesectas_obitos",                   "MAT_OBITO_CAUSA",                                  "Outras",   "Directas",
+                            "smi_mat_total_de_complicacoes_e_mortes_maternasectas_complicacoes",             "MAT_COMPL_CAUSA_TOTAL",                                        NA,   "Directas",
+                                  "smi_mat_total_de_complicacoes_e_mortes_maternasectas_obitos",             "MAT_OBITO_CAUSA_TOTAL",                                        NA,   "Directas",
+                                                                 "smi_mat_malaria_complicacoes",                   "MAT_COMPL_CAUSA",                                 "Malaria", "Indirectas",
+                                                                       "smi_mat_malaria_obitos",                   "MAT_OBITO_CAUSA",                                 "Malaria", "Indirectas",
+                                                                  "smi_mat_anemia_complicacoes",                   "MAT_COMPL_CAUSA",                                  "Anemia", "Indirectas",
+                                                                        "smi_mat_anemia_obitos",                   "MAT_OBITO_CAUSA",                                  "Anemia", "Indirectas",
+                                                                "smi_mat_hiv_sida_complicacoes",                   "MAT_COMPL_CAUSA",                                "HIV/SIDA", "Indirectas",
+                                                                      "smi_mat_hiv_sida_obitos",                   "MAT_OBITO_CAUSA",                                "HIV/SIDA", "Indirectas",
+                                                             "smi_mat_tuberculose_complicacoes",                   "MAT_COMPL_CAUSA",                                      "TB", "Indirectas",
+                                                                   "smi_mat_tuberculose_obitos",                   "MAT_OBITO_CAUSA",                                      "TB", "Indirectas",
+                                 "smi_mat_intoxicacao_por_medicamento_tradicional_complicacoes",                   "MAT_COMPL_CAUSA", "Intoxicacao por Medicamento tradicional", "Indirectas",
+                                       "smi_mat_intoxicacao_por_medicamento_tradicional_obitos",                   "MAT_OBITO_CAUSA", "Intoxicacao por Medicamento tradicional", "Indirectas",
+                                                "smi_mat_outras_complicacoesectas_complicacoes",                   "MAT_COMPL_CAUSA",                                  "Outras", "Indirectas",
+                                                      "smi_mat_outras_complicacoesectas_obitos",                   "MAT_OBITO_CAUSA",                                  "Outras", "Indirectas",
+                                     "smi_mat_total_de_complicacoes_e_mortesectas_complicacoes",             "MAT_COMPL_CAUSA_TOTAL",                                        NA, "Indirectas",
+                                           "smi_mat_total_de_complicacoes_e_mortesectas_obitos",             "MAT_OBITO_CAUSA_TOTAL",                                        NA, "Indirectas",
+                                                 "smi_mat_antibioticos_parenterais_endovenosos",                  "MAT_CONDUTA_PROC",                "Antibioticos endovenosos",           NA,
+             "smi_mat_oxitocicos_parenterais_ev_ou_im_para_tratamento_da_hemorragia_obstetrica",                  "MAT_CONDUTA_PROC",              "Oxitocitos para hemorragia",           NA,
+                                                  "smi_mat_administracao_de_anti_hipertensivos",                  "MAT_CONDUTA_PROC",                      "Anti-hipertensivos",           NA,
+                                      "smi_mat_administracao_parenteral_de_sulfate_de_magnesio",                  "MAT_CONDUTA_PROC",                     "Sulfato de magnesio",           NA,
+                                                              "smi_mat_aspiracao_intra_uterina",                  "MAT_CONDUTA_PROC",                 "Aspiracao intra uterina",           NA,
+                                                                 "smi_mat_transfusao_de_sangue",                  "MAT_CONDUTA_PROC",                    "Transfusao de sangue",           NA,
+                                                             "smi_mat_histerectomia_obstetrica",                  "MAT_CONDUTA_PROC",                "Histerectomia obstetrica",           NA,
+               "smi_mat_numero_de_mulheres_que_fizeram_a_4a_dose_ou_mais_de_tip_na_maternidade",                  "MAT_CONDUTA_PROC",                           "Dose 4 de TIP",           NA,
+                                                    "smi_mat_laparotomia_por_gravidez_ectopica",                  "MAT_CONDUTA_PROC",                             "Laparotomia",           NA,
+                                       "smi_mat_planeamento_familiar_diu_no_pos_parto_imediato",                  "MAT_CONDUTA_PROC",                                  "PF DIU",           NA,
+                                                           "smi_mat_planeamento_familiar_outro",                  "MAT_CONDUTA_PROC",                                "PF outro",           NA,
+                                                                          "smi_mat_nados_vivos",                "MAT_RN_NADOS_VIVOS",                                        NA,           NA,
+                                                                         "smi_mat_nados_mortos",         "MAT_RN_NADOS_MORTOS_TOTAL",                                        NA,           NA,
+                                             "smi_mat_nados_mortos_com_foco_positivo_a_entrada",               "MAT_RN_NADOS_MORTOS",                "Mortos com foco positivo",           NA,
+                                                               "smi_mat_nados_mortos_macerados",               "MAT_RN_NADOS_MORTOS",                        "Mortos macerados",           NA,
+                             "smi_mat_recem_nascido_em_contacto_imediato_pele_a_pele_com_a_mae",                       "MAT_RN_PELE",                                        NA,           NA,
+                                     "smi_mat_recem_nascido_amamentado_na_1a_hora_apos_o_parto",           "MAT_RN_AMAMENTADO_1HORA",                                        NA,           NA,
+                                                                        "smi_mat_rn_prematuros",                  "MAT_RN_PREMATURO",                                        NA,           NA,
+                                                               "smi_mat_rn_com_sepsis_neonatal",              "MAT_RN_SEPSIS_NEONAT",                                        NA,           NA,
+                                                                 "smi_mat_rn_com_asfixia_grave",                    "MAT_RN_ASFIXIA",                                        NA,           NA,
+                                                                       "smi_mat_rn_malformados",                 "MAT_RN_MALFORMADO",                                        NA,           NA,
+                                                      "smi_mat_reanimacao_neonatal_com_sucesso",        "MAT_RN_REANIMADO_C_SUCESSO",                                        NA,           NA,
+                                                      "smi_mat_reanimacao_neonatal_sem_sucesso",        "MAT_RN_REANIMADO_S_SUCESSO",                                        NA,           NA,
+                                                                     "smi_mat_partos_gemelares",           "MAT_RN_PARTOS_GEMELARES",                                        NA,           NA,
+                                                          "smi_mat_nados_vivos_com_peso_2500gr",                 "MAT_RN_ABAIXO2500",                                        NA,           NA,
+                                                        "smi_mat_rn_que_fizeram_profilaxia_arv",                    "MAT_RN_HIV_ARV",                                        NA,           NA,
+           "smi_mat_rn_de_mae_com_sifilis_que_iniciaram_tratamento_para_sifilis_na_maternidade",                     "MAT_RN_SIF_TX",                                        NA,           NA,
+                                         "smi_mat_total_de_maes_que_tomaram_vit_a_no_pos_parto",                     "MAT_ALTA_VITA",                                        NA,           NA,
+                                                "smi_mat_total_de_maes_que_levaram_sal_ferroso",                  "MAT_ALTA_SALFERR",                                        NA,           NA,
+                                          "smi_mat_mulheres_que_levaram_arv_para_tomar_em_casa",                      "MAT_ALTA_ARV",                                        NA,           NA,
+                                                "smi_mat_rn_que_levaram_arv_para_tomar_em_casa",               "MAT_ALTA_RN_HIV_ARV",                                        NA,           NA,
+                                                        "smi_mat_total_de_dias_de_internamento",              "MAT_ALTA_DIAS_INTERN",                                        NA,           NA,
+                                        "smi_mat_gravidas_ou_parturientes_transferidas_pela_pt",            "MAT_OUTRAS_TRANSFER_PT",                                        NA,           NA,
+                                                    "smi_mat_gravidas_vindas_da_casa_de_espera",             "MAT_OUTRAS_CASAESPERA",                                        NA,           NA,
+                                                      "smi_mat_partos_assistidos_na_comunidade", "MAT_OUTRAS_PARTO_ASSIS_COMUNIDADE",                                        NA,           NA,
+                                                   "smi_mat_mulheres_tranferidas_para_outra_us",            "MAT_OUTRAS_TRANSFER_US",                                        NA,           NA
+  )
+usethis::use_data(data_sisma_smi_mat_map, overwrite = TRUE)
+
+
+
 
