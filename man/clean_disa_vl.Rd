@@ -15,3 +15,8 @@ Final cleaned historic DISA VL dataframe
 \description{
 Clean historic DISA Viral Load dataframe loaded from historic monthly data
 }
+\examples{
+\dontrun{
+
+ df <- clean_disa_vl()}
+}
