@@ -1,6 +1,5 @@
 #' Process monthly enhanced monitoring IMER submission from PEPFAR Mozambique Clinical Partners
 #' @param filename Local path to the monthly IP submission
-#' @param ip IP whose submission the file pertains to
 #' @return A tidy dataframe with monthly enhanced monitoring IMER results
 #' @export
 #'
@@ -9,24 +8,36 @@
 #'
 #' df <- reshape_em_imer()}
 
-reshape_em_imer <- function(filename, ip){
+reshape_em_imer <- function(filename){
+
+  ip_temp <- read_excel(filename, sheet = "meta", range = "C3:C3", col_names = FALSE)[[1]]
+  month_temp <- read_excel(filename, sheet = "meta", range = "C4:C4", col_names = FALSE)[[1]]
 
   df <- readxl::read_excel(filename,
                            sheet = "TX NEW, TX CURR AND IMER",
                            skip = 8,
                            col_types = "text") %>%
-    dplyr::select(!c(No, SISMA_code, Period)) %>%
+
     tidyr::pivot_longer(TX_NEWTot:I4_ER4_40_RetCalc,
                         names_to = "indicator",
                         values_to = "value") %>%
-    dplyr::inner_join(erdsd_var_mapping, by = "indicator") %>%
+
+    dplyr::select(partner = Partner,
+                  snu = Province,
+                  psnu = District,
+                  sitename = `Health Facility`,
+                  datim_uid = DATIM_code,
+                  indicator,
+                  value) %>%
+
+    dplyr::inner_join(data_em_imer_var_map, by = "indicator") %>%
     dplyr::filter(!indicator_new == "remove") %>%
     tidyr::separate(indicator_new,
                     c("indicator", "sex", "age", "pop_type", "dispensation", "numdenom", "er_status", "dsd_eligibility"),
                     sep = "\\.") %>%
     dplyr::mutate(across(everything(), ~ifelse(.=="", NA, as.character(.))),
                   value = as.numeric(value),
-                  period = as.Date(month, "%Y-%m-%d"),
+                  period = month_temp,
                   indicator = stringr::str_replace_all(indicator, "\\.", "_"),
                   age = stringr::str_replace_all(age, "\\_", "-"),
                   age = dplyr::recode(age,
@@ -51,12 +62,12 @@ reshape_em_imer <- function(filename, ip){
                   numdenom = tidyr::replace_na(numdenom, "N"),
                   er_status = dplyr::recode(er_status,
                                             "Initiated ART" = NA_character_)) %>%
-    dplyr::filter(Partner == ip) %>%
-    dplyr::select(partner = Partner,
-                  snu = Province,
-                  psnu = District,
-                  sitename = `Health Facility`,
-                  datim_uid = DATIM_code,
+    dplyr::filter(partner == ip_temp) %>%
+    dplyr::select(partner,
+                  snu,
+                  psnu,
+                  sitename,
+                  datim_uid,
                   period,
                   indicator,
                   sex,
