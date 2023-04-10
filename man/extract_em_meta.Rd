@@ -2,20 +2,20 @@
 % Please edit documentation in R/extract_em_meta.R
 \name{extract_em_meta}
 \alias{extract_em_meta}
-\title{Extract Partner and Period Metadata from monthly EM Excel submission}
+\title{Extract Metadata from monthly IP sumissions}
 \usage{
 extract_em_meta(filename, type)
 }
 \arguments{
-\item{filename}{Path to EM Excel submission}
+\item{filename}{Local path to the monthly IP submission}
 
-\item{type}{Metadata to return.  Set to either "ip" or "month"}
+\item{type}{Meta element for extraction - set to either "ip" or "month"}
 }
 \value{
-values for Partner and Month
+Meta values for ip and month
 }
 \description{
-Extract Partner and Period Metadata from monthly EM Excel submission
+Extract Metadata from monthly IP sumissions
 }
 \examples{
 \dontrun{

@@ -1,8 +1,7 @@
-#' Extract Partner and Period Metadata from monthly EM Excel submission
-#'
-#' @param filename Path to EM Excel submission
-#' @param type Metadata to return.  Set to either "ip" or "month"
-#' @return values for Partner and Month
+#' Extract Metadata from monthly IP sumissions
+#' @param filename Local path to the monthly IP submission
+#' @param type Meta element for extraction - set to either "ip" or "month"
+#' @return Meta values for ip and month
 #' @export
 #'
 #' @examples
@@ -10,7 +9,7 @@
 #'
 #' df <- extract_em_meta()}
 
-extract_em_meta <- function(filename, type) {
+extract_em_meta <- function(filename, type){
 
   if(type == "ip"){
     df <- read_excel(filename, sheet = "meta", range = "C3:C3", col_names = FALSE)[[1]]
