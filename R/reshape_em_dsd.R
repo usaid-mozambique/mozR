@@ -1,6 +1,5 @@
 #' Process monthly enhanced monitoring DSD submission from PEPFAR Mozambique Clinical Partners
 #' @param filename Local path to the monthly IP submission
-#' @param ip IP whose submission the file pertains to
 #'
 #' @return A tidy dataframe with monthly enhanced monitoring DSD results
 #' @export
@@ -10,19 +9,26 @@
 #'
 #' df <- reshape_em_dsd()}
 
-reshape_em_dsd <- function(filename, ip) {
+reshape_em_dsd <- function(filename) {
+
+  ip_temp <- extract_em_meta(filename, type = "ip")
+  month_temp <- extract_em_meta(filename, type = "month")
 
   df <- readxl::read_excel(filename, # function argument
                            sheet = "MDS",
                            skip = 8) %>%
-    dplyr::select(!c(No, SISMA_code, Period)) %>%
-    tidyr::pivot_longer(remove.1:DSD.AHD__LW_15p,
+
+    dplyr::select(!c(contains("remove"))) %>%
+
+    tidyr::pivot_longer(TX.ACTIVE.ELIGIBILITY_ELI_ADULT_15p:DSD.BD_NEL_LW,
                         names_to = c("indicator", "dsd_eligibility", "pop_type", "age"),
                         names_sep = "_",
                         values_to = "value") %>%
-    dplyr::filter(Partner == ip, # function argument
+
+    dplyr::filter(Partner == ip_temp,
                   !stringr::str_detect(indicator, "remove")) %>%
-    dplyr::mutate(period = as.Date(month, "%Y-%m-%d"),
+
+    dplyr::mutate(period = month_temp,
                   indicator = stringr::str_replace_all(indicator, "\\.", "_"),
                   age = stringr::str_replace_all(age, "\\.", "-"),
                   age = dplyr::recode(age,
@@ -30,7 +36,7 @@ reshape_em_dsd <- function(filename, ip) {
                                       `2-4`   = "02-04",
                                       `5-9`   = "05-09",
                                       `15p`   = "15+",
-                                      Unknown = "Unknown Age"), # this section is new to correct age, replaces a case_when block
+                                      Unknown = "Unknown Age"),
                   dsd_eligibility = dplyr::recode(dsd_eligibility,
                                                   ELI = "Eligible",
                                                   NEL = "Non-Eligible",
@@ -38,6 +44,7 @@ reshape_em_dsd <- function(filename, ip) {
                   pop_type = dplyr::recode(pop_type,
                                            ADULT = "Adult",
                                            PED = "Pediatric")) %>%
+
     dplyr::select(partner = Partner,
                   snu = Province,
                   psnu = District,
@@ -49,5 +56,7 @@ reshape_em_dsd <- function(filename, ip) {
                   pop_type,
                   age,
                   value)
+
+  return(df)
 
 }

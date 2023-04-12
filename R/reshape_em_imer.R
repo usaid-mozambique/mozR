@@ -10,8 +10,8 @@
 
 reshape_em_imer <- function(filename){
 
-  ip_temp <- extract_em_meta(ARIEL, type = "ip")
-  month_temp <- extract_em_meta(ARIEL, type = "month")
+  ip_temp <- extract_em_meta(filename, type = "ip")
+  month_temp <- extract_em_meta(filename, type = "month")
 
   df <- readxl::read_excel(filename,
                            sheet = "TX NEW, TX CURR AND IMER",

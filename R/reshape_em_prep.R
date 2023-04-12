@@ -1,6 +1,5 @@
 #' Process monthly enhanced monitoring PREP submission from PEPFAR Mozambique Clinical Partners
 #' @param filename Local path to the monthly IP submission
-#' @param ip IP whose submission the file pertains to
 #' @return A tidy dataframe with monthly enhanced monitoring PREP results
 #' @export
 #'
@@ -9,70 +8,18 @@
 #'
 #' df <- reshape_em_prep()}
 
-reshape_em_prep <- function(filename, ip){
+reshape_em_prep <- function(filename){
 
-  df <- readxl::read_excel(filename, # Function argument
-                           sheet = "Resumo Mensal de PrEP",
-                           col_types = c("text",
-                                         "text", "text", "text", "text", "text",
-                                         "numeric", "text", "text", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric"),
-                           skip = 7) %>%
+  ip_temp <- extract_em_meta(filename, type = "ip")   # Function argument
+  month_temp <- extract_em_meta(filename, type = "month")   # Function argument
 
-    dplyr::filter(Partner == ip) %>%  # Function argument
+  df <- read_excel(filename,   # Function argument
+                   sheet = "Resumo Mensal de PrEP",
+                   skip = 7) %>%
 
-    dplyr::select(!c(No,
-                     `SISMA Code`,
-                     Relatorio_period,
-                     Relatorio_Date,
-                     Elegible.to.PrEP_All_Total_Total,
+    dplyr::filter(Partner == ip_temp) %>%
+
+    dplyr::select(!c(Elegible.to.PrEP_All_Total_Total,
                      Elegible.to.PrEP_Casos.Especiais_Male_Total,
                      Elegible.to.PrEP_Casos.Especiais_Female_Total,
                      Elegible.to.PrEP_All_PW_Total,
@@ -98,18 +45,12 @@ reshape_em_prep <- function(filename, ip){
                      PrEP.CT.3months_All_PW_Total,
                      PrEP.CT.3months_All_LW_Total)) %>%
 
-    dplyr::rename(partner = Partner,
-                  snu = Province,
-                  psnu = District,
-                  sitename = `Health Facility`,
-                  datim_uid = `Datim Code`) %>%
-
     tidyr::pivot_longer('Elegible.to.PrEP_Casos.Especiais_Male_10.14':'PrEP.CT.3months_TP_People.who.Injected.Drugs_Total',
                         names_to = c("indicator", "pop_type", "disaggregate", "age"),
                         names_sep = "_",
                         values_to = "value") %>%
 
-    dplyr::mutate(period = as.Date(month, "%Y-%m-%d"),
+    dplyr::mutate(period = month_temp,
                   indicator = stringr::str_replace_all(indicator, "\\.", "_"),
                   indicator = stringr::str_replace_all(indicator, "Elegible_to_PrEP", "PrEP_Eligible"),
                   indicator = stringr::str_replace_all(indicator, "PrEP_New_Who_RTT", "PrEP_NEW_RTT"),
@@ -130,6 +71,22 @@ reshape_em_prep <- function(filename, ip){
                                                "People.who.Injected.Drugs" = "PWID",
                                                "Sero.Discordante.Couples" = "Sero-Discordante Couples",
                                                "Sex.workers" = "Sex Workers",
-                                               "TG" = "Transgender"))
+                                               "TG" = "Transgender")) %>%
+
+    dplyr::select(partner = Partner,
+                  snu = Province,
+                  psnu = District,
+                  sitename = `Health Facility`,
+                  datim_uid = `Datim Code`,
+                  period,
+                  indicator,
+                  pop_type,
+                  disaggregate,
+                  sex,
+                  age,
+                  value
+    )
+
+  return(df)
 
 }

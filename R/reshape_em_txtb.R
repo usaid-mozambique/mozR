@@ -1,6 +1,5 @@
 #' Process monthly enhanced monitoring TXTB submission from PEPFAR Mozambique Clinical Partners
 #' @param filename Local path to the monthly IP submission
-#' @param ip IP whose submission the file pertains to
 #' @return A tidy dataframe with monthly enhanced monitoring TXTB results
 #' @export
 #'
@@ -9,76 +8,19 @@
 #'
 #' df <- reshape_em_txtb()}
 
-reshape_em_txtb <- function(filename, ip){
+reshape_em_txtb <- function(filename){
 
-  df <- readxl::read_excel(filename,
-                           sheet = "TX_TB",
-                           col_types = c("text", "text", "text",
-                                         "text", "text", "text", "text",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric"),
-                           skip = 7) %>%
+  ip_temp <- extract_em_meta(filename, type = "ip")
+  month_temp <- extract_em_meta(filename, type = "month")
 
-    dplyr::filter(partner == ip) %>%
+  df <- read_excel(filename,
+                   sheet = "TX_TB",
+                   skip = 7) %>%
+    dplyr::filter(partner == ip_temp) %>%
 
     dplyr::select(!c(contains(c("remove", "tot")),
-                     sisma_nid)) %>%
+                     sisma_nid,
+                     No)) %>%
 
     dplyr::rename(snu = snu1) %>%
 
@@ -87,13 +29,15 @@ reshape_em_txtb <- function(filename, ip){
                         names_sep = "_",
                         values_to = "value") %>%
 
-    dplyr::mutate(period = as.Date(month, "%Y-%m-%d"),
+    dplyr::mutate(period = month_temp,
                   indicator = stringr::str_replace_all(indicator, "\\.", "_"),
                   age = dplyr::recode(age,
                                       "Unk" = "Unknown Age"), # new code to correct age
                   disaggregate = dplyr::recode(disaggregate,
                                                "newART" = "New on ART",
                                                "alreadyART" = "Already on ART"))
+
+  return(df)
 
 }
 

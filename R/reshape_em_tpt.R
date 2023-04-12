@@ -1,6 +1,5 @@
 #' Process monthly enhanced monitoring TPT submission from PEPFAR Mozambique Clinical Partners
 #' @param filename Local path to the monthly IP submission
-#' @param ip IP whose submission the file pertains to
 #' @return A tidy dataframe with monthly enhanced monitoring TPT results
 #' @export
 #'
@@ -10,25 +9,22 @@
 #'  df <- reshape_em_tpt()}
 
 
-reshape_em_tpt <- function(filename, ip){
+reshape_em_tpt <- function(filename){
 
-  df <- readxl::read_excel(filename, sheet = "TPT Completion",
-                           range = "A8:P650",
-                           col_types = c("numeric",
-                                         "text", "text", "text", "text", "text",
-                                         "numeric", "text", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric",
-                                         "numeric", "numeric", "numeric"),
-                           skip = 7) %>%
+  ip_temp <- extract_em_meta(filename, type = "ip")
+  month_temp <- extract_em_meta(filename, type = "month")
 
-    dplyr::filter(Partner == ip) %>%
+  df <- read_excel(filename,
+                   sheet = "TPT Completion",
+                   skip = 7) %>%
+
+    dplyr::filter(Partner == ip_temp) %>%
 
     dplyr::select(partner = Partner,
                   snu = Province,
                   psnu = District,
                   sitename = `Health Facility`,
                   datim_uid = DATIM_code,
-                  period = Period,
                   TX_CURR,
                   TX_CURR_TPT_Com,
                   TX_CURR_TPT_Not_Comp,
@@ -55,9 +51,18 @@ reshape_em_tpt <- function(filename, ip){
                                      "TPT_ineligible" = "TPT Ineligible",
                                      "TX_CURR_TPT_Not_Comp" = "TPT Not Comp",
                                      "TPT_active_complete" = "TPT Completed/Active"),
-                  period = {month}
+                  period = month_temp,
     ) %>%
-    dplyr::filter(!indicator %in% c("TX_CURR_Eleg_TPT_Init", "TX_CURR_Eleg_TPT_Comp"))
+    dplyr::filter(!indicator %in% c("TX_CURR_Eleg_TPT_Init", "TX_CURR_Eleg_TPT_Comp")) %>%
+    dplyr::select(partner,
+                  snu,
+                  psnu,
+                  sitename,
+                  datim_uid,
+                  period,
+                  indicator,
+                  attribute,
+                  value)
 
   return(df)
 

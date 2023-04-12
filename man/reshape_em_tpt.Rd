@@ -4,12 +4,10 @@
 \alias{reshape_em_tpt}
 \title{Process monthly enhanced monitoring TPT submission from PEPFAR Mozambique Clinical Partners}
 \usage{
-reshape_em_tpt(filename, ip)
+reshape_em_tpt(filename)
 }
 \arguments{
 \item{filename}{Local path to the monthly IP submission}
-
-\item{ip}{IP whose submission the file pertains to}
 }
 \value{
 A tidy dataframe with monthly enhanced monitoring TPT results
