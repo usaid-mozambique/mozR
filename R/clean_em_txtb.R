@@ -10,7 +10,7 @@
 
 clean_em_txtb <- function(df){
 
-  volumn_period <- txtb_historic %>%
+  volumn_period <- df %>%
     dplyr::select(datim_uid, period, indicator, value) %>%
     dplyr::filter(period == max(period),
                   indicator == "TX_CURR") %>%
@@ -23,10 +23,12 @@ clean_em_txtb <- function(df){
       TRUE ~ "Not Reported")) %>%
     dplyr::select(datim_uid, site_volume)
 
-  df_cleaned <- txtb_historic %>%
+
+  df <- df %>%
     dplyr::select(!c(partner, snu, psnu, sitename)) %>% # strip meta data that will be replaced by sitemap
     dplyr::left_join(ajuda_site_map, by = "datim_uid") %>%
     dplyr::left_join(volumn_period) %>%
+    dplyr::mutate(row_n = dplyr::row_number()) %>%
     tidyr::pivot_wider(names_from = indicator, values_from = value) %>%
     dplyr::select(datim_uid,
                   sisma_uid,
@@ -49,6 +51,6 @@ clean_em_txtb <- function(df){
                   disaggregate,
                   starts_with("TX_"))
 
-  return(df_cleaned)
+  return(df)
 
 }

@@ -10,8 +10,7 @@
 
 clean_em_dsd <- function(df){
 
-  df_cleaned <- df %>%
-    dplyr::filter(period <= as.Date(month)) %>%
+  df <- df %>%
     dplyr::select(-c(partner,
                      snu,
                      psnu,
@@ -39,6 +38,6 @@ clean_em_dsd <- function(df){
       names_from = temp_indicator,
       values_from = temp_value)
 
-  return(df_cleaned)
+  return(df)
 
 }

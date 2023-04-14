@@ -10,8 +10,14 @@
 
 clean_em_imer <- function(df){
 
-  imer_tidy_historic_2 <- imer_tidy_historic %>%
-    dplyr::filter(period <= as.Date(month)) %>%
+  temp <- df %>%
+    dplyr::filter(indicator == "TX_CURR") %>%
+    dplyr::select(period)
+
+  period_limiter <- max(as.Date(temp$period))
+
+  df <- df %>%
+    dplyr::filter(period <= as.Date(period_limiter)) %>%
     dplyr::select(-c(partner,
                      snu,
                      psnu,
@@ -51,5 +57,7 @@ clean_em_imer <- function(df){
       TX_MMD = dplyr::case_when(dispensation %in% c("3-5", "6+") ~ TX_MMD_D),
       indicator = dplyr::case_when(indicator == "TX_MMD" ~ "TX_MMD_D",
                                    TRUE ~ indicator))
+
+  return(df)
 
 }

@@ -10,7 +10,7 @@
 
 clean_em_mi <- function(df){
 
-  df_cleaned <- df %>%
+  df <- df %>%
 
     dplyr::select(!c(partner, snu, psnu, sitename)) %>% # strip meta data that will be replaced by sitemap
 
@@ -18,14 +18,28 @@ clean_em_mi <- function(df){
 
     dplyr::relocate(sisma_uid:site_nid, .after = datim_uid) %>%
 
-    dplyr::relocate(period:partner, .after = site_nid) %>%
+    dplyr::relocate(period:partner_pepfar_clinical, .after = site_nid) %>%
 
     dplyr::mutate(row_n = row_number()) %>%
 
     tidyr::pivot_wider(names_from = indicator, values_from = value) %>%
 
-    dplyr::select(!row_n)
+    dplyr::select(datim_uid,
+                  sisma_uid,
+                  sisma_uid_datim_map,
+                  site_nid,
+                  period,
+                  snu,
+                  psnu,
+                  sitename,
+                  partner = partner_pepfar_clinical,
+                  numdenom,
+                  pop_type,
+                  age,
+                  program_ap3,
+                  program_mi,
+                  dpi.colheu.pcr_D:mds.cv.estaveis)
 
-  return(df_cleaned)
+  return(df)
 
 }
