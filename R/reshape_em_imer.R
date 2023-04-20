@@ -16,7 +16,8 @@ reshape_em_imer <- function(filename){
   df <- readxl::read_excel(filename,
                            sheet = "TX NEW, TX CURR AND IMER",
                            skip = 8,
-                           col_types = "text") %>%
+                           col_types = "text",
+                           .name_repair = "unique_quiet") %>%
 
     tidyr::pivot_longer(TX_NEWTot:I4_ER4_40_RetCalc,
                         names_to = "indicator",

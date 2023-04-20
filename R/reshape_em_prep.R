@@ -15,7 +15,8 @@ reshape_em_prep <- function(filename){
 
   df <- read_excel(filename,   # Function argument
                    sheet = "Resumo Mensal de PrEP",
-                   skip = 7) %>%
+                   skip = 7,
+                   .name_repair = "unique_quiet") %>%
 
     dplyr::filter(Partner == ip_temp) %>%
 

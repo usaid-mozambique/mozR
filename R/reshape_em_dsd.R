@@ -16,7 +16,8 @@ reshape_em_dsd <- function(filename) {
 
   df <- readxl::read_excel(filename, # function argument
                            sheet = "MDS",
-                           skip = 8) %>%
+                           skip = 8,
+                           .name_repair = "unique_quiet") %>%
 
     dplyr::select(!c(contains("remove"))) %>%
 

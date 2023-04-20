@@ -15,7 +15,9 @@ reshape_em_txtb <- function(filename){
 
   df <- read_excel(filename,
                    sheet = "TX_TB",
-                   skip = 7) %>%
+                   skip = 7,
+                   .name_repair = "unique_quiet") %>%
+
     dplyr::filter(partner == ip_temp) %>%
 
     dplyr::select(!c(contains(c("remove", "tot")),

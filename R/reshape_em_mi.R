@@ -15,7 +15,8 @@ reshape_em_mi <- function(filename){
 
   df <- read_excel(filename, # function argument
                    sheet = "Monitoria Intensiva",
-                   skip = 9) %>%
+                   skip = 9,
+                   .name_repair = "unique_quiet") %>%
 
     dplyr::rename(dpi.colheu.pcr_d__all = dpi.colheu.pcr_d_total,
                   dpi.colheu.pcr_n__all = dpi.colheu.pcr_n_total,
