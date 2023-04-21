@@ -2,7 +2,7 @@
 % Please edit documentation in R/pull_sitemap.R
 \name{pull_sitemap}
 \alias{pull_sitemap}
-\title{Retrieve site meta data for Mozambique Health Facilities from the USAID Google Sheet}
+\title{Retreive site metadata}
 \usage{
 pull_sitemap(sheetname = "list_ajuda")
 }
@@ -10,15 +10,22 @@ pull_sitemap(sheetname = "list_ajuda")
 \item{sheetname}{Sheet name from the Mozambique AJUDA Site Map}
 }
 \value{
-A dataframe containing metadata for all PEPFAR Mozambique AJUDA sites
+A dataframe containing site metadata
 }
 \description{
-Retrieve site meta data for Mozambique Health Facilities from the USAID Google Sheet
+\code{pull_sitemap} utilizes stored user credentials to access
+a GoogleSheet where Mozambique health facility metadata is
+contained.  This includes site GIS coordinates, USG program
+support definition, mapping of existing HIS, and unique system
+identifiers
 }
 \examples{
  \dontrun{
 
+ #fetch metadata for current PEPFAR AJUDA sites in Mozambique
  df <- pull_sitemap()
-}
 
+ #fetch DISA uid's mapped to Datim/Sisma uid
+ df <- pull_sitemap(sheet = "map_disa")
+}
 }
