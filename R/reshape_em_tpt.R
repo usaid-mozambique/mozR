@@ -16,7 +16,8 @@ reshape_em_tpt <- function(filename){
 
   df <- read_excel(filename,
                    sheet = "TPT Completion",
-                   skip = 7) %>%
+                   skip = 7,
+                   .name_repair = "unique_quiet") %>%
 
     dplyr::filter(Partner == ip_temp) %>%
 
