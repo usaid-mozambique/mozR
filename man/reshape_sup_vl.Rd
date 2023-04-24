@@ -4,12 +4,10 @@
 \alias{reshape_sup_vl}
 \title{Process quarterly MER supplemental viral load source report}
 \usage{
-reshape_sup_vl(filename, ip)
+reshape_sup_vl(filename)
 }
 \arguments{
 \item{filename}{File containing quarterly supplemental MER results}
-
-\item{ip}{Partner submitting quarterly results}
 }
 \value{
 A tidy dataframe containing TX_PVLS results according to the EPTS Ficha Mestra and EPTS Lab Module
