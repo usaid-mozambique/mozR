@@ -4,12 +4,10 @@
 \alias{reshape_sup_kp}
 \title{Process quarterly MER supplemental Key Population report}
 \usage{
-reshape_sup_kp(filename, ip)
+reshape_sup_kp(filename)
 }
 \arguments{
 \item{filename}{File containing quarterly supplemental MER results}
-
-\item{ip}{Partner submitting quarterly results}
 }
 \value{
 A tidy dataframe containing Key Population results - TX_PLVS, TX_RET, TX_CURR

@@ -1,7 +1,6 @@
 #' Process quarterly MER supplemental Key Population report
 #'
 #' @param filename File containing quarterly supplemental MER results
-#' @param ip Partner submitting quarterly results
 #'
 #' @return A tidy dataframe containing Key Population results - TX_PLVS, TX_RET, TX_CURR
 #' @export
@@ -11,7 +10,12 @@
 #'
 #' df <- reshape_sup_kp()}
 
-reshape_sup_kp <- function(filename, ip){
+reshape_sup_kp <- function(filename){
+
+  ip_temp <- extract_em_meta(filename, type = "ip")
+
+  month_temp <- extract_em_meta(filename, type = "month") %>%
+    stringr::str_replace("FY", "20")
 
   df <- readxl::read_excel(filename, sheet = "POP CHAVES - Trimestre", skip = 9) %>%
     dplyr::select(-c(No, SISMA_code, Data, Column1)) %>%
@@ -20,10 +24,14 @@ reshape_sup_kp <- function(filename, ip){
                   psnu = District,
                   sitename = `Health Facility`,
                   datim_uid = DATIM_code) %>%
+
     tidyr::pivot_longer(TX_New_KP_total:`TX_PVLS_Num_6meses_REC&MTS_25+`,
                         names_to = "temp",
                         values_to = "value") %>%
-    dplyr::filter(partner == ip) %>%
+
+    dplyr::filter(partner == ip_temp,
+                  value > 0) %>%
+
     dplyr::mutate(indicator = dplyr::case_when(
       stringr::str_detect(temp, "TX_CURR_6meses")  ~ "TX_CURR_6MO",
       stringr::str_detect(temp, "TX_CURR_meses")  ~ "TX_CURR_6MO",  # CORRECT IN REPORTING TEMPLATE?
@@ -59,6 +67,23 @@ reshape_sup_kp <- function(filename, ip){
                            stringr::str_detect(temp, "20_24")  ~ "20-24",
                            stringr::str_detect(temp, "25+")  ~ "25+")
     ) %>%
-    tidyr::pivot_wider(names_from = indicator, values_from = value)
+    tidyr::pivot_wider(names_from = indicator, values_from = value) %>%
+
+    dplyr::mutate(date = month_temp,
+                  pop_type = case_when(keypop == "All (KP & non-KP)" ~ "General",
+                                       TRUE ~ "Key Pop"),
+                  keypop = case_when(keypop == "All (KP & non-KP)" ~ "",
+                                     TRUE ~ keypop)) %>%
+    dplyr::select(snu,
+                  psnu,
+                  sitename,
+                  datim_uid,
+                  pop_type,
+                  keypop,
+                  age,
+                  period = date,
+                  starts_with("TX_"))
+
+  return(df)
 
 }

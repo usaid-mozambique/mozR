@@ -15,7 +15,7 @@ parse_sisma_ats_index <- function(file) {
   df_all <- file %>%
 
     dplyr::filter(!is.na(value)) %>%
-    dplyr::left_join(data_sisma_ats_ci, by = "indicator") %>%
+    dplyr::left_join(data_sisma_ats_ci_map, by = "indicator") %>%
     dplyr::mutate(
       modality_sub = NA_character_,
       source = "LdR ATS",

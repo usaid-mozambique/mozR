@@ -27,11 +27,11 @@ reshape_sup_trn <- function(filename){
                   datim_uid = DATIM_code,
                   `TX_RTT Total`:TRF_IN_Female_Unk) %>%
 
-    dplyr::select(!c(contains("emove"), contains("heck"))) %>%
+    dplyr::select(!c(contains("emove"), contains("heck"), contains("otal"))) %>%
 
     dplyr::filter(partner == ip_temp) %>%
 
-    dplyr::mutate(dplyr::across(`TX_RTT Total`:TRF_IN_Female_Unk, as.numeric)) %>%
+    dplyr::mutate(dplyr::across(`TX_RTT_<12_months`:TRF_IN_Female_Unk, as.numeric)) %>%
 
     tidyr::pivot_longer(!c(partner, snu, psnu, sitename, datim_uid),
                         names_to = "temp",

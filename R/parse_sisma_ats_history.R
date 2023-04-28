@@ -13,7 +13,7 @@
 parse_sisma_ats_history <- function(file) {
 
   df_all <- file %>%
-    dplyr::left_join(data_sisma_ats_hist, by = "indicator") %>%
+    dplyr::left_join(data_sisma_ats_hist_map, by = "indicator") %>%
     dplyr::filter(!is.na(value)) %>%
     dplyr::mutate(
       modality_sub = NA_character_,

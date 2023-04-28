@@ -14,7 +14,7 @@ parse_sisma_ats_ccsd <- function(file) {
 
   df_all <- file %>%
     dplyr::filter(!is.na(value)) %>%
-    dplyr::left_join(data_sisma_ats_ccsd, by = "indicator") %>%
+    dplyr::left_join(data_sisma_ats_ccsd_map, by = "indicator") %>%
     dplyr::filter(!is.na(indicator_new)) %>%
     dplyr::mutate(
       source = "LdR SMI",
