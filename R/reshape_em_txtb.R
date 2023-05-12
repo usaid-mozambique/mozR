@@ -37,7 +37,8 @@ reshape_em_txtb <- function(filename){
                                       "Unk" = "Unknown Age"), # new code to correct age
                   disaggregate = dplyr::recode(disaggregate,
                                                "newART" = "New on ART",
-                                               "alreadyART" = "Already on ART"))
+                                               "alreadyART" = "Already on ART",
+                                               "mWRD" = "GX"))
 
   return(df)
 

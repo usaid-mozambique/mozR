@@ -29,8 +29,7 @@ reshape_sup_kp <- function(filename){
                         names_to = "temp",
                         values_to = "value") %>%
 
-    dplyr::filter(partner == ip_temp,
-                  value > 0) %>%
+    dplyr::filter(partner == ip_temp) %>%
 
     dplyr::mutate(indicator = dplyr::case_when(
       stringr::str_detect(temp, "TX_CURR_6meses")  ~ "TX_CURR_6MO",
