@@ -18,14 +18,14 @@ reshape_em_mi <- function(filename){
                    skip = 9,
                    .name_repair = "unique_quiet") %>%
 
-    dplyr::rename(dpi.colheu.pcr_d__all = dpi.colheu.pcr_d_total,
-                  dpi.colheu.pcr_n__all = dpi.colheu.pcr_n_total,
-                  dpi.pcr.enviado_d__all = dpi.pcr.enviado_d_total,
-                  dpi.pcr.enviado_n__all = dpi.pcr.enviado_n_total,
-                  dpi.pcr.entregue_d__all = dpi.pcr.entregue_d_total,
-                  dpi.pcr.entregue_n__all = dpi.pcr.entregue_n_total,
-                  dpi.pcr.tarv_d__all = dpi.pcr.tarv_d_total,
-                  dpi.pcr.tarv_n__all = dpi.pcr.tarv_n_total) %>%
+    # dplyr::rename(dpi.colheu.pcr_d__all = dpi.colheu.pcr_d_total,
+    #               dpi.colheu.pcr_n__all = dpi.colheu.pcr_n_total,
+    #               dpi.pcr.enviado_d__all = dpi.pcr.enviado_d_total,
+    #               dpi.pcr.enviado_n__all = dpi.pcr.enviado_n_total,
+    #               dpi.pcr.entregue_d__all = dpi.pcr.entregue_d_total,
+    #               dpi.pcr.entregue_n__all = dpi.pcr.entregue_n_total,
+    #               dpi.pcr.tarv_d__all = dpi.pcr.tarv_d_total,
+    #               dpi.pcr.tarv_n__all = dpi.pcr.tarv_n_total) %>%
 
     dplyr::filter(Partner == ip_temp) %>%
 
@@ -47,6 +47,7 @@ reshape_em_mi <- function(filename){
                                       "0.4" = "<04",
                                       "1.4" = "01-04",
                                       "5.9" = "05-09",
+                                      "8.9" = "08-09",
                                       "10.14" = "10-14",
                                       "15.19" = "15-19",
                                       "0.14" = "<15",
