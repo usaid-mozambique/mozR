@@ -48,7 +48,8 @@ reshape_em_imer <- function(filename){
                                       "unknown" = "Unknown Age"), # age coding correction
                   sex = dplyr::recode(sex,
                                       "M" = "Male",
-                                      "F" = "Female"),
+                                      "F" = "Female",
+                                      "unknown" = "Unknown"),
                   key_pop = dplyr::case_when(pop_type == "FSW" ~ "FSW",
                                              pop_type == "MSM" ~ "MSM",
                                              pop_type == "PWID" ~ "PWID",
