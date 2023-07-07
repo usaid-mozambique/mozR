@@ -44,7 +44,7 @@ reshape_sup_trn <- function(filename){
                                                        TRUE ~ "12+ months"),
                   sex = dplyr::case_when(stringr::str_detect(temp, "Female") ~ "Female",
                                          stringr::str_detect(temp, "Male") ~ "Male",
-                                         TRUE ~ "Unknown"),
+                                         TRUE ~ "Unknown Sex"),
                   ageasentered = dplyr::case_when(stringr::str_detect(temp, "<01") ~ "<01",
                                                   stringr::str_detect(temp, "1_4") ~ "01-04",
                                                   stringr::str_detect(temp, "5_9") ~ "05-09",
@@ -60,7 +60,7 @@ reshape_sup_trn <- function(filename){
                                                   stringr::str_detect(temp, "55_59") ~ "55-59",
                                                   stringr::str_detect(temp, "60_64") ~ "60-64",
                                                   stringr::str_detect(temp, ">=65") ~ "65+",
-                                                  TRUE ~ "Unknown"),
+                                                  TRUE ~ "Unknown Age"),
                   period = period,
                   partner = ip_temp,
                   row_n = dplyr::row_number()) %>%
