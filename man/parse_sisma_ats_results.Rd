@@ -2,7 +2,7 @@
 % Please edit documentation in R/parse_sisma_ats_results.R
 \name{parse_sisma_ats_results}
 \alias{parse_sisma_ats_results}
-\title{A specific helper function for parsing a cleaned CSV export from SISMA}
+\title{A helper function for parsing a cleaned CSV export of ATS Results from SISMA}
 \usage{
 parse_sisma_ats_results(file)
 }
@@ -10,10 +10,10 @@ parse_sisma_ats_results(file)
 \item{file}{Dataframe cleaned via reshape_sisma}
 }
 \value{
-A tidy format of SISMA dataframe
+A tidy dataframe of SISMA ATS Results
 }
 \description{
-A specific helper function for parsing a cleaned CSV export from SISMA
+A helper function for parsing a cleaned CSV export of ATS Results from SISMA
 }
 \examples{
  \dontrun{

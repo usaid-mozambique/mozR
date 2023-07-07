@@ -1,8 +1,8 @@
-#' A specific helper function for parsing a cleaned CSV export from SISMA
+#' A helper function for parsing a cleaned CSV export of ATS Results from SISMA
 #'
 #' @param file Dataframe cleaned via reshape_sisma
 #'
-#' @return A tidy format of SISMA dataframe
+#' @return A tidy dataframe of SISMA ATS Results
 #' @export
 #'
 #' @examples
