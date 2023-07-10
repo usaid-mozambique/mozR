@@ -21,7 +21,7 @@ reshape_em_dsd <- function(filename) {
 
     dplyr::select(!c(contains("remove"))) %>%
 
-    tidyr::pivot_longer(TX.ACTIVE.ELIGIBILITY_ELI_ADULT_15p:DSD.BD_NEL_LW,
+    tidyr::pivot_longer(TX.ACTIVE.ELIGIBILITY_ELI_ADULT_15p:DSD.ONE.ALL__LW_15p,
                         names_to = c("indicator", "dsd_eligibility", "pop_type", "age"),
                         names_sep = "_",
                         values_to = "value") %>%

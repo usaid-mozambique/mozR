@@ -18,15 +18,6 @@ reshape_em_mi <- function(filename){
                    skip = 9,
                    .name_repair = "unique_quiet") %>%
 
-    # dplyr::rename(dpi.colheu.pcr_d__all = dpi.colheu.pcr_d_total,
-    #               dpi.colheu.pcr_n__all = dpi.colheu.pcr_n_total,
-    #               dpi.pcr.enviado_d__all = dpi.pcr.enviado_d_total,
-    #               dpi.pcr.enviado_n__all = dpi.pcr.enviado_n_total,
-    #               dpi.pcr.entregue_d__all = dpi.pcr.entregue_d_total,
-    #               dpi.pcr.entregue_n__all = dpi.pcr.entregue_n_total,
-    #               dpi.pcr.tarv_d__all = dpi.pcr.tarv_d_total,
-    #               dpi.pcr.tarv_n__all = dpi.pcr.tarv_n_total) %>%
-
     dplyr::filter(Partner == ip_temp) %>%
 
     dplyr::mutate(dplyr::across(dpi.colheu.pcr_d__all:mds.cv.estaveis_n_mds, as.numeric)) %>%
