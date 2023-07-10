@@ -19,7 +19,7 @@ reshape_em_imer <- function(filename){
                            col_types = "text",
                            .name_repair = "unique_quiet") %>%
 
-    tidyr::pivot_longer(TX_NEWTot:I4_ER4_40_RetCalc,
+    tidyr::pivot_longer(TX_NEWTot:TX_C_MISAU_AD_F_20p,
                         names_to = "indicator",
                         values_to = "value") %>%
 
