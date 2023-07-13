@@ -20,7 +20,8 @@ parse_sisma_csv <- function(data, type){
          "ATS CCSD" = parse_sisma_ats_ccsd(data),
          "ATS SMI" = parse_sisma_ats_smi(data),
          "ATS Auto" = parse_sisma_ats_auto(data),
-         "HIV TARV" = parse_sisma_hiv_tarv(data)
+         "HIV TARV" = parse_sisma_hiv_tarv(data),
+         "HIV PREP" = parse_sisma_hiv_prep(data)
   )
 
 }
