@@ -21,7 +21,8 @@ parse_sisma_csv <- function(data, type){
          "ATS SMI" = parse_sisma_ats_smi(data),
          "ATS Auto" = parse_sisma_ats_auto(data),
          "HIV TARV" = parse_sisma_hiv_tarv(data),
-         "HIV PREP" = parse_sisma_hiv_prep(data)
+         "HIV PREP" = parse_sisma_hiv_prep(data),
+         "HIV APSS" = parse_sisma_hiv_apss(data)
   )
 
 }
