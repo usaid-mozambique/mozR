@@ -1248,3 +1248,40 @@ data_sisma_hiv_prep_map <-
                  "mz_prep_pr_ep_3_meses_consecutivos_utentes_em_pr_ep_por_3_meses_consecutivos_apos_terem_iniciado_a_pr_ep_masculino_25_anos",   "PREP_3MES_CONSEC",    "25+", "Masculino",            NA
     )
 usethis::use_data(data_sisma_hiv_prep_map, overwrite = TRUE)
+
+
+data_sisma_hiv_apss_map <-
+tibble::tribble(
+                                                                                                                                                               ~indicator,       ~indicator_new,  ~age,        ~sex,
+                      "mz_apss_pp_chamadas_e_viistas_domic_no_de_pacientes_faltosos_e_abandonos_contactados_e_ou_encontrados_durante_o_trimestre_dos_referidos_no_mesmo_periodo_15_anos_feminino", "APSS_ABAND_CONTACT", "15+",  "Feminino",
+                     "mz_apss_pp_chamadas_e_viistas_domic_no_de_pacientes_faltosos_e_abandonos_contactados_e_ou_encontrados_durante_o_trimestre_dos_referidos_no_mesmo_periodo_15_anos_masculino", "APSS_ABAND_CONTACT", "15+", "Masculino",
+                           "mz_apss_pp_chamadas_e_viistas_domic_no_de_pacientes_faltosos_e_abandonos_contactados_e_ou_encontrados_durante_o_trimestre_dos_referidos_no_mesmo_periodo_15_feminino", "APSS_ABAND_CONTACT", "<15",  "Feminino",
+                          "mz_apss_pp_chamadas_e_viistas_domic_no_de_pacientes_faltosos_e_abandonos_contactados_e_ou_encontrados_durante_o_trimestre_dos_referidos_no_mesmo_periodo_15_masculino", "APSS_ABAND_CONTACT", "<15", "Masculino",
+            "mz_apss_pp_chamadas_e_viistas_domic_no_de_pacientes_faltosos_e_abandonos_que_retornaram_a_us_durante_o_trimestre_dos_contactados_e_ou_encontrados_no_mesmo_periodo_15_anos_feminino",  "APSS_ABAND_RETORN", "15+",  "Feminino",
+           "mz_apss_pp_chamadas_e_viistas_domic_no_de_pacientes_faltosos_e_abandonos_que_retornaram_a_us_durante_o_trimestre_dos_contactados_e_ou_encontrados_no_mesmo_periodo_15_anos_masculino",  "APSS_ABAND_RETORN", "15+", "Masculino",
+                 "mz_apss_pp_chamadas_e_viistas_domic_no_de_pacientes_faltosos_e_abandonos_que_retornaram_a_us_durante_o_trimestre_dos_contactados_e_ou_encontrados_no_mesmo_periodo_15_feminino",  "APSS_ABAND_RETORN", "<15",  "Feminino",
+                "mz_apss_pp_chamadas_e_viistas_domic_no_de_pacientes_faltosos_e_abandonos_que_retornaram_a_us_durante_o_trimestre_dos_contactados_e_ou_encontrados_no_mesmo_periodo_15_masculino",  "APSS_ABAND_RETORN", "<15", "Masculino",
+                             "mz_apss_pp_chamadas_e_viistas_domic_no_de_pacientes_faltosos_e_abandonos_referidos_para_chamadas_e_ou_visitas_de_reintegracao_durante_o_trimestre_15_anos_feminino",   "APSS_ABAND_REFER", "15+",  "Feminino",
+                            "mz_apss_pp_chamadas_e_viistas_domic_no_de_pacientes_faltosos_e_abandonos_referidos_para_chamadas_e_ou_visitas_de_reintegracao_durante_o_trimestre_15_anos_masculino",   "APSS_ABAND_REFER", "15+", "Masculino",
+                                  "mz_apss_pp_chamadas_e_viistas_domic_no_de_pacientes_faltosos_e_abandonos_referidos_para_chamadas_e_ou_visitas_de_reintegracao_durante_o_trimestre_15_feminino",   "APSS_ABAND_REFER", "<15",  "Feminino",
+                                 "mz_apss_pp_chamadas_e_viistas_domic_no_de_pacientes_faltosos_e_abandonos_referidos_para_chamadas_e_ou_visitas_de_reintegracao_durante_o_trimestre_15_masculino",   "APSS_ABAND_REFER", "<15", "Masculino",
+   "mz_apss_pp_pacote_completo_pp_no_de_pacientes_que_iniciou_tarv_15_a_nesta_us_no_trimestre_anterior_e_que_receberam_o_pacote_completo_de_prevencao_ate_ao_periodo_de_reporte_15_anos_feminino",     "APSS_NOVO_PREV", "15+",  "Feminino",
+  "mz_apss_pp_pacote_completo_pp_no_de_pacientes_que_iniciou_tarv_15_a_nesta_us_no_trimestre_anterior_e_que_receberam_o_pacote_completo_de_prevencao_ate_ao_periodo_de_reporte_15_anos_masculino",     "APSS_NOVO_PREV", "15+", "Masculino",
+        "mz_apss_pp_pacote_completo_pp_no_de_pacientes_que_iniciou_tarv_15_a_nesta_us_no_trimestre_anterior_e_que_receberam_o_pacote_completo_de_prevencao_ate_ao_periodo_de_reporte_15_feminino",     "APSS_NOVO_PREV", "<15",  "Feminino",
+       "mz_apss_pp_pacote_completo_pp_no_de_pacientes_que_iniciou_tarv_15_a_nesta_us_no_trimestre_anterior_e_que_receberam_o_pacote_completo_de_prevencao_ate_ao_periodo_de_reporte_15_masculino",     "APSS_NOVO_PREV", "<15", "Masculino",
+                                    "mz_apss_pp_revelacao_total_do_diagn_no_de_criancas_e_adolescente_de_8_14a_que_receberam_revelacao_total_do_diagnostico_durante_o_trimestre_15_anos_feminino",      "APSS_AJ_REVEL", "15+",  "Feminino",
+                                   "mz_apss_pp_revelacao_total_do_diagn_no_de_criancas_e_adolescente_de_8_14a_que_receberam_revelacao_total_do_diagnostico_durante_o_trimestre_15_anos_masculino",      "APSS_AJ_REVEL", "15+", "Masculino",
+                                         "mz_apss_pp_revelacao_total_do_diagn_no_de_criancas_e_adolescente_de_8_14a_que_receberam_revelacao_total_do_diagnostico_durante_o_trimestre_15_feminino",      "APSS_AJ_REVEL", "<15",  "Feminino",
+                                        "mz_apss_pp_revelacao_total_do_diagn_no_de_criancas_e_adolescente_de_8_14a_que_receberam_revelacao_total_do_diagnostico_durante_o_trimestre_15_masculino",      "APSS_AJ_REVEL", "<15", "Masculino",
+                                                                     "mz_apss_pp_sessoes_no_de_pacientes_activos_em_tarv_que_receberam_seguimento_de_adesao_durante_o_trimestre_15_anos_feminino",  "APSS_ACTIVO_ACONS", "15+",  "Feminino",
+                                                                    "mz_apss_pp_sessoes_no_de_pacientes_activos_em_tarv_que_receberam_seguimento_de_adesao_durante_o_trimestre_15_anos_masculino",  "APSS_ACTIVO_ACONS", "15+", "Masculino",
+                                                                          "mz_apss_pp_sessoes_no_de_pacientes_activos_em_tarv_que_receberam_seguimento_de_adesao_durante_o_trimestre_15_feminino",  "APSS_ACTIVO_ACONS", "<15",  "Feminino",
+                                                                         "mz_apss_pp_sessoes_no_de_pacientes_activos_em_tarv_que_receberam_seguimento_de_adesao_durante_o_trimestre_15_masculino",  "APSS_ACTIVO_ACONS", "<15", "Masculino",
+                             "mz_apss_pp_sessoes_no_de_pacientes_que_iniciou_cuidados_hiv_nesta_us_durante_o_trimestre_e_que_receberam_aconselhamento_pre_tarv_no_mesmo_periodo_15_anos_feminino", "APSS_PRETARV_ACONS", "15+",  "Feminino",
+                            "mz_apss_pp_sessoes_no_de_pacientes_que_iniciou_cuidados_hiv_nesta_us_durante_o_trimestre_e_que_receberam_aconselhamento_pre_tarv_no_mesmo_periodo_15_anos_masculino", "APSS_PRETARV_ACONS", "15+", "Masculino",
+                                  "mz_apss_pp_sessoes_no_de_pacientes_que_iniciou_cuidados_hiv_nesta_us_durante_o_trimestre_e_que_receberam_aconselhamento_pre_tarv_no_mesmo_periodo_15_feminino", "APSS_PRETARV_ACONS", "<15",  "Feminino",
+                                 "mz_apss_pp_sessoes_no_de_pacientes_que_iniciou_cuidados_hiv_nesta_us_durante_o_trimestre_e_que_receberam_aconselhamento_pre_tarv_no_mesmo_periodo_15_masculino", "APSS_PRETARV_ACONS", "<15", "Masculino"
+  )
+usethis::use_data(data_sisma_hiv_apss_map, overwrite = TRUE)
+
+

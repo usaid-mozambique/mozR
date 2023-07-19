@@ -196,7 +196,20 @@
 "data_sisma_hiv_prep_map"
 
 
-
+#' SISMA APSS Map for Feature Engineering
+#'
+#' List of indicators
+#'
+#' @usage data(data_sisma_hiv_apss_map)
+#'
+#' @format A list of the variables included to engineer dataset features
+#' \describe{
+#'   \item{data_sisma_hiv_apss_map}{indicator}
+#'   \item{data_sisma_hiv_apss_map}{indicator_new}
+#'   \item{data_sisma_hiv_apss_map}{age}
+#'   \item{data_sisma_hiv_apss_map}{sex}
+#' }
+"data_sisma_hiv_apss_map"
 
 
 
