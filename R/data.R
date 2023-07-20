@@ -212,10 +212,24 @@
 "data_sisma_hiv_apss_map"
 
 
+#' SISMA ITS Map for Feature Engineering
+#'
+#' List of indicators
+#'
+#' @usage data(data_sisma_hiv_its_map)
+#'
+#' @format A list of the variables included to engineer dataset features
+#' \describe{
+#'   \item{data_sisma_hiv_its_map}{indicator}
+#'   \item{data_sisma_hiv_its_map}{indicator_new}
+#'   \item{data_sisma_hiv_its_map}{age}
+#'   \item{data_sisma_hiv_its_map}{sex}
+#'   \item{data_sisma_hiv_its_map}{sub_group}
+#'   \item{data_sisma_hiv_its_map}{result_status}
+#'   \item{data_sisma_hiv_its_map}{disaggregate}
 
-
-
-
+#' }
+"data_sisma_hiv_its_map"
 
 
 

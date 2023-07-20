@@ -38,7 +38,13 @@ clean_sisma_csv <- function(file) {
 
     # dplyr::filter(!is.na(value)) %>%
 
-    dplyr::mutate(periodcode = paste0(periodcode, "01"),
+    dplyr::mutate(periodcode = stringr::str_replace_all(periodcode,
+
+                                                        c("Q1" = "03",
+                                                          "Q2" = "06",
+                                                          "Q3" = "09",
+                                                          "Q4" = "12")),
+                  periodcode = paste0(periodcode, "01"),
                   periodcode = ymd(periodcode),
                   across(c(orgunitlevel2, orgunitlevel3), ~ str_to_title(.))) %>%
 
