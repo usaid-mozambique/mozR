@@ -923,6 +923,62 @@ tibble::tribble(
   )
 usethis::use_data(data_sisma_smi_mat_map, overwrite = TRUE)
 
+
+data_sisma_smi_ccr_map <-
+tibble::tribble(
+                                                                                       ~indicator,         ~indicator_new, ~disaggregate,
+                                                                     "smi_ccr_maes_hiv_lactantes",                     NA,            NA,
+                                                                 "smi_ccr_maes_em_tarv_a_entrada",                     NA,            NA,
+                                                                "smi_ccr_maes_que_iniciaram_tarv",                     NA,            NA,
+                                                                 "smi_ccr_total_de_1as_consultas",                     NA,            NA,
+                                                               "smi_ccr_criancas_com_contacto_tb",                     NA,            NA,
+                             "smi_ccr_criancas_expostas_com_resultado_definitivo_de_hiv_negativo",                     NA,            NA,
+                          "smi_ccr_criancas_nao_expostas_ao_hiv_testadas_com_teste_rapido_de_hiv",                     NA,            NA,
+                                                        "smi_ccr_total_de_1o_pcr_colhido_2_meses",                     NA,            NA,
+                                                      "smi_ccr_total_de_1o_pcr_colhido_2_meses_2",                     NA,            NA,
+                                                           "smi_ccr_total_de_pcr_colhido_2_meses",     "CCR_9M_CE_PCR_2M",         "<2m",
+                                                         "smi_ccr_total_de_pcr_colhido_2_meses_2",     "CCR_9M_CE_PCR_2M",         "2m+",
+                                                              "smi_ccr_total_de_criancas_com_dag",           "CCR_9M_DAG",            NA,
+                                                              "smi_ccr_total_de_criancas_com_dam",           "CCR_9M_DAM",            NA,
+                                              "smi_ccr_total_de_criancas_com_dag_que_foram_obito",                     NA,            NA,
+                                                  "smi_ccr_total_de_criancas_com_dam_recuperadas",                     NA,            NA,
+                                  "smi_ccr_total_de_criancas_com_resultados_pcr_positivo_2_meses",                     NA,            NA,
+                                "smi_ccr_total_de_criancas_com_resultados_pcr_positivo_2_meses_2",                     NA,            NA,
+                                             "smi_ccr_total_de_criancas_expostas_coorte_18_meses",                     NA,            NA,
+                                              "smi_ccr_total_de_criancas_expostas_coorte_9_meses",                     NA,            NA,
+                                                           "smi_ccr_criancas_com_dag_recuperadas",     "CCR_9M_DAG_RECUP",            NA,
+                                                       "smi_ccr_criancas_com_dam_que_abandonaram",      "CCR_9M_DAM_ABAN",            NA,
+                                     "smi_ccr_criancas_expostas_em_aleitamento_misto_aos_5_meses", "CCR_9M_CE_ALE_MIS_5M",            NA,
+                                                       "smi_ccr_criancas_com_dag_que_abandonaram",                     NA,            NA,
+                                 "smi_ccr_criancas_com_dag_que_foram_referidas_para_internamento",                     NA,            NA,
+                                                  "smi_ccr_criancas_com_contacto_com_tuberculose",                     NA,            NA,
+                                                "smi_ccr_criancas_com_desnutricao_aguda_moderada",                     NA,            NA,
+                                                   "smi_ccr_criancas_com_desnutricao_aguda_grave",                     NA,            NA,
+                                                          "smi_ccr_criancas_com_exposicao_ao_hiv",                     NA,            NA,
+                                                   "smi_ccr_criancas_com_outra_condicao_de_risco",                     NA,            NA,
+                               "smi_ccr_criancas_expostas_com_5_meses_de_idade_e_com_mae_em_tarv",                     NA,            NA,
+                        "smi_ccr_criancas_expostas_com_aleitamento_materno_exclusivo_aos_5_meses",                     NA,            NA,
+                             "smi_ccr_criancas_expostas_com_resultado_definitivo_de_hiv_positivo",                     NA,            NA,
+                                                      "smi_ccr_criancas_expostas_que_abandonaram",                     NA,            NA,
+                                                      "smi_ccr_criancas_expostas_que_foram_obito",                     NA,            NA,
+                                        "smi_ccr_criancas_expostas_que_receberam_arv_aos_5_meses",                     NA,            NA,
+                           "smi_ccr_criancas_expostas_transferidas_para_a_consulta_crianca_sadia",                     NA,            NA,
+                            "smi_ccr_criancas_expostas_transferidas_para_as_consultas_integradas",                     NA,            NA,
+                             "smi_ccr_criancas_expostas_9_meses_testadas_com_teste_rapido_de_hiv",                     NA,            NA,
+  "smi_ccr_criancas_nao_expostas_ao_hiv_testadas_com_teste_rapido_que_tiveram_resultado_positivo",                     NA,            NA,
+                                                               "smi_ccr_criancas_que_abandonaram",                     NA,            NA,
+                                                    "smi_ccr_criancas_que_completaram_isoniazida",                     NA,            NA,
+                                                     "smi_ccr_criancas_que_iniciaram_ctz_2_meses",                     NA,            NA,
+                                                   "smi_ccr_criancas_que_iniciaram_ctz_2_meses_2",                     NA,            NA,
+                                               "smi_ccr_criancas_que_iniciaram_isoniazida_na_ccr",                     NA,            NA,
+                                                            "smi_ccr_criancas_que_receberam_atpu",                     NA,            NA,
+                                      "smi_ccr_criancas_que_receberam_csb_suplemento_nutricional",                     NA,            NA,
+                                                           "smi_ccr_criancas_referidas_para_pnct",                     NA,            NA
+  )
+
+usethis::use_data(data_sisma_smi_ccr_map, overwrite = TRUE)
+
+
 data_em_imer_var_map <-
 tibble::tribble(
                 ~indicator,                                    ~indicator_new,

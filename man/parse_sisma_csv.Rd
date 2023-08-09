@@ -2,20 +2,34 @@
 % Please edit documentation in R/parse_sisma_csv.R
 \name{parse_sisma_csv}
 \alias{parse_sisma_csv}
-\title{Parse monthly sisma csv export}
+\title{Cleans and transforms SISMA programmatic data sets into a
+tidy format useful for analysis in R/PowerBI/Tableau.}
 \usage{
 parse_sisma_csv(data, type)
 }
 \arguments{
-\item{data}{Data input to be parsed}
+\item{data}{Path to SISMA dataset (saved in .csv format)}
 
-\item{type}{Data type to be parsed}
+\item{type}{Defines programmatic data type for processing}
 }
 \value{
 A tidy dataframe with monthly sisma results
 }
 \description{
-Parse monthly sisma csv export
+parse_sisma_csv cleans and transforms programmatic
+data sets exported from SISMA into tidy data frames. Such
+structured data sets are key to facilitating subsequent analysis
+in R/PowerBI/Tableau.
+\subsection{Overview of programmatic data type options}{
+\itemize{
+\item SMI-CPN: CPN, Saude Materna Infantil
+\item SMI-MAT: Maternidade, Saude Materna Infantil
+\item SMI-CCR: CCR, Saude Materna Infantil
+\item ATS Result: ATS Resultados, Programa de HIV
+\item ATS History: ATS Historial, Programa de HIV
+\item ATS CI: ATS Caso Indice, Programa de HIV
+}
+}
 }
 \examples{
  \dontrun{

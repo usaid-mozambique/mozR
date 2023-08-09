@@ -178,6 +178,22 @@
 "data_sisma_smi_mat_map"
 
 
+#' SISMA HIV SISMA CCR Map for Feature Engineering
+#'
+#' List of indicators
+#'
+#' @usage data(data_sisma_smi_ccr_map)
+#'
+#' @format A list of the variables included to engineer dataset features
+#' \describe{
+#'   \item{data_sisma_smi_ccr_map}{indicator}
+#'   \item{data_sisma_smi_ccr_map}{indicator_new}
+#'   \item{data_sisma_smi_ccr_map}{disaggregate}
+#' }
+"data_sisma_smi_ccr_map"
+
+
+
 #' SISMA PREP Map for Feature Engineering
 #'
 #' List of indicators
