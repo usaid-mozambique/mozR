@@ -52,7 +52,7 @@ usethis::use_data(data_sisma_smi_cpn_map, overwrite = TRUE)
 
 data_sisma_ats_results_map <-
   tibble::tribble(
-                                                                              ~indicator, ~indicator_new,        ~sex,    ~age, ~age_coarse,        ~modality, ~result_status,
+                                                                              ~indicator, ~indicator_new,        ~sex,    ~age, ~age_coarse,        ~disaggregate, ~result_status,
              "mz_ats_resultado_por_grupo_etario_outro_atip_negativo_20_24_anos_feminino",      "ATS_TST",  "Feminino", "20-24",          NA, "ATS-ATIP Outro",     "Negativo",
              "mz_ats_resultado_por_grupo_etario_outro_atip_negativo_25_49_anos_feminino",      "ATS_TST",  "Feminino", "25-49",          NA, "ATS-ATIP Outro",     "Negativo",
             "mz_ats_resultado_por_grupo_etario_outro_atip_negativo_25_49_anos_masculino",      "ATS_TST", "Masculino", "25-49",          NA, "ATS-ATIP Outro",     "Negativo",
@@ -311,7 +311,7 @@ usethis::use_data(data_sisma_ats_results_map, overwrite = TRUE)
 
 data_sisma_ats_ci_map <-
 tibble::tribble(
-                                                                                                ~indicator, ~indicator_new,        ~modality,   ~sub_group, ~result_status, ~age_coarse,
+                                                                                                ~indicator, ~indicator_new,        ~disaggregate,   ~sub_group, ~result_status, ~age_coarse,
                          "mz_ats_utentes_diagonsticados_hiv_numero_hiv_ligado_aos_servicos_clinicos_ats_c",  "ATS_LIG_NUM",          "ATS-C",           NA,             NA,          NA,
              "mz_ats_utentes_diagonsticados_hiv_numero_hiv_ligado_aos_servicos_clinicos_banco_de_socorros",  "ATS_LIG_NUM",        "ATS-BdS",           NA,             NA,          NA,
             "mz_ats_utentes_diagonsticados_hiv_numero_hiv_ligado_aos_servicos_clinicos_consultas_externas",  "ATS_LIG_NUM",         "ATS-CE",           NA,             NA,          NA,
@@ -417,7 +417,7 @@ usethis::use_data(data_sisma_ats_ci_map, overwrite = TRUE)
 
 data_sisma_ats_hist_map <-
 tibble::tribble(
-                                                                           ~indicator,  ~indicator_new,        ~modality, ~sub_group, ~result_status,
+                                                                           ~indicator,  ~indicator_new,        ~disaggregate, ~sub_group, ~result_status,
                                    "mz_ats_historial_de_testagem_1_vez_testado_ats_c", "ATS_HIST_PRIM",          "ATS-C",         NA,             NA,
                        "mz_ats_historial_de_testagem_1_vez_testado_banco_de_socorros", "ATS_HIST_PRIM",        "ATS-BdS",         NA,             NA,
                       "mz_ats_historial_de_testagem_1_vez_testado_consultas_externas", "ATS_HIST_PRIM",         "ATS-CE",         NA,             NA,
@@ -556,7 +556,7 @@ usethis::use_data(data_sisma_ats_smi_map, overwrite = TRUE)
 
 data_sisma_ats_ccsd_map <-
 tibble::tribble(
-                                                                   ~indicator, ~indicator_new,   ~source, ~modality,   ~modality_sub, ~result_status, ~age_coarse,       ~sex,
+                                                                   ~indicator, ~indicator_new,   ~source, ~disaggregate,   ~disaggregate_sub, ~result_status, ~age_coarse,       ~sex,
   "mz_smi_ccd_total_de_criancas_com_teste_de_hiv_indeterminado_brigada_movel",      "ATS_TST", "LdR SMI", "SMI-CCD", "Brigada Movel",       "Indet.",       "<15", "Desconh.",
      "mz_smi_ccd_total_de_criancas_com_teste_de_hiv_indeterminado_posto_fixo",      "ATS_TST", "LdR SMI", "SMI-CCD",    "Posto Fixo",       "Indet.",       "<15", "Desconh.",
        "mz_smi_ccd_total_de_criancas_com_teste_de_hiv_negativo_brigada_movel",      "ATS_TST", "LdR SMI", "SMI-CCD", "Brigada Movel",     "Negativo",       "<15", "Desconh.",
@@ -622,7 +622,7 @@ usethis::use_data(data_sisma_ats_autoteste_map, overwrite = TRUE)
 
 data_sisma_ats_saaj_map <-
 tibble::tribble(
-                                                                                          ~indicator, ~indicator_new,    ~source,    ~age, ~modality, ~sub_group, ~result_status, ~age_coarse,        ~sex,
+                                                                                          ~indicator, ~indicator_new,    ~source,    ~age, ~disaggregate, ~sub_group, ~result_status, ~age_coarse,        ~sex,
                            "mz_saaj_testagem_para_hiv_numero_parceiros_testados_10_14_anos_feminino",      "ATS_TST", "LdR SAAJ", "10-14",    "SAAJ", "Parceiro",             NA,       "<15",  "Feminino",
                           "mz_saaj_testagem_para_hiv_numero_parceiros_testados_10_14_anos_masculino",      "ATS_TST", "LdR SAAJ", "10-14",    "SAAJ", "Parceiro",             NA,       "<15", "Masculino",
                            "mz_saaj_testagem_para_hiv_numero_parceiros_testados_15_19_anos_feminino",      "ATS_TST", "LdR SAAJ", "15-19",    "SAAJ", "Parceiro",             NA,       "15+",  "Feminino",
@@ -721,7 +721,7 @@ usethis::use_data(data_sisma_ats_saaj_map, overwrite = TRUE)
 
 data_sisma_hiv_tarv_map <-
 tibble::tribble(
-                                                                                                                                                                    ~indicator,      ~indicator_new,    ~age,        ~sex,         ~exit_type,
+                                                                                                                                                                    ~indicator,      ~indicator_new,    ~age,        ~sex,         ~disaggregate,
   "mz_hiv_sida_dos_activos_tarv_no_fim_do_mes_b_13_subgrupo_que_recebeu_resultado_de_cv_com_supressao_virologica_durante_o_mes_1000_copias_m_l_notificacao_anual_fg_0_14_anos",        "TX_CV_SURP",  "0-14",          NA,                 NA,
     "mz_hiv_sida_dos_activos_tarv_no_fim_do_mes_b_13_subgrupo_que_recebeu_resultado_de_cv_com_supressao_virologica_durante_o_mes_1000_copias_m_l_notificacao_anual_fg_15_anos",        "TX_CV_SURP",   "15+",          NA,                 NA,
                             "mz_hiv_sida_dos_activos_em_tarv_no_fim_do_mes_b_13_subgrupo_que_realizou_um_teste_de_carga_viral_cv_durante_o_mes_notificacao_anual_fg_0_14_anos",       "TX_CV_NOTIF",  "0-14",          NA,                 NA,
@@ -812,7 +812,7 @@ usethis::use_data(data_sisma_hiv_tarv_map, overwrite = TRUE)
 
 data_sisma_smi_mat_map <-
 tibble::tribble(
-                                                                                     ~indicator,                      ~indicator_new,                             ~disaggregate,  ~cause_type,
+                                                                                     ~indicator,                      ~indicator_new,                             ~disaggregate,  ~disaggregate_sub,
                                                                    "smi_mat_total_de_admissoes",                     "MAT_ADMISSOES",                                        NA,           NA,
                                                        "smi_mat_total_de_partos_na_maternidade",                     "MAT_PARTOS_US",                                        NA,           NA,
                                                   "smi_mat_total_de_partos_fora_da_maternidade",                   "MAT_PARTOS_FORA",                                        NA,           NA,

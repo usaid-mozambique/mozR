@@ -16,7 +16,7 @@ parse_sisma_ats_history <- function(file) {
     dplyr::left_join(data_sisma_ats_hist_map, by = "indicator") %>%
     dplyr::filter(!is.na(value)) %>%
     dplyr::mutate(
-      modality_sub = NA_character_,
+      disaggregate_sub = NA_character_,
       age_coarse = NA_character_,
       source = "LdR ATS",
       age = NA_character_,
@@ -27,7 +27,7 @@ parse_sisma_ats_history <- function(file) {
     dplyr::mutate(indicator = dplyr::case_when(indicator == "ATS_KP" ~ "ATS_KP_POS"))
 
   df_parse <- dplyr::bind_rows(df_all, df_pos) %>%
-    dplyr::select(sisma_uid, snu, psnu, sitename, period, indicator = indicator_new, source, modality, modality_sub, sub_group, sex, age_coarse, age, result_status, value)
+    dplyr::select(sisma_uid, snu, psnu, sitename, period, indicator = indicator_new, source, disaggregate, disaggregate_sub, sub_group, sex, age_coarse, age, result_status, value)
 
   return(df_parse)
 

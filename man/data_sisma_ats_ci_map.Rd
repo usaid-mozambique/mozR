@@ -9,7 +9,7 @@ A list of the variables included to engineer dataset features
 \describe{
 \item{data_sisma_ats_ci_map}{indicator}
 \item{data_sisma_ats_ci_map}{indicator_new}
-\item{data_sisma_ats_ci_map}{modality}
+\item{data_sisma_ats_ci_map}{disaggregate}
 \item{data_sisma_ats_ci_map}{sub_group}
 \item{data_sisma_ats_ci_map}{result_status}
 \item{data_sisma_ats_ci_map}{age_coarse}

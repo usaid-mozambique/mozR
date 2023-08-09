@@ -11,7 +11,7 @@ A list of the variables included to engineer dataset features
 \item{data_sisma_hiv_tarv_map}{indicator_new}
 \item{data_sisma_hiv_tarv_map}{age}
 \item{data_sisma_hiv_tarv_map}{sex}
-\item{data_sisma_hiv_tarv_map}{exit_type}
+\item{data_sisma_hiv_tarv_map}{disaggregate}
 }
 }
 \usage{

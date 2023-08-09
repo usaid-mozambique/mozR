@@ -22,7 +22,7 @@ parse_sisma_ats_results <- function(file) {
                                     age == "01-09" ~ "<15",
                                     age == "10-14" ~ "<15"),
       age_coarse = tidyr::replace_na(age_coarse, "15+"),
-      modality_sub = NA_character_,
+      disaggregate_sub = NA_character_,
       source = "LdR ATS",
       sub_group = NA_character_)
 
@@ -31,7 +31,7 @@ parse_sisma_ats_results <- function(file) {
     dplyr::mutate(indicator = dplyr::case_when(indicator == "ATS_TST" ~ "ATS_TST_POS"))
 
   df_parse <- dplyr::bind_rows(df_all, df_pos) %>%
-    dplyr::select(sisma_uid, snu, psnu, sitename, period, indicator, source, modality, modality_sub, sub_group, sex, age_coarse, age, result_status, value)
+    dplyr::select(sisma_uid, snu, psnu, sitename, period, indicator, source, disaggregate, disaggregate_sub, sub_group, sex, age_coarse, age, result_status, value)
 
   return(df_parse)
 

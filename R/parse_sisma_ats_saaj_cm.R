@@ -78,14 +78,14 @@ parse_sisma_ats_saaj_cm <- function(file) {
                                          stringr::str_detect(indicator, "masculino")  ~ "Masculino",
                                          stringr::str_detect(indicator, "mz_c_masc_") ~ "Masculino"),
 
-                  modality = dplyr::case_when(stringr::str_detect(indicator, "mz_saaj_")    ~ "SAAJ",
+                  disaggregate = dplyr::case_when(stringr::str_detect(indicator, "mz_saaj_")    ~ "SAAJ",
                                               stringr::str_detect(indicator, "mz_c_masc_")  ~ "CM"),
 
                   result_status = dplyr::case_when(stringr::str_detect(indicator, "positivo")   ~ "Positivo",
                                                    stringr::str_detect(indicator, "negativo")   ~ "Negativo",
                                                    stringr::str_detect(indicator, "indetermin") ~ "Indet."),
 
-                  modality_sub = NA_character_,
+                  disaggregate_sub = NA_character_,
 
                   source = dplyr::case_when(stringr::str_detect(indicator, "mz_saaj_")      ~ "LdR SAAJ",
                                             stringr::str_detect(indicator, "mz_c_masc_")    ~ "LdR CM"),
@@ -104,7 +104,7 @@ parse_sisma_ats_saaj_cm <- function(file) {
 
 
   df_parse <- dplyr::bind_rows(df_all, df_pos) %>%
-    dplyr::select(sisma_uid, snu, psnu, sitename, period, indicator, source, modality, modality_sub, sub_group, sex, age_coarse, age, result_status, value)
+    dplyr::select(sisma_uid, snu, psnu, sitename, period, indicator, source, disaggregate, disaggregate_sub, sub_group, sex, age_coarse, age, result_status, value)
 
 
   return(df_parse)

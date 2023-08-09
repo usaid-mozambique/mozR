@@ -12,7 +12,8 @@
 parse_sisma_csv <- function(data, type){
 
   switch(type,
-         "CPN" = parse_sisma_smi_cpn(data),
+         "SMI-CPN" = parse_sisma_smi_cpn(data),
+         "SMI-MAT" = parse_sisma_smi_mat(data),
          "ATS Result" = parse_sisma_ats_results(data), # search term "ano"
          "ATS History" = parse_sisma_ats_history(data),
          "ATS CI" = parse_sisma_ats_index(data),

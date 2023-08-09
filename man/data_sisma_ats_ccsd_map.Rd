@@ -10,8 +10,8 @@ A list of the variables included to engineer dataset features
 \item{data_sisma_ats_ccsd_map}{indicator}
 \item{data_sisma_ats_ccsd_map}{indicator_new}
 \item{data_sisma_ats_ccsd_map}{source}
-\item{data_sisma_ats_ccsd_map}{modality}
-\item{data_sisma_ats_ccsd_map}{modality_sub}
+\item{data_sisma_ats_ccsd_map}{disaggregate}
+\item{data_sisma_ats_ccsd_map}{disaggregate_sub}
 \item{data_sisma_ats_ccsd_map}{result_status}
 \item{data_sisma_ats_ccsd_map}{age_coarse}
 \item{data_sisma_ats_ccsd_map}{sex}

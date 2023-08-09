@@ -28,7 +28,7 @@ parse_sisma_ats_ccsd <- function(file) {
 
 
   df_parse <- dplyr::bind_rows(df_all, df_pos) %>%
-    dplyr::select(sisma_uid, snu, psnu, sitename, period, indicator = indicator_new, source, modality, modality_sub, sub_group, sex, age_coarse, age, result_status, value)
+    dplyr::select(sisma_uid, snu, psnu, sitename, period, indicator = indicator_new, source, disaggregate, disaggregate_sub, sub_group, sex, age_coarse, age, result_status, value)
 
 
   return(df_parse)

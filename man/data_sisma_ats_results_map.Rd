@@ -12,9 +12,8 @@ A list of the variables included to engineer dataset features
 \item{data_sisma_ats_results_map}{sex}
 \item{data_sisma_ats_results_map}{age}
 \item{data_sisma_ats_results_map}{age_coarse}
-\item{data_sisma_ats_results_map}{modality}
-\item{data_sisma_ats_results_map}{result_status}
 \item{data_sisma_ats_results_map}{disaggregate}
+\item{data_sisma_ats_results_map}{result_status}
 }
 }
 \usage{

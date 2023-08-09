@@ -43,14 +43,14 @@ parse_sisma_ats_smi <- function(file) {
                         names_to = "indicator",
                         values_to = "value") %>%
 
-    dplyr::mutate(modality = dplyr::case_when(stringr::str_detect(indicator, "smi_cpn") ~ "SMI-CPN",
+    dplyr::mutate(disaggregate = dplyr::case_when(stringr::str_detect(indicator, "smi_cpn") ~ "SMI-CPN",
                                               stringr::str_detect(indicator, "smi_mat") ~ "SMI-MAT",
                                               stringr::str_detect(indicator, "smi_ccr") ~ "SMI-CCR",
                                               stringr::str_detect(indicator, "smi_cpp") ~ "SMI-CPP",
                                               stringr::str_detect(indicator, "smi_pf") ~ "SMI-PF",
                                               stringr::str_detect(indicator, "smi_ug") ~ "SMI-UG"),
 
-                  modality_sub = NA_character_,
+                  disaggregate_sub = NA_character_,
 
                   result_status = dplyr::case_when(stringr::str_detect(indicator, "negativ") ~ "Negativo",
                                                    stringr::str_detect(indicator, "positi") ~ "Positivo",
@@ -67,7 +67,7 @@ parse_sisma_ats_smi <- function(file) {
                   age_coarse = tidyr::replace_na(age_coarse, "15+"),
 
                   sex = dplyr::case_when(stringr::str_detect(indicator, "parceir") ~ "Masculino",
-                                         stringr::str_detect(modality, ", smi_ccr") ~ "Desconh."),
+                                         stringr::str_detect(disaggregate, ", smi_ccr") ~ "Desconh."),
 
                   sex = tidyr::replace_na(sex, "Feminino"),
 
@@ -82,7 +82,7 @@ parse_sisma_ats_smi <- function(file) {
     dplyr::mutate(indicator = dplyr::case_when(indicator == "ATS_TST" ~ "ATS_TST_POS"))
 
   df_parse <- dplyr::bind_rows(df_all, df_pos) %>%
-    dplyr::select(sisma_uid, snu, psnu, sitename, period, indicator, source, modality, modality_sub, sub_group, sex, age_coarse, age, result_status, value)
+    dplyr::select(sisma_uid, snu, psnu, sitename, period, indicator, source, disaggregate, disaggregate_sub, sub_group, sex, age_coarse, age, result_status, value)
 
 
   return(df_parse)
