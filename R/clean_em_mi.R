@@ -38,7 +38,7 @@ clean_em_mi <- function(df){
                   age,
                   program_ap3,
                   program_mi,
-                  dpi.colheu.pcr_D:mds.cv.estaveis)
+                  dpi.colheu.pcr_D:revelacao) # to exclude new cd4 and revelation indicators, the final variable would be mds.cv.estaveis
 
   return(df)
 
