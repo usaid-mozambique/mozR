@@ -36,6 +36,10 @@ reshape_em_ahd <- function(filename){
                                       "10.14" = "10-14",
                                       "15.19" = "15-19",
                                       "20" = "20+"),# new code to correct age
+                  disaggregate = case_when(disaggregate %in% c("LAM", "woLAM", "Grade1",
+                                                               "Grade2", "Grade3", "Grade4",
+                                                               "GradeNR") ~ disaggregate,
+                                           TRUE ~ NA)
     )
 
   return(df)
