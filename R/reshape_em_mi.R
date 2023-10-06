@@ -20,10 +20,10 @@ reshape_em_mi <- function(filename){
 
     dplyr::filter(Partner == ip_temp) %>%
 
-    dplyr::mutate(dplyr::across(dpi.colheu.pcr_d__all:mds.cv.estaveis_n_mds, as.numeric)) %>%
+    dplyr::mutate(dplyr::across(tpt.inicio_d_total:mds.cv.estaveis_n_mds, as.numeric)) %>% # change sept. '23 - start of selection was previously dpi.colheu.pcr_d__all
 
 
-    tidyr::pivot_longer('dpi.colheu.pcr_d__all':'mds.cv.estaveis_n_mds',
+    tidyr::pivot_longer('tpt.inicio_d_total':'mds.cv.estaveis_n_mds', # change sept. '23 - start of selection was previously dpi.colheu.pcr_d__all
                         names_to = c("indicator", "numdenom", "pop_type", "age"),
                         names_sep = "_",
                         values_to = "value") %>%
