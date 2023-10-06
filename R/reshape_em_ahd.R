@@ -40,7 +40,8 @@ reshape_em_ahd <- function(filename){
                                                                "Grade2", "Grade3", "Grade4",
                                                                "GradeNR") ~ disaggregate,
                                            TRUE ~ NA)
-    )
+    ) %>%
+    dplyr::rename(snu = snu1)
 
   return(df)
 }
