@@ -20,6 +20,8 @@ reshape_em_prep <- function(filename){
 
     dplyr::filter(Partner == ip_temp) %>%
 
+    dplyr::select(c(No:PrEP.CT_TP_Outro_Total)) %>%
+
     dplyr::select(!c(Elegible.to.PrEP_All_Total_Total,
                      Elegible.to.PrEP_Casos.Especiais_Male_Total,
                      Elegible.to.PrEP_Casos.Especiais_Female_Total,
@@ -39,14 +41,16 @@ reshape_em_prep <- function(filename){
                      PrEP.CT_Casos.Especiais_Male_Total,
                      PrEP.CT_Casos.Especiais_Female_Total,
                      PrEP.CT_All_PW_Total,
-                     PrEP.CT_All_LW_Total,
-                     PrEP.CT.3months_All_Total_Total,
-                     PrEP.CT.3months_Casos.Especiais_Male_Total,
-                     PrEP.CT.3months_Casos.Especiais_Female_Total,
-                     PrEP.CT.3months_All_PW_Total,
-                     PrEP.CT.3months_All_LW_Total)) %>%
+                     PrEP.CT_All_LW_Total)) %>%
 
-    tidyr::pivot_longer('Elegible.to.PrEP_Casos.Especiais_Male_10.14':'PrEP.CT.3months_TP_People.who.Injected.Drugs_Total',
+  # Removed below vars from Sept '23
+  # PrEP.CT.3months_All_Total_Total,
+  # PrEP.CT.3months_Casos.Especiais_Male_Total,
+  # PrEP.CT.3months_Casos.Especiais_Female_Total,
+  # PrEP.CT.3months_All_PW_Total,
+  # PrEP.CT.3months_All_LW_Total
+
+    tidyr::pivot_longer('Elegible.to.PrEP_Casos.Especiais_Male_10.14':'PrEP.CT_TP_Outro_Total',
                         names_to = c("indicator", "pop_type", "disaggregate", "age"),
                         names_sep = "_",
                         values_to = "value") %>%
