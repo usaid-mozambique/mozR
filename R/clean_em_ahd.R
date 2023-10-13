@@ -12,7 +12,7 @@
 clean_em_ahd <- function(df){
 
   df_cleaned <- df %>%
-    dplyr::select(!c(partner, snu1, psnu,
+    dplyr::select(!c(partner, snu, psnu,
               sitename)) %>%
     dplyr::left_join(ajuda_site_map, by = "datim_uid") %>%
     dplyr::select(datim_uid,
