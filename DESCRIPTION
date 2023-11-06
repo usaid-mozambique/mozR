@@ -13,14 +13,15 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 BugReports: https://github.com/usaid-mozambique/mozR/issues
 Imports:
-  magrittr,
-  googlesheets4,
-  dplyr,
-  tidyr,
-  readr,
-  stringr,
-  readxl,
-  tidyselect,
-  janitor
+    magrittr,
+    googlesheets4,
+    dplyr,
+    tidyr,
+    readr,
+    stringr,
+    readxl,
+    tidyselect,
+    janitor,
+    lubridate
 Depends: 
     R (>= 2.10)
