@@ -212,3 +212,44 @@ tibble::tribble(
   )
 usethis::use_data(data_em_imer_var_map, overwrite = TRUE)
 
+data_sdp_orgunituid_map <-
+tibble::tribble(
+       ~orgunituid,       ~recode,
+     "TNxjWVnFcH3", "atj39UeK8N9",
+     "MLWfwGSAExm", "Ay6W05BTgDV",
+     "Eltn3fV50IH", "bRkKgVQ1bbn",
+     "EOiaX9x1o8g", "D5BprGY8EIU",
+     "j7R6NW899TU", "Dhku9zrZoJe",
+     "ld9H4kG1Bnr", "EefeXxr8yDS",
+     "yyR3ZgRyBzQ", "F8ZvmoAy2bh",
+     "BdBJXnCZRJ5", "fJy2O3xh1fV",
+     "ZZlLKqhLyve", "fJy2O3xh1fV",
+     "imEg2imKHMv", "FNUYBvpbWaA",
+     "c5OMOnQ8Yuf", "gUve5bZAut8",
+     "ZKcg6E0YW40", "HcKIEHFgpDb",
+     "eKkUVSMc9VE", "k6fqIh47UYc",
+     "iqL4lrR62dI", "kyGz0JzX3Z0",
+     "xiz4opVckuD", "nUanptGavqT",
+     "A2WP9rKyeCd", "nx2J294i6hk",
+     "bigmUwX7nZi", "oN0anW8xCpq",
+     "MrzLUXqobYg", "oNDzB1D5as4",
+     "Ld3DBzAtu2q", "PWXwPbUM2DB",
+     "SnbIkc5HFdC", "qQ84fCTxdGh",
+     "p1khrkzyj1C", "qU7z54bY9jA",
+     "crU0qFcl39a", "siMZUtd2cJW",
+     "e1ucJNfbCNo", "siMZUtd2cJW",
+     "FMadYBJcUXZ", "siMZUtd2cJW",
+     "MWbzgovlaB7", "siMZUtd2cJW",
+     "ncwP2HaqFru", "siMZUtd2cJW",
+     "siMZUtd2cJW", "siMZUtd2cJW",
+     "ubKeGKFgG6p", "siMZUtd2cJW",
+     "VTgqf9zaWJR", "siMZUtd2cJW",
+     "wBH8Pu2Ho4Q", "siMZUtd2cJW",
+  "srTB-HIVJGYtcK", "srTptJGYtcK",
+     "IbTdghFlhMi", "XPhxWI0fDyq",
+     "Y9W059tBM50", "yJ014QFEqru",
+     "YDiTYO8iXlo", "zaeb1Zos2Mu"
+  )
+
+usethis::use_data(data_sdp_orgunituid_map, overwrite = TRUE)
+
