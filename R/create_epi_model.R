@@ -17,7 +17,7 @@
 #'    create_data(mer_data, "TX_CURR", "Age/Sex/HIVStatus", "N", "TX_CURR" )
 #'  }
 
-create_data <- function(mer_data, indicator_value, standard_disag, num_dem, label){
+create_epi_model <- function(mer_data, indicator_value, standard_disag, num_dem, label){
   data <- clean_mer(mer_data, indicator_value, standard_disag, num_dem)
   data_1 <- scenario_1(data)
   data_2 <- scenario_2(data)
@@ -50,7 +50,7 @@ create_data <- function(mer_data, indicator_value, standard_disag, num_dem, labe
 #'  }
 
 
-clean_mer <- function(mer_data, indicator_value, standard_disag, num_dem){
+epi_clean_mer <- function(mer_data, indicator_value, standard_disag, num_dem){
 
   mer <- mer_data %>%
     dplyr::filter(standardizeddisaggregate %in% standard_disag,
@@ -75,7 +75,7 @@ clean_mer <- function(mer_data, indicator_value, standard_disag, num_dem){
 #'  \dontrun{
 #'    scenario_1(data_1)
 #'  }
-scenario_1 <- function(indicator_data){
+epi_scenario_1 <- function(indicator_data){
   #step 1:  create dataset with semi-detailed age groups
   indicator_model <- indicator_data %>%
     dplyr::filter(age != "<15", age !="15+",
@@ -96,7 +96,7 @@ scenario_1 <- function(indicator_data){
 #' \dontrun{
 #'    scenario_2(data_2)
 #'  }
-scenario_2 <- function(indicator_data){
+epi_scenario_2 <- function(indicator_data){
 
   # 15+ and <15 already excluded from scenario_1 to create proportion dataset
   proportion <- scenario_1(indicator_data)
@@ -143,7 +143,7 @@ scenario_2 <- function(indicator_data){
 #'    scenario_3(data_3)
 #'  }
 
-scenario_3 <- function(indicator_data){
+epi_scenario_3 <- function(indicator_data){
 
   #returns a list of a results based on semi-detailed age group
   proportion <- scenario_1(indicator_data)
