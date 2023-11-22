@@ -211,7 +211,7 @@ epi_scenario_3 <- function(indicator_data){
     # This join adds one line per age group.  SNU appears multiple times in both tables
     dplyr::left_join(det_total, by = c("snu1uid", "sex", "age_group_type"), relationship = "many-to-many")  %>%
     dplyr::mutate(est_value = round(coarse_value * snu_percentage, digits = 0 )) %>%
-    dplyr::select(-c("snu_percentage", coarse_value)) %>%
+    dplyr::select(-c("snu_percentage")) %>%
     dplyr::rename(value = est_value)
 
 
