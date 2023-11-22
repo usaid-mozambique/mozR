@@ -17,7 +17,7 @@
 #'    create_data(mer_data, "TX_CURR", "Age/Sex/HIVStatus", "N", "TX_CURR" )
 #'  }
 
-create_data <- function(mer_data, indicator_value, standard_disag, num_dem, label){
+create_epi_model <- function(mer_data, indicator_value, standard_disag, num_dem, label){
   data <- clean_mer(mer_data, indicator_value, standard_disag, num_dem)
   data_1 <- scenario_1(data)
   data_2 <- scenario_2(data)
@@ -50,7 +50,7 @@ create_data <- function(mer_data, indicator_value, standard_disag, num_dem, labe
 #'  }
 
 
-clean_mer <- function(mer_data, indicator_value, standard_disag, num_dem){
+epi_clean_mer <- function(mer_data, indicator_value, standard_disag, num_dem){
 
   mer <- mer_data %>%
     dplyr::filter(standardizeddisaggregate %in% standard_disag,
@@ -75,7 +75,7 @@ clean_mer <- function(mer_data, indicator_value, standard_disag, num_dem){
 #'  \dontrun{
 #'    scenario_1(data_1)
 #'  }
-scenario_1 <- function(indicator_data){
+epi_scenario_1 <- function(indicator_data){
   #step 1:  create dataset with semi-detailed age groups
   indicator_model <- indicator_data %>%
     dplyr::filter(age != "<15", age !="15+",
@@ -96,7 +96,7 @@ scenario_1 <- function(indicator_data){
 #' \dontrun{
 #'    scenario_2(data_2)
 #'  }
-scenario_2 <- function(indicator_data){
+epi_scenario_2 <- function(indicator_data){
 
   # 15+ and <15 already excluded from scenario_1 to create proportion dataset
   proportion <- scenario_1(indicator_data)
@@ -116,18 +116,45 @@ scenario_2 <- function(indicator_data){
     dplyr::filter(age %in% c("<15","15+"),
                   value > 0
     ) %>%
-    dplyr::select( -c(age, snu1, snu1uid, psnu)) %>%
-    dplyr::rename(coarse_value = value) %>%
-    dplyr::left_join(det_total, by = c("psnuuid", "sex", "age_group_type")) %>%
-    dplyr::mutate(est_value = coarse_value * psnu_percentage) %>%
-    dplyr::filter(!is.na(est_value)) %>%
-    dplyr::select(-c( value, psnu_total, psnu_percentage)) %>%
-    dplyr::rename(value = est_value) %>%
-    tidyr::drop_na() %>%
-    dplyr::select(-coarse_value)
+  dplyr::select( -c(age, snu1, snu1uid, psnu)) %>%
+  dplyr::rename(coarse_value = value) %>%
+  dplyr::left_join(det_total, by = c("psnuuid", "sex", "age_group_type")) %>%
+  dplyr::mutate(est_value = coarse_value * psnu_percentage) %>%
+  dplyr::filter(!is.na(est_value)) %>%
+  dplyr::select(-c( value, psnu_total, psnu_percentage)) %>%
+  dplyr::rename(value = est_value) %>%
+  dplyr::mutate(value = round(value, digits = 0)) %>%
+
+  tidyr::pivot_wider(names_from = "age", values_from = "value")  %>%
+  replace(is.na(.), 0) %>%
+  dplyr::mutate(
+    coarse_value_ped = dplyr::case_when(age_group_type == "ped" ~ coarse_value,
+                                   .default = NULL),
+    coarse_value_adult = dplyr::case_when(age_group_type == "adult" ~ coarse_value,
+                                   .default = NULL)
+    ) %>%
+
+    dplyr::mutate(
+      `05-09` = coarse_value_ped - (`01-04` + `10-14` + `<01`),
+      `30-34` = coarse_value_adult - (
+        `15-19` + `25-29` + `20-24` +
+          `35-39` + `40-44` + `45-49` + `50-54` + `55-59` +  `60-64` + `65+`
+      )
+    ) %>%
+
+    dplyr::select(-c(coarse_value, coarse_value_ped, coarse_value_adult)) %>%
+
+    tidyr::pivot_longer(
+      cols = -c("psnuuid":"psnu"),
+      names_to = "age",
+      values_to = "value"
+    ) %>%
+
+    dplyr::filter(value > 0)
+
+  return(indicator_temp)
 
 }
-
 
 
 #' Creates an estimate per age band for districts that report values for 15+.  The estimate is created using
@@ -143,7 +170,7 @@ scenario_2 <- function(indicator_data){
 #'    scenario_3(data_3)
 #'  }
 
-scenario_3 <- function(indicator_data){
+epi_scenario_3 <- function(indicator_data){
 
   #returns a list of a results based on semi-detailed age group
   proportion <- scenario_1(indicator_data)
@@ -190,11 +217,39 @@ scenario_3 <- function(indicator_data){
 
   #only process age groups IF 15+ data exists
   if (nrow(indicator_temp) == 0){
+    indicator_temp <- indicator_temp %>%
+      dplyr::select(-coarse_value)
     return(indicator_temp)
   }
 
   else{
+    indicator_temp <- indicator_temp %>%
+      dplyr::mutate(
+        coarse_value_ped = dplyr::case_when(age_group_type == "ped" ~ coarse_value,
+                                     .default = NULL),
+        coarse_value_adult = dplyr::case_when(age_group_type == "adult" ~ coarse_value,
+                                      .default = NULL)
+      ) %>%
+
+      tidyr::pivot_wider(names_from = "age", values_from = "value")  %>%
+      dplyr::mutate(
+        `05-09` = coarse_value_ped - (`01-04` + `10-14` + `<01`),
+        `30-34` = coarse_value_adult - (
+          `15-19` + `25-29` + `20-24` +
+            `35-39` + `40-44` + `45-49` + `50-54` + `55-59` +  `60-64` + `65+`
+        )
+      ) %>%
+
+      dplyr::select(-c(coarse_value_ped, coarse_value_adult, coarse_value)) %>%
+
+      tidyr::pivot_longer(
+        cols = -c("snu1":"age_group_type"),
+        names_to = "age",
+        values_to = "value"
+      ) %>%
+      tidyr::drop_na(value)
     return(indicator_temp)
   }
 
 }
+
