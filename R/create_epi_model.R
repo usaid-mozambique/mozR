@@ -99,7 +99,7 @@ epi_scenario_1 <- function(indicator_data){
 epi_scenario_2 <- function(indicator_data){
 
   # 15+ and <15 already excluded from scenario_1 to create proportion dataset
-  proportion <- scenario_1(indicator_data)
+  proportion <- epi_scenario_1(indicator_data)
 
   #create a table of totals per PSNU and sex
   psnu_temp <- proportion %>%
@@ -173,7 +173,7 @@ epi_scenario_2 <- function(indicator_data){
 epi_scenario_3 <- function(indicator_data){
 
   #returns a list of a results based on semi-detailed age group
-  proportion <- scenario_1(indicator_data)
+  proportion <- epi_scenario_1(indicator_data)
 
   # create a temp table that includes the total value per SNU, Age and Sex
   temp_snu_age <- proportion %>%
