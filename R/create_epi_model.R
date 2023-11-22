@@ -18,10 +18,10 @@
 #'  }
 
 create_epi_model <- function(mer_data, indicator_value, standard_disag, num_dem, label){
-  data <- clean_mer(mer_data, indicator_value, standard_disag, num_dem)
-  data_1 <- scenario_1(data)
-  data_2 <- scenario_2(data)
-  data_3 <- scenario_3(data)
+  data <- epi_clean_mer(mer_data, indicator_value, standard_disag, num_dem)
+  data_1 <- epi_scenario_1(data)
+  data_2 <- epi_scenario_2(data)
+  data_3 <- epi_scenario_3(data)
 
   data_complete <- data_1 %>%
     dplyr::union_all(data_2) %>%
