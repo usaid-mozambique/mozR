@@ -17,11 +17,9 @@ Imports:
     googlesheets4,
     dplyr,
     tidyr,
-    readr,
     stringr,
     readxl,
     tidyselect,
     janitor,
-    lubridate
 Depends: 
     R (>= 2.10)
