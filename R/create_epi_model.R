@@ -121,12 +121,12 @@ epi_scenario_2 <- function(indicator_data){
   dplyr::left_join(det_total, by = c("psnuuid", "sex", "age_group_type")) %>%
   dplyr::mutate(est_value = coarse_value * psnu_percentage) %>%
   dplyr::filter(!is.na(est_value)) %>%
+  dplyr::add_row(age = "<01") %>%
   dplyr::select(-c( value, psnu_total, psnu_percentage)) %>%
   dplyr::rename(value = est_value) %>%
   dplyr::mutate(value = round(value, digits = 0)) %>%
 
   tidyr::pivot_wider(names_from = "age", values_from = "value")  %>%
-  replace(is.na(.), 0) %>%
   dplyr::mutate(
     coarse_value_ped = dplyr::case_when(age_group_type == "ped" ~ coarse_value,
                                    .default = NULL),
@@ -134,12 +134,15 @@ epi_scenario_2 <- function(indicator_data){
                                    .default = NULL)
     ) %>%
 
+
+  #modify two age groups so there is a 100% match to MER.  This adds everything and ignores nulls
     dplyr::mutate(
-      `05-09` = coarse_value_ped - (`01-04` + `10-14` + `<01`),
-      `30-34` = coarse_value_adult - (
-        `15-19` + `25-29` + `20-24` +
-          `35-39` + `40-44` + `45-49` + `50-54` + `55-59` +  `60-64` + `65+`
-      )
+      `05-09` = coarse_value_ped - rowSums(select(.,c(`01-04`,`10-14`,`<01`)),
+                                           na.rm = TRUE),
+      `30-34` = coarse_value_adult - rowSums(select(., c(
+        `15-19`, `25-29`, `20-24`,
+        `35-39`,`40-44`,`45-49`,`50-54`,`55-59`,`60-64`,`65+`)),
+        na.rm = TRUE)
     ) %>%
 
     dplyr::select(-c(coarse_value, coarse_value_ped, coarse_value_adult)) %>%
@@ -155,7 +158,6 @@ epi_scenario_2 <- function(indicator_data){
   return(indicator_temp)
 
 }
-
 
 #' Creates an estimate per age band for districts that report values for 15+.  The estimate is created using
 #' the total values for each age band per province. (Scenario 3)
@@ -224,6 +226,7 @@ epi_scenario_3 <- function(indicator_data){
 
   else{
     indicator_temp <- indicator_temp %>%
+      dplyr::add_row(age = "<01") %>%
       dplyr::mutate(
         coarse_value_ped = dplyr::case_when(age_group_type == "ped" ~ coarse_value,
                                      .default = NULL),
@@ -232,13 +235,16 @@ epi_scenario_3 <- function(indicator_data){
       ) %>%
 
       tidyr::pivot_wider(names_from = "age", values_from = "value")  %>%
+
+      #update two groups so that the model is the same as MER.  Ignores null values
       dplyr::mutate(
-        `05-09` = coarse_value_ped - (`01-04` + `10-14` + `<01`),
-        `30-34` = coarse_value_adult - (
-          `15-19` + `25-29` + `20-24` +
-            `35-39` + `40-44` + `45-49` + `50-54` + `55-59` +  `60-64` + `65+`
-        )
-      ) %>%
+        `05-09` = coarse_value_ped - rowSums(select(.,c(`01-04`,`10-14`,`<01`)),
+                                             na.rm = TRUE),
+        `30-34` = coarse_value_adult - rowSums(select(., c(
+          `15-19`, `25-29`, `20-24`,
+          `35-39`,`40-44`,`45-49`,`50-54`,`55-59`,`60-64`,`65+`)),
+          na.rm = TRUE)
+        )%>%
 
       dplyr::select(-c(coarse_value_ped, coarse_value_adult, coarse_value)) %>%
 
