@@ -4,7 +4,7 @@
 \alias{clean_em_ahdhiv}
 \title{Join AJUDA site metadata and clean processed monthly enhanced monitoring AHD HIV dataframe}
 \usage{
-clean_em_ahdhiv(df, ajuda_site_map)
+clean_em_ahdhiv(df)
 }
 \arguments{
 \item{df}{Processed monthly enhanced monitoring AHD HIV dataframe}
