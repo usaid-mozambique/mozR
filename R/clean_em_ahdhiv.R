@@ -1,7 +1,6 @@
 #' Join AJUDA site metadata and clean processed monthly enhanced monitoring AHD HIV dataframe
 #'
 #' @param df Processed monthly enhanced monitoring AHD HIV dataframe
-#' @param ajuda_site_map Ajuda_site_map data
 #'
 #' @return Final AHD HIV dataframe used in analytic dashboards
 #' @export
