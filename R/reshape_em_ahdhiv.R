@@ -9,7 +9,7 @@
 #' \dontrun{
 #'
 #' df <- reshape_em_ahdhiv()}
-#'
+
 reshape_em_ahdhiv <- function(filename){
   ip_temp <- mozR::extract_em_meta(filename, type = "ip")
   month_temp <- mozR::extract_em_meta(filename, type = "month")
@@ -28,7 +28,7 @@ reshape_em_ahdhiv <- function(filename){
                         values_to = "value") %>%
     dplyr::mutate(period = month_temp,
                   partner = ip_temp,
-                  indicator = stringr::str_replace_all(indicator, "\\.", "_"),
+                  indicator = stringr::str_to_upper(stringr::str_replace_all(indicator, "\\.", "_")),
                   age = dplyr::recode(age,
                                       "u5" = "<05",
                                       "5.9" = "05-09",
@@ -37,12 +37,15 @@ reshape_em_ahdhiv <- function(filename){
                                       "o15" = ">15",
                                       "u15" = "<15",
                                       "20p" = "20+"),# new code to correct age
-                  pop_type = dplyr::recode(pop_type,
-                                           "age" = "Age",
-                                           "pw" = "PW"),
+                  pop_type = dplyr::case_when(pop_type == "age" ~ "Age",
+                                              pop_type == "pw" ~ "PW",
+                                              .default = as.character(pop_type)),
+                  disaggregate = dplyr::case_when(disaggregate == "reinit" ~ "reinitiate",
+                                                  .default = as.character(disaggregate)),
                   disaggregate = stringr::str_to_title(disaggregate)
     )%>%
     dplyr::rename(snu = snu1)
 
   return(df)
 }
+
