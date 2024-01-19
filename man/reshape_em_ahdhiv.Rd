@@ -19,5 +19,4 @@ Process monthly enhanced monitoring AHD HIV submission from PEPFAR Mozambique Cl
 \dontrun{
 
 df <- reshape_em_ahdhiv()}
-
 }

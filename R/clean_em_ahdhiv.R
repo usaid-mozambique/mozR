@@ -11,7 +11,8 @@
 #'
 #' df <- clean_em_ahdhiv()}
 
-clean_em_ahdhiv <- function(df, ajuda_site_map){
+clean_em_ahdhiv <- function(df){
+
   df_cleaned <- df %>%
     dplyr::select(!c(partner, snu, psnu,
                      sitename)) %>%
