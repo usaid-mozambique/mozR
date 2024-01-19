@@ -20,7 +20,8 @@ reshape_em_ahdhiv <- function(filename){
 
   df <- data %>%
     dplyr::select(!c(contains("remove"),
-                     sisma_nid))%>%
+                     sisma_nid,
+                     No))%>%
     tidyr::pivot_longer('ahd.curr.previous_age__u5_':'ks.diag.tx_pw___',
                         names_to = c("indicator", "pop_type","disaggregate", "age"),
                         names_sep = "_",
@@ -35,7 +36,11 @@ reshape_em_ahdhiv <- function(filename){
                                       "15.19" = "15-19",
                                       "o15" = ">15",
                                       "u15" = "<15",
-                                      "20p" = "20+")# new code to correct age
+                                      "20p" = "20+"),# new code to correct age
+                  pop_type = dplyr::recode(pop_type,
+                                           "age" = "Age",
+                                           "pw" = "PW"),
+                  disaggregate = stringr::str_to_title(disaggregate)
     )%>%
     dplyr::rename(snu = snu1)
 
