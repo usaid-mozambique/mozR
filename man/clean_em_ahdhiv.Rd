@@ -8,8 +8,6 @@ clean_em_ahdhiv(df)
 }
 \arguments{
 \item{df}{Processed monthly enhanced monitoring AHD HIV dataframe}
-
-\item{ajuda_site_map}{Ajuda_site_map data}
 }
 \value{
 Final AHD HIV dataframe used in analytic dashboards
