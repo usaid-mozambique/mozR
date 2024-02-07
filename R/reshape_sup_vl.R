@@ -10,6 +10,7 @@
 #'
 #' df <- reshape_sup_vl()}
 
+
 reshape_sup_vl <- function(filename){
 
 
@@ -23,9 +24,10 @@ reshape_sup_vl <- function(filename){
                              sheet = "TX_PVLS_FM",
                              skip = 7) %>%
 
-    dplyr::select(-c(No,
-                     contains("reporting"),
-                     SISMA_code,
+    dplyr::select(-c(No, # change
+                     contains("eport"),
+                     contains("emove"),
+                     contains("eriod"),
                      contains("otal"),
                      contains("Column"))) %>%
 
@@ -37,7 +39,7 @@ reshape_sup_vl <- function(filename){
 
     dplyr::filter(partner == ip_temp) %>%
 
-    dplyr::mutate(dplyr::across(TX_PVLS_D_FM.R.M.Less1:TX_PVLS_N_FM.T.Prison.all, as.numeric)) %>%
+    dplyr::mutate(dplyr::across(TX_PVLS_D_FM..M.Less1:TX_PVLS_N_FM..Prisioners.all, as.numeric)) %>%
 
     tidyr::pivot_longer(!c(partner, snu, psnu, sitename, datim_uid),
                         names_to = "temp",
@@ -87,9 +89,10 @@ reshape_sup_vl <- function(filename){
                      sheet = "TX_PVLS_LAB",
                      skip = 7) %>%
 
-    dplyr::select(-c(No,
-                     contains("reporting"),
-                     SISMA_code,
+    dplyr::select(-c(No, # change
+                     contains("eport"),
+                     contains("emove"),
+                     contains("eriod"),
                      contains("otal"),
                      contains("Column"))) %>%
 
@@ -101,7 +104,7 @@ reshape_sup_vl <- function(filename){
 
     dplyr::filter(partner == ip_temp) %>%
 
-    dplyr::mutate(dplyr::across(TX_PVLS_D_Lab.R.M.Less1:TX_PVLS_N_Lab.T.Prison.all, as.numeric)) %>%
+    dplyr::mutate(dplyr::across(TX_PVLS_D_Lab..M.Less1:TX_PVLS_N_Lab..Prisioners.all, as.numeric)) %>%
 
     tidyr::pivot_longer(!c(partner, snu, psnu, sitename, datim_uid),
                         names_to = "temp",
