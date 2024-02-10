@@ -109,7 +109,8 @@ epi_scenario_2 <- function(indicator_data){
   #calculate the proportion based on the total table and individual results
   det_total <- proportion %>%
     dplyr::left_join(psnu_temp, by = c("psnuuid", "sex", "age_group_type")) %>%
-    dplyr::mutate(psnu_percentage = value / psnu_total)
+    dplyr::mutate(psnu_percentage = value / psnu_total) %>%
+    dplyr::select(-period)
 
   #Create expected result for coarse age data using psnu proportion
   indicator_temp <- indicator_data %>%
