@@ -56,7 +56,7 @@ epi_clean_mer <- function(mer_data, indicator_value, standard_disag, num_dem){
     dplyr::filter(standardizeddisaggregate %in% standard_disag,
                   indicator %in% indicator_value,
                   numeratordenom == num_dem) %>%
-    dplyr::group_by(snu1, snu1uid, psnu, psnuuid, sex, ageasentered, numeratordenom, age_group_type) %>%
+    dplyr::group_by(snu1, snu1uid, psnu, psnuuid, sex, ageasentered, numeratordenom,period, age_group_type) %>%
     dplyr::rename(age = ageasentered)%>%
     dplyr::summarise(value = sum(value, na.rm = TRUE), .groups = 'drop') %>%
     dplyr::select(-numeratordenom)
