@@ -56,7 +56,7 @@ epi_clean_mer <- function(mer_data, indicator_value, standard_disag, num_dem){
     dplyr::filter(standardizeddisaggregate %in% standard_disag,
                   indicator %in% indicator_value,
                   numeratordenom == num_dem) %>%
-    dplyr::group_by(snu1, snu1uid, psnu, psnuuid, sex, ageasentered, numeratordenom,period, age_group_type) %>%
+    dplyr::group_by(snu1, snu1uid, psnu, psnuuid, sex, ageasentered, numeratordenom, age_group_type) %>%
     dplyr::rename(age = ageasentered)%>%
     dplyr::summarise(value = sum(value, na.rm = TRUE), .groups = 'drop') %>%
     dplyr::select(-numeratordenom)
@@ -109,8 +109,7 @@ epi_scenario_2 <- function(indicator_data){
   #calculate the proportion based on the total table and individual results
   det_total <- proportion %>%
     dplyr::left_join(psnu_temp, by = c("psnuuid", "sex", "age_group_type")) %>%
-    dplyr::mutate(psnu_percentage = value / psnu_total) %>%
-    dplyr::select(-period)
+    dplyr::mutate(psnu_percentage = value / psnu_total)
 
   #Create expected result for coarse age data using psnu proportion
   indicator_temp <- indicator_data %>%
