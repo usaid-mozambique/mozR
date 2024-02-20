@@ -34,6 +34,7 @@ clean_em_ahdhiv <- function(df){
                   pop_type,
                   disaggregate,
                   age,
+                  sex, # added
                   value
     )
   return(df_cleaned)
