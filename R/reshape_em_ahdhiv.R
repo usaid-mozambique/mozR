@@ -23,7 +23,7 @@ reshape_em_ahdhiv <- function(filename){
                      sisma_nid,
                      No))%>%
     tidyr::pivot_longer('ahd.curr.previous_age__u5_':'ks.diag.tx_pw___',
-                        names_to = c("indicator", "pop_type","disaggregate", "age"),
+                        names_to = c("indicator", "pop_type","disaggregate", "age", "sex"),
                         names_sep = "_",
                         values_to = "value") %>%
     dplyr::mutate(period = month_temp,
@@ -37,6 +37,9 @@ reshape_em_ahdhiv <- function(filename){
                                       "o15" = ">15",
                                       "u15" = "<15",
                                       "20p" = "20+"),# new code to correct age
+                  sex = dplyr::recode(sex,
+                                      "m" = "Male",
+                                      "f" = "Female"),# new code to correct age
                   pop_type = dplyr::case_when(pop_type == "age" ~ "Age",
                                               pop_type == "pw" ~ "PW",
                                               .default = as.character(pop_type)),
