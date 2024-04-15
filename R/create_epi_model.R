@@ -135,14 +135,14 @@ epi_scenario_2 <- function(indicator_data){
     ) %>%
 
 
-  #modify two age groups so there is a 100% match to MER.  This adds everything and ignores nulls.
-  #NB: not all age groups will appear - use if_any to handle that
-    age_groups <- c("01-04", "10-14", "<01", "15-19", "25-29", "20-24",
-                    "35-39", "40-44", "45-49", "50-54", "55-59", "60-64", "65+")
-
+    #modify two age groups so there is a 100% match to MER.  This adds everything and ignores nulls
     dplyr::mutate(
-    `05-09` = if_any(age_groups[1:3], ~coarse_value_ped - rowSums(select(., all_of(c(age_groups[1:3]))), na.rm = TRUE)),
-    `30-34` = if_any(age_groups[4:length(age_groups)] , ~coarse_value_adult - rowSums(select(., all_of(c(age_groups[4:length(age_groups)])))), na.rm = TRUE)
+      `05-09` = coarse_value_ped - rowSums(select(.,c(`01-04`,`10-14`,`<01`)),
+                                           na.rm = TRUE),
+      `30-34` = coarse_value_adult - rowSums(select(., c(
+        `15-19`, `25-29`, `20-24`,
+        `35-39`,`40-44`,`45-49`,`50-54`,`55-59`,`60-64`,`65+`)),
+        na.rm = TRUE)
     ) %>%
 
     dplyr::select(-c(coarse_value, coarse_value_ped, coarse_value_adult)) %>%
@@ -236,14 +236,14 @@ epi_scenario_3 <- function(indicator_data){
 
       tidyr::pivot_wider(names_from = "age", values_from = "value")  %>%
 
-      #update two groups so that the model is the same as MER.  Ignores null values
-      #NB: not all age groups will appear - use if_any to handle that
-      age_groups <- c("01-04", "10-14", "<01", "15-19", "25-29", "20-24",
-                      "35-39", "40-44", "45-49", "50-54", "55-59", "60-64", "65+")
-
+      #modify two age groups so there is a 100% match to MER.  This adds everything and ignores nulls
       dplyr::mutate(
-        `05-09` = if_any(age_groups[1:3], ~coarse_value_ped - rowSums(select(., all_of(c(age_groups[1:3]))), na.rm = TRUE)),
-        `30-34` = if_any(age_groups[4:length(age_groups)] , ~coarse_value_adult - rowSums(select(., all_of(c(age_groups[4:length(age_groups)])))), na.rm = TRUE)
+        `05-09` = coarse_value_ped - rowSums(select(.,c(`01-04`,`10-14`,`<01`)),
+                                             na.rm = TRUE),
+        `30-34` = coarse_value_adult - rowSums(select(., c(
+          `15-19`, `25-29`, `20-24`,
+          `35-39`,`40-44`,`45-49`,`50-54`,`55-59`,`60-64`,`65+`)),
+          na.rm = TRUE)
       ) %>%
 
       dplyr::select(-c(coarse_value_ped, coarse_value_adult, coarse_value)) %>%
