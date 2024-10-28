@@ -16,7 +16,7 @@ reshape_em_ahd <- function(filename){
 
   df <- readxl::read_excel(filename,
                            sheet = "AHD TB",
-                           skip = 4,
+                           skip = 5,
                            .name_repair = "unique_quiet") %>%
 
     dplyr::select(!c(contains("remove")),
