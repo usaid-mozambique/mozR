@@ -46,6 +46,7 @@ clean_em_txtb <- function(df){
                   sex,
                   age,
                   disaggregate,
+                  disaggregate_sub,
                   starts_with("TX_"))
 
   return(df)
