@@ -27,7 +27,7 @@ reshape_em_txtb <- function(filename){
     dplyr::rename(snu = snu1) %>%
 
     tidyr::pivot_longer('TX.CURR_newART_Male_<15':'TX.TB.CURR.N_alreadyART_Female_Unk',
-                        names_to = c("indicator", "disaggregate", "sex", "age"),
+                        names_to = c("indicator", "disaggregate", "sex", "age", "disaggregate_sub"),
                         names_sep = "_",
                         values_to = "value") %>%
 
@@ -43,4 +43,3 @@ reshape_em_txtb <- function(filename){
   return(df)
 
 }
-
